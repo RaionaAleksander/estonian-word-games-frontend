@@ -3,10 +3,12 @@ import { Word } from '../../models/word.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { WordsApiService } from '../../../../core/api/words/words-api.service';
 import { PaginationComponent } from '../../../../shared/components/pagination/pagination';
+import { WordFilterComponent } from '../../../../shared/components/word-filter/word-filter';
+import { WordFilters } from '../../models/word-filter.model';
 
 @Component({
   selector: 'app-words-page',
-  imports: [RouterLink, PaginationComponent],
+  imports: [RouterLink, PaginationComponent, WordFilterComponent],
   templateUrl: './words-page.html',
   styleUrl: './words-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,6 +29,8 @@ export class WordsPageComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
 
+  protected activeFilters: WordFilters = {};
+
   public ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
       const page = Number(params.get('page')) || 0;
@@ -35,28 +39,27 @@ export class WordsPageComponent implements OnInit {
       this.currentPage.set(page);
       this.pageSize.set(size);
 
-      this.loadWords(page, size);
+      const rawParams: any = {};
+
+      params.keys.forEach((key) => {
+        rawParams[key] = params.get(key);
+      });
+      this.activeFilters = this.parseFiltersFromQuery(rawParams);
+
+      this.loadWords(page, size, this.activeFilters);
     });
   }
 
-  private loadWords(page: number, size: number): void {
+  private loadWords(page: number, size: number, filters: WordFilters): void {
 
     if (page < 0 || size <= 0) return;
 
     this.loading.set(true);
 
-    this.wordsApiService.getWordsPage(page, size).subscribe({
+    this.wordsApiService.getWordsPage(page, size, filters).subscribe({
       next: (response) => {
         this.words.set(response.words);
         this.totalPages.set(response.totalPages);
-
-        const safePage =
-          response.totalPages > 0 &&
-          response.currentPage >= response.totalPages
-            ? response.totalPages - 1
-            : response.currentPage;
-
-        this.currentPage.set(Math.max(0, safePage));
 
         this.loading.set(false);
       },
@@ -76,5 +79,75 @@ export class WordsPageComponent implements OnInit {
       },
       queryParamsHandling: 'merge',
     });
+  }
+
+  protected onFiltersChange(filters: WordFilters): void {
+    this.activeFilters = filters;
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: this.buildQueryParams(filters),
+    });
+  }
+
+  private buildQueryParams(filters: WordFilters): any {
+    const params: any = {
+      page: 0,
+    };
+
+    if (filters.minLength != null) params.minLength = filters.minLength;
+    if (filters.maxLength != null) params.maxLength = filters.maxLength;
+
+    if (filters.startsWith) params.startsWith = filters.startsWith;
+    if (filters.endsWith) params.endsWith = filters.endsWith;
+    if (filters.pattern) params.pattern = filters.pattern;
+
+    if (Array.isArray(filters.contains) && filters.contains.length)
+      params.contains = filters.contains.join(',');
+
+    if (Array.isArray(filters.notContains) && filters.notContains.length)
+      params.notContains = filters.notContains.join(',');
+
+    if (Array.isArray(filters.includeCategories) && filters.includeCategories.length)
+      params.includeCategories = filters.includeCategories.join(',');
+
+    if (Array.isArray(filters.excludeCategories) && filters.excludeCategories.length)
+      params.excludeCategories = filters.excludeCategories.join(',');
+
+    if (Array.isArray(filters.excludedWords) && filters.excludedWords.length)
+      params.excludedWords = filters.excludedWords.join(',');
+
+    return params;
+  }
+
+  private parseFiltersFromQuery(params: any): WordFilters {
+    return {
+      minLength: params['minLength'] ? Number(params['minLength']) : undefined,
+      maxLength: params['maxLength'] ? Number(params['maxLength']) : undefined,
+
+      startsWith: params['startsWith'] || undefined,
+      endsWith: params['endsWith'] || undefined,
+      pattern: params['pattern'] || undefined,
+
+      contains: params['contains']
+        ? params['contains'].split(',').filter(Boolean)
+        : undefined,
+
+      notContains: params['notContains']
+        ? params['notContains'].split(',').filter(Boolean)
+        : undefined,
+
+      includeCategories: params['includeCategories']
+        ? params['includeCategories'].split(',').filter(Boolean)
+        : undefined,
+
+      excludeCategories: params['excludeCategories']
+        ? params['excludeCategories'].split(',').filter(Boolean)
+        : undefined,
+
+      excludedWords: params['excludedWords']
+        ? params['excludedWords'].split(',').filter(Boolean)
+        : undefined,
+    };
   }
 }
