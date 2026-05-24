@@ -1,0 +1,63 @@
+<div class="pagination">
+
+  <!-- FIRST -->
+  @if (currentPage > 0) {
+    <button (click)="goToFirst()">««</button>
+    <button (click)="goToPrev()"><</button>
+  }
+
+  <!-- prev-2 -->
+  @if (currentPage - 2 >= 0) {
+    <button (click)="goToPage(currentPage - 2)">
+      {{ currentPage - 1 }}
+    </button>
+  }
+
+  <!-- prev-1 -->
+  @if (currentPage - 1 >= 0) {
+    <button (click)="goToPage(currentPage - 1)">
+      {{ currentPage }}
+    </button>
+  }
+
+  <!-- CURRENT -->
+  <button class="active">
+    {{ currentPage + 1 }}
+  </button>
+
+  <!-- next+1 -->
+  @if (currentPage + 1 < totalPages) {
+    <button (click)="goToPage(currentPage + 1)">
+      {{ currentPage + 2 }}
+    </button>
+  }
+
+  <!-- next+2 -->
+  @if (currentPage + 2 < totalPages) {
+    <button (click)="goToPage(currentPage + 2)">
+      {{ currentPage + 3 }}
+    </button>
+  }
+
+  <!-- NEXT -->
+  @if (currentPage < totalPages - 1) {
+    <button (click)="goToNext()">></button>
+    <button (click)="goToLast()">»»</button>
+  }
+
+  <!-- GO INPUT -->
+  <input
+    type="number"
+    [value]="goToPageInput()"
+    (input)="goToPageInput.set($any($event.target).valueAsNumber)"
+    placeholder="Page"
+  />
+
+  <button
+    (click)="onGo()"
+    [disabled]="isGoDisabled()"
+    >
+    GO
+  </button>
+
+</div>

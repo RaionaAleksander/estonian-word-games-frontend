@@ -1,0 +1,46 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  align-items: center;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button.active {
+  background: black;
+  color: white;
+}
+
+button:disabled {
+  background: #e0e0e0;
+  color: #888;
+  cursor: not-allowed;
+  border: 1px solid #ccc;
+}
+
+input {
+  width: 60px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

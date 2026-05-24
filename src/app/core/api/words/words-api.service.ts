@@ -13,9 +13,12 @@ export class WordsApiService {
 
   private readonly apiUrl = 'http://localhost:8080/api/v1/words';
 
-  public getWordsPage(): Observable<WordPageResponse> {
-    return this.http.get<WordPageResponse>(
-      `${this.apiUrl}`
-    );
+  public getWordsPage(page: number, size: number): Observable<WordPageResponse> {
+    return this.http.get<WordPageResponse>(`${this.apiUrl}`, {
+      params: {
+        page: page,
+        size: size,
+      },
+    });
   }
 }

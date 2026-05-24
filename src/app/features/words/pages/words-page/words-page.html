@@ -38,4 +38,10 @@
       }
     </tbody>
   </table>
+
+  <app-pagination
+    [currentPage]="currentPage()"
+    [totalPages]="totalPages()"
+    (pageChange)="onPageChange($event)"
+  ></app-pagination>
 </section>
