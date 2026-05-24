@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { Word } from '../../models/word.model';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { WordsApiService } from '../../../../core/api/words/words-api.service';
 import { PaginationComponent } from '../../../../shared/components/pagination/pagination';
 
@@ -24,13 +24,22 @@ export class WordsPageComponent implements OnInit {
   protected readonly totalPages = signal(1);
   protected readonly pageSize = signal(20);
 
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+
   public ngOnInit(): void {
-    this.loadWords();
+    this.route.queryParamMap.subscribe((params) => {
+      const page = Number(params.get('page')) || 0;
+      const size = Number(params.get('size')) || 20;
+
+      this.currentPage.set(page);
+      this.pageSize.set(size);
+
+      this.loadWords(page, size);
+    });
   }
 
-  private loadWords(): void {
-    const page = this.currentPage();
-    const size = this.pageSize();
+  private loadWords(page: number, size: number): void {
 
     if (page < 0 || size <= 0) return;
 
@@ -42,6 +51,7 @@ export class WordsPageComponent implements OnInit {
         this.totalPages.set(response.totalPages);
 
         const safePage =
+          response.totalPages > 0 &&
           response.currentPage >= response.totalPages
             ? response.totalPages - 1
             : response.currentPage;
@@ -58,7 +68,13 @@ export class WordsPageComponent implements OnInit {
   }
 
   protected onPageChange(page: number): void {
-    this.currentPage.set(page);
-    this.loadWords();
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        page,
+        size: this.pageSize(),
+      },
+      queryParamsHandling: 'merge',
+    });
   }
 }
