@@ -1,0 +1,41 @@
+<section class="words-page">
+  <h1>Eesti sõnad</h1>
+
+  @if (loading()) {
+    <p>Loading words...</p>
+  }
+
+  @if (error()) {
+    <p>{{ error() }}</p>
+  }
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>ID</th>
+        <th>Lemma</th>
+        <th>Length</th>
+        <th>Category</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (word of words(); track word.id; let index = $index) {
+        <tr>
+            <td>{{ index + 1 }}</td>
+            <td>{{ word.id }}</td>
+            <td>{{ word.lemma }}</td>
+            <td>{{ word.length }}</td>
+            <td>{{ word.category }}</td>
+            <td>
+                <a [routerLink]="['/words', word.lemma]">
+                    View
+                </a>
+            </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>
