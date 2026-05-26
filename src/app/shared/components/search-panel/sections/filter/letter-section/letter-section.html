@@ -1,0 +1,29 @@
+<app-search-section title="Letters">
+
+  <div class="filter-row">
+
+    <div class="filter-field">
+      <label>Contains</label>
+      <input
+        id="contains"
+        type="text"
+        placeholder="a,b,c"
+        [value]="containsValue()"
+        (input)="onContainsChange($any($event.target).value)"
+      />
+    </div>
+
+    <div class="filter-field">
+      <label>Not Contains</label>
+      <input
+        id="notContains"
+        type="text"
+        placeholder="x,y,z"
+        [value]="notContainsValue()"
+        (input)="onNotContainsChange($any($event.target).value)"
+      />
+    </div>
+
+  </div>
+
+</app-search-section>

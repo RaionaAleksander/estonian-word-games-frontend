@@ -1,0 +1,44 @@
+<section class="filter-container">
+
+  <div class="header">
+    <h2>Filters</h2>
+
+    <button class="toggle-button" type="button" (click)="toggle()">
+      {{ expanded() ? '▼' : '►' }}
+    </button>
+  </div>
+
+  @if (expanded()) {
+
+    <app-length-section
+        [minLength]="filters.minLength"
+        [maxLength]="filters.maxLength"
+        (valueChange)="filtersChange.emit($event)"
+    />
+
+    <app-boundary-section
+        [startsWith]="filters.startsWith"
+        [endsWith]="filters.endsWith"
+        (valueChange)="filtersChange.emit($event)"
+    />
+
+    <app-letter-section
+        [contains]="filters.contains"
+        [notContains]="filters.notContains"
+        (valueChange)="updateFilters($event)"
+    />
+
+    <app-category-section
+        [includeCategories]="filters.includeCategories"
+        [excludeCategories]="filters.excludeCategories"
+        (valueChange)="updateFilters($event)"
+    />
+
+    <app-excluded-words-section
+        [excludedWords]="filters.excludedWords"
+        (valueChange)="updateFilters($event)"
+    />
+
+  }
+
+</section>

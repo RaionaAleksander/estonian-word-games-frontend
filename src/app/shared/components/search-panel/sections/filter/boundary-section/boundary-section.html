@@ -1,0 +1,29 @@
+<app-search-section title="Boundaries">
+
+  <div class="filter-row">
+
+    <div class="filter-field">
+      <label>Starts With</label>
+      <input 
+        id="startsWith"
+        placeholder="ap"
+        type="text" 
+        [value]="startsWith ?? ''"
+        (input)="onStartsWithChange($any($event.target).value)"
+      />
+    </div>
+
+    <div class="filter-field">
+      <label>Ends With</label>
+      <input 
+        id="endsWith"
+        placeholder="ik"
+        type="text" 
+        [value]="endsWith ?? ''"
+        (input)="onEndsWithChange($any($event.target).value)"
+      />
+    </div>
+
+  </div>
+
+</app-search-section>

@@ -3,12 +3,12 @@ import { Word } from '../../models/word.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { WordsApiService } from '../../../../core/api/words/words-api.service';
 import { PaginationComponent } from '../../../../shared/components/pagination/pagination';
-import { WordFilterComponent } from '../../../../shared/components/word-filter/word-filter';
 import { WordFilters } from '../../models/word-filter.model';
+import { WordMainPanelComponent } from '../../components/word-main-panel/word-main-panel';
 
 @Component({
   selector: 'app-words-page',
-  imports: [RouterLink, PaginationComponent, WordFilterComponent],
+  imports: [RouterLink, PaginationComponent, WordMainPanelComponent],
   templateUrl: './words-page.html',
   styleUrl: './words-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -149,5 +149,17 @@ export class WordsPageComponent implements OnInit {
         ? params['excludedWords'].split(',').filter(Boolean)
         : undefined,
     };
+  }
+
+  protected onResetAll(): void {
+    this.activeFilters = {};
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        page: 0,
+        size: this.pageSize(),
+      },
+    });
   }
 }

@@ -1,0 +1,17 @@
+<div class="panel-actions">
+
+  <button
+    type="button"
+    (click)="primaryClick.emit()"
+  >
+    {{ primaryLabel() }}
+  </button>
+
+  <button
+    type="button"
+    (click)="secondaryClick.emit()"
+  >
+    {{ secondaryLabel() }}
+  </button>
+
+</div>

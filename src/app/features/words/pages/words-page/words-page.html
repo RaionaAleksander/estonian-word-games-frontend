@@ -1,7 +1,10 @@
 <section class="words-page">
   <h1>Eesti sõnad</h1>
 
-  <app-word-filter [initialFilters]="activeFilters" (filtersChange)="onFiltersChange($event)"></app-word-filter>
+  <app-word-main-panel
+    (applyAllEvent)="onFiltersChange($event)"
+    (resetAllEvent)="onResetAll()"
+  />
 
   @if (loading()) {
     <p>Loading words...</p>

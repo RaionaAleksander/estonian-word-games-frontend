@@ -1,0 +1,17 @@
+<app-search-panel class="main-panel">
+
+  <!-- FILTER CONTAINER -->
+  <app-filter-container
+    [filters]="filters"
+    (filtersChange)="updateFilters($event)"
+  />
+
+  <!-- ACTIONS -->
+  <app-panel-actions
+    primaryLabel="Apply All"
+    secondaryLabel="Reset All"
+    (primaryClick)="applyAll()"
+    (secondaryClick)="resetAll()"
+  />
+
+</app-search-panel>

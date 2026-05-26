@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WordFilterComponent } from './word-filter';
+import { WordMainPanelComponent } from './word-main-panel';
 
-describe('WordFilter', () => {
-  let component: WordFilterComponent;
-  let fixture: ComponentFixture<WordFilterComponent>;
+describe('WordMainPanel', () => {
+  let component: WordMainPanelComponent;
+  let fixture: ComponentFixture<WordMainPanelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WordFilterComponent],
+      imports: [WordMainPanelComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(WordFilterComponent);
+    fixture = TestBed.createComponent(WordMainPanelComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

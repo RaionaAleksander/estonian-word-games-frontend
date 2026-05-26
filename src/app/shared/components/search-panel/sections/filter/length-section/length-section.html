@@ -1,0 +1,29 @@
+<app-search-section title="Length">
+
+  <div class="filter-row">
+
+    <div class="filter-field">
+      <label>Min Length</label>
+      <input
+        id="minLength"
+        placeholder="3"
+        type="number"
+        [value]="minLength ?? ''"
+        (input)="onMinChange($any($event.target).value)"
+      />
+    </div>
+
+    <div class="filter-field">
+      <label>Max Length</label>
+      <input
+        id="maxLength"
+        placeholder="10"
+        type="number"
+        [value]="maxLength ?? ''"
+        (input)="onMaxChange($any($event.target).value)"
+      />
+    </div>
+
+  </div>
+
+</app-search-section>

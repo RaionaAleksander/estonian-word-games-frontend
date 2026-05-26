@@ -1,0 +1,28 @@
+<app-search-section title="Length">
+
+  <div class="filter-row">
+
+    <div class="filter-field">
+      <label>Include</label>
+      <input 
+        id="includeCategories"
+        placeholder="loomad"
+        type="text" 
+        [value]="includeValue()"
+        (input)="onIncludeChange($any($event.target).value)"
+      />
+    </div>
+
+    <div class="filter-field">
+      <label>Exclude</label>
+      <input 
+        id="excludeCategories"
+        placeholder="riigid"
+        type="text" 
+        [value]="excludeValue()"
+        (input)="onExcludeChange($any($event.target).value)"
+      />
+    </div>
+
+  </div>
+</app-search-section>

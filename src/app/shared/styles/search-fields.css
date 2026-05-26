@@ -1,0 +1,27 @@
+.filter-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.filter-field.full-width {
+  width: 100%;
+}
+
+label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+input {
+  padding: 0.7rem;
+  border: 1px solid #bdbdbd;
+  border-radius: 6px;
+  background: white;
+}

@@ -1,0 +1,17 @@
+<app-search-section title="Length">
+
+  <div class="filter-row">
+
+    <div class="filter-field">
+      <label>Excluded Words</label>
+      <input 
+        id="excludedWords"
+        placeholder="kass"
+        type="text"
+        [value]="excludedValue()"
+        (input)="onExcludedChange($any($event.target).value)"
+      />
+    </div>
+
+  </div>
+</app-search-section>
