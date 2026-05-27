@@ -8,7 +8,7 @@
         id="excludedWords"
         placeholder="kass"
         type="text"
-        [value]="excludedValue()"
+        [value]="excludedWords?.join(', ') ?? ''"
         (input)="onExcludedChange($any($event.target).value)"
       />
     </div>

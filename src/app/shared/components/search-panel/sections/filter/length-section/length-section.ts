@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SearchSectionComponent } from '../../../foundation/search-section/search-section';
+import { WordFilters } from '../../../../../../features/words/models/word-filter.model';
 
 @Component({
   selector: 'app-length-section',
@@ -12,23 +13,21 @@ export class LengthSectionComponent {
   @Input() minLength?: number;
   @Input() maxLength?: number;
 
-  @Output() valueChange =
-    new EventEmitter<{ minLength?: number; maxLength?: number }>();
+  @Output() valueChange = new EventEmitter<Partial<WordFilters>>();
 
   protected onMinChange(value: string): void {
-    this.minLength = value ? Number(value) : undefined;
-    this.emit();
+    this.emit({
+      minLength: value ? Number(value) : undefined
+    });
   }
 
   protected onMaxChange(value: string): void {
-    this.maxLength = value ? Number(value) : undefined;
-    this.emit();
+    this.emit({
+      maxLength: value ? Number(value) : undefined
+    });
   }
 
-  private emit(): void {
-    this.valueChange.emit({
-      minLength: this.minLength ?? undefined,
-      maxLength: this.maxLength ?? undefined,
-    });
+  private emit(partial: Partial<WordFilters>): void {
+    this.valueChange.emit(partial);
   }
 }

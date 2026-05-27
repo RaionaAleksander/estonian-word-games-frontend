@@ -8,7 +8,7 @@
         id="contains"
         type="text"
         placeholder="a,b,c"
-        [value]="containsValue()"
+        [value]="contains?.join(', ') ?? ''"
         (input)="onContainsChange($any($event.target).value)"
       />
     </div>
@@ -19,7 +19,7 @@
         id="notContains"
         type="text"
         placeholder="x,y,z"
-        [value]="notContainsValue()"
+        [value]="notContains?.join(', ') ?? ''"
         (input)="onNotContainsChange($any($event.target).value)"
       />
     </div>

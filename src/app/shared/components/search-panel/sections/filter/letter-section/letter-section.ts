@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, signal, effect } from '@angular/core';
 import { SearchSectionComponent } from '../../../foundation/search-section/search-section';
 import { FormsModule } from '@angular/forms';
+import { WordFilters } from '../../../../../../features/words/models/word-filter.model';
 
 @Component({
   selector: 'app-letter-section',
@@ -12,30 +13,25 @@ export class LetterSectionComponent {
   @Input() contains?: string[];
   @Input() notContains?: string[];
 
-  @Output() valueChange = new EventEmitter<{ contains?: string[]; notContains?: string[] }>();
+  @Output() valueChange = new EventEmitter<Partial<WordFilters>>();
 
   protected onContainsChange(value: string): void {
-    this.contains = value ? value.split(',').map(s => s.trim()).filter(s => s) : undefined;
-    this.emit();
+    this.emit({
+      contains: value
+        ? value.split(',').map(s => s.trim()).filter(Boolean)
+        : undefined
+    });
   }
 
   protected onNotContainsChange(value: string): void {
-    this.notContains = value ? value.split(',').map(s => s.trim()).filter(s => s) : undefined;
-    this.emit();
-  }
-
-  protected containsValue(): string {
-    return this.contains?.join(', ') ?? '';
-  }
-
-  protected notContainsValue(): string {
-    return this.notContains?.join(', ') ?? '';
-  }
-
-  private emit(): void {
-    this.valueChange.emit({
-      contains: this.contains,
-      notContains: this.notContains,
+    this.emit({
+      notContains: value
+        ? value.split(',').map(s => s.trim()).filter(Boolean)
+        : undefined
     });
+  }
+
+  private emit(partial: Partial<WordFilters>): void {
+    this.valueChange.emit(partial);
   }
 }

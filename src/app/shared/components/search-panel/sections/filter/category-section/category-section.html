@@ -8,7 +8,7 @@
         id="includeCategories"
         placeholder="loomad"
         type="text" 
-        [value]="includeValue()"
+        [value]="includeCategories?.join(', ') ?? ''"
         (input)="onIncludeChange($any($event.target).value)"
       />
     </div>
@@ -19,7 +19,7 @@
         id="excludeCategories"
         placeholder="riigid"
         type="text" 
-        [value]="excludeValue()"
+        [value]="excludeCategories?.join(', ') ?? ''"
         (input)="onExcludeChange($any($event.target).value)"
       />
     </div>
