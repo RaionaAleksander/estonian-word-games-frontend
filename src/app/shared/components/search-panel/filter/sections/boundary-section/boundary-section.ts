@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, signal, effect } from '@angular/core';
 import { SearchSectionComponent } from '../../../foundation/search-section/search-section';
 import { WordFilters } from '../../../../../../features/words/models/word-filter.model';
+import { BaseFilterSectionComponent } from '../../base/base-filter-section.directive';
 
 @Component({
   selector: 'app-boundary-section',
@@ -8,21 +9,15 @@ import { WordFilters } from '../../../../../../features/words/models/word-filter
   templateUrl: './boundary-section.html',
   styleUrl: './boundary-section.css',
 })
-export class BoundarySectionComponent {
+export class BoundarySectionComponent extends BaseFilterSectionComponent<WordFilters> {
   @Input() startsWith?: string;
   @Input() endsWith?: string;
 
-  @Output() valueChange = new EventEmitter<Partial<WordFilters>>();
-
   protected onStartsWithChange(value: string): void {
-    this.emit({ startsWith: value || undefined });
+    this.emit({ startsWith: this.normalizeString(value) });
   }
 
   protected onEndsWithChange(value: string): void {
-    this.emit({ endsWith: value || undefined });
-  }
-
-  private emit(partial: Partial<WordFilters>): void {
-    this.valueChange.emit(partial);
+    this.emit({ endsWith: this.normalizeString(value) });
   }
 }

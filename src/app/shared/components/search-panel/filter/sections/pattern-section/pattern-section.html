@@ -1,0 +1,21 @@
+<app-search-section title="Pattern">
+  <div class="filter-row">
+    <div class="filter-field">
+
+      <label>Word Pattern</label>
+
+      <input
+        id="pattern"
+        type="text"
+        placeholder="_a_a"
+        [value]="pattern ?? ''"
+        (input)="onPatternChange($any($event.target).value)"
+      />
+
+      <small class="mt-2">
+        Use "_" for unknown letters
+      </small>
+
+    </div>
+  </div>
+</app-search-section>

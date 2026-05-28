@@ -1,27 +1,20 @@
 import { Component, EventEmitter, Input, Output, signal, effect } from '@angular/core';
 import { SearchSectionComponent } from '../../../foundation/search-section/search-section';
-import { FormsModule } from '@angular/forms';
 import { WordFilters } from '../../../../../../features/words/models/word-filter.model';
+import { BaseFilterSectionComponent } from '../../base/base-filter-section.directive';
 
 @Component({
   selector: 'app-excluded-words-section',
-  imports: [FormsModule, SearchSectionComponent],
+  imports: [SearchSectionComponent],
   templateUrl: './excluded-words-section.html',
   styleUrl: './excluded-words-section.css',
 })
-export class ExcludedWordsSectionComponent {
+export class ExcludedWordsSectionComponent extends BaseFilterSectionComponent<WordFilters> {
   @Input() excludedWords?: string[];
-  @Output() valueChange = new EventEmitter<Partial<WordFilters>>();
 
   protected onExcludedChange(value: string): void {
     this.emit({
-      excludedWords: value
-        ? value.split(',').map(s => s.trim()).filter(Boolean)
-        : undefined
+      excludedWords: this.parseArray(value)
     });
-  }
-
-  private emit(partial: Partial<WordFilters>): void {
-    this.valueChange.emit(partial);
   }
 }

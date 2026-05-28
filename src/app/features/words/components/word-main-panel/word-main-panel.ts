@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { WordFilters } from '../../models/word-filter.model';
-import { FilterContainerComponent } from '../../../../shared/components/search-panel/filter-container/filter-container';
+import { FilterContainerComponent } from '../../../../shared/components/search-panel/filter/filter-container/filter-container';
 import { PanelActionsComponent } from '../../../../shared/components/search-panel/foundation/panel-actions/panel-actions';
 import { SearchPanelComponent } from '../../../../shared/components/search-panel/foundation/search-panel/search-panel';
 

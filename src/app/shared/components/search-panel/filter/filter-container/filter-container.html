@@ -28,6 +28,11 @@
         (valueChange)="updateFilters($event)"
     />
 
+    <app-pattern-section
+        [pattern]="filters.pattern"
+        (valueChange)="updateFilters($event)"
+    />
+
     <app-category-section
         [includeCategories]="filters.includeCategories"
         [excludeCategories]="filters.excludeCategories"
