@@ -1,10 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
-
-import { WordPageResponse } from '../../../features/words/models/word-page-response.model';
-import { WordFilters } from '../../../features/words/models/word-filter.model';
+import { WordQueryParams } from '../../../features/words/models/word-query-params.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,49 +11,57 @@ export class WordsApiService {
 
   private readonly apiUrl = 'http://localhost:8080/api/v1/words';
 
-  public getWordsPage(page: number, size: number, filters: WordFilters) {
+  public getWordsPage(page: number, size: number, queryParams: WordQueryParams) {
     let params = new HttpParams()
       .set('page', page)
       .set('size', size);
 
-    if (filters.minLength != null) {
-      params = params.set('minLength', filters.minLength);
+    if (queryParams.minLength != null) {
+      params = params.set('minLength', queryParams.minLength);
     }
 
-    if (filters.maxLength != null) {
-      params = params.set('maxLength', filters.maxLength);
+    if (queryParams.maxLength != null) {
+      params = params.set('maxLength', queryParams.maxLength);
     }
 
-    if (filters.startsWith) {
-      params = params.set('startsWith', filters.startsWith);
+    if (queryParams.startsWith) {
+      params = params.set('startsWith', queryParams.startsWith);
     }
 
-    if (filters.endsWith) {
-      params = params.set('endsWith', filters.endsWith);
+    if (queryParams.endsWith) {
+      params = params.set('endsWith', queryParams.endsWith);
     }
 
-    if (filters.pattern) {
-      params = params.set('pattern', filters.pattern);
+    if (queryParams.pattern) {
+      params = params.set('pattern', queryParams.pattern);
     }
 
-    if (filters.contains?.length) {
-      params = params.set('contains', filters.contains.join(','));
+    if (queryParams.contains?.length) {
+      params = params.set('contains', queryParams.contains.join(','));
     }
 
-    if (filters.notContains?.length) {
-      params = params.set('notContains', filters.notContains.join(','));
+    if (queryParams.notContains?.length) {
+      params = params.set('notContains', queryParams.notContains.join(','));
     }
 
-    if (filters.includeCategories?.length) {
-      params = params.set('includeCategories', filters.includeCategories.join(','));
+    if (queryParams.includeCategories?.length) {
+      params = params.set('includeCategories', queryParams.includeCategories.join(','));
     }
 
-    if (filters.excludeCategories?.length) {
-      params = params.set('excludeCategories', filters.excludeCategories.join(','));
+    if (queryParams.excludeCategories?.length) {
+      params = params.set('excludeCategories', queryParams.excludeCategories.join(','));
     }
 
-    if (filters.excludedWords?.length) {
-      params = params.set('excludedWords', filters.excludedWords.join(','));
+    if (queryParams.excludedWords?.length) {
+      params = params.set('excludedWords', queryParams.excludedWords.join(','));
+    }
+
+    if (queryParams.sort) {
+      params = params.set('sort', queryParams.sort);
+    }
+
+    if (queryParams.order) {
+      params = params.set('order', queryParams.order);
     }
 
     return this.http.get<any>(this.apiUrl, { params });

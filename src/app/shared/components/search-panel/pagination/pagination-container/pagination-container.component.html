@@ -1,0 +1,20 @@
+<section class="pagination-container">
+
+  <div class="header">
+    <h2>Pagination</h2>
+
+    <button class="toggle-button" type="button" (click)="toggle()">
+      {{ expanded() ? '▼' : '►' }}
+    </button>
+  </div>
+
+  @if (expanded()) {
+
+    <app-page-size-section
+      [size]="pageSize.size"
+      (valueChange)="updateSize($event)"
+    />
+
+  }
+
+</section>

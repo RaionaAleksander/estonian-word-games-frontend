@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, signal } from '@angular/core';
-import { WordFilters } from '../../../../../features/words/models/word-filter.model';
+import { WordFilters } from '../models/word-filter.model';
 import { ExcludedWordsSectionComponent } from '../sections/excluded-words-section/excluded-words-section.component';
 import { LengthSectionComponent } from '../sections/length-section/length-section.component';
 import { BoundarySectionComponent } from '../sections/boundary-section/boundary-section.component';
@@ -28,14 +28,6 @@ export class FilterContainerComponent {
 
   protected toggle(): void {
     this.expanded.update(v => !v);
-  }
-
-  protected apply(filters: WordFilters): void {
-    this.filtersChange.emit(filters);
-  }
-
-  protected reset(): void {
-    this.filtersChange.emit({});
   }
 
   protected updateFilters(partial: Partial<WordFilters>): void {

@@ -3,8 +3,10 @@ import { Word } from '../../models/word.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { WordsApiService } from '../../../../core/api/words/words-api.service';
 import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
-import { WordFilters } from '../../models/word-filter.model';
+import { WordFilters } from '../../../../shared/components/search-panel/filter/models/word-filter.model';
 import { WordMainPanelComponent } from '../../components/word-main-panel/word-main-panel.component';
+import { WordQuery } from '../../models/word-query.model';
+import { WordSort } from '../../../../shared/components/search-panel/sort/models/word-sort.model';
 
 @Component({
   selector: 'app-words-page',
@@ -29,7 +31,12 @@ export class WordsPageComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
 
-  protected activeFilters: WordFilters = {};
+  protected query: WordQuery = {
+    filters: {},
+    sort: {},
+    page: 0,
+    size: 20,
+  };
 
   public ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
@@ -44,23 +51,41 @@ export class WordsPageComponent implements OnInit {
       params.keys.forEach((key) => {
         rawParams[key] = params.get(key);
       });
-      this.activeFilters = this.parseFiltersFromQuery(rawParams);
+      this.query = {
+        filters: this.parseFiltersFromQuery(rawParams),
 
-      this.loadWords(page, size, this.activeFilters);
+        sort: {
+          sort: rawParams['sort'] || undefined,
+          order: rawParams['order'] || undefined,
+        },
+
+        page,
+        size,
+      };
+
+      this.loadWords(this.query);
     });
   }
 
-  private loadWords(page: number, size: number, filters: WordFilters): void {
+  private loadWords(query: WordQuery): void {
 
-    if (page < 0 || size <= 0) return;
+    if (query.page < 0 || query.size <= 0) {
+      return;
+    }
 
     this.loading.set(true);
 
-    this.wordsApiService.getWordsPage(page, size, filters).subscribe({
+    this.wordsApiService.getWordsPage(
+      query.page,
+      query.size,
+      {
+        ...query.filters,
+        ...query.sort,
+      }
+    ).subscribe({
       next: (response) => {
         this.words.set(response.words);
         this.totalPages.set(response.totalPages);
-
         this.loading.set(false);
       },
       error: () => {
@@ -70,30 +95,45 @@ export class WordsPageComponent implements OnInit {
     });
   }
 
-  protected onPageChange(page: number): void {
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: {
-        page,
-        size: this.pageSize(),
-      },
-      queryParamsHandling: 'merge',
-    });
-  }
+  protected onQueryChange(event: {
+    filters: WordFilters;
+    sort: WordSort;
+    size: number;
+  }): void {
 
-  protected onFiltersChange(filters: WordFilters): void {
-    this.activeFilters = filters;
-
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: this.buildQueryParams(filters),
-    });
-  }
-
-  private buildQueryParams(filters: WordFilters): any {
-    const params: any = {
+    this.query = {
+      ...this.query,
+      filters: event.filters,
+      sort: event.sort,
+      size: event.size,
       page: 0,
     };
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: this.buildQueryParams(),
+    });
+  }
+
+  protected onPageChange(page: number): void {
+    this.query = {
+      ...this.query,
+      page,
+    };
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: this.buildQueryParams(),
+    });
+  }
+
+  private buildQueryParams(): any {
+    const params: any = {
+      page: this.query.page,
+      size: this.query.size,
+    };
+
+    const filters = this.query.filters;
 
     if (filters.minLength != null) params.minLength = filters.minLength;
     if (filters.maxLength != null) params.maxLength = filters.maxLength;
@@ -116,6 +156,14 @@ export class WordsPageComponent implements OnInit {
 
     if (Array.isArray(filters.excludedWords) && filters.excludedWords.length)
       params.excludedWords = filters.excludedWords.join(',');
+
+    if (this.query.sort.sort)
+      params.sort = this.query.sort.sort;
+
+    if (this.query.sort.order)
+      params.order = this.query.sort.order;
+
+    params.size = this.query.size;
 
     return params;
   }
@@ -152,13 +200,17 @@ export class WordsPageComponent implements OnInit {
   }
 
   protected onResetAll(): void {
-    this.activeFilters = {};
+    this.query = {
+      filters: {},
+      sort: {},
+      page: 0,
+      size: 20,
+    };
 
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
-        page: 0,
-        size: this.pageSize(),
+        page: 0
       },
     });
   }

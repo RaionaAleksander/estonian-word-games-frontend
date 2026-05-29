@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, signal, effect } from '@angular/core';
 import { SearchSectionComponent } from '../../../foundation/search-section/search-section.component';
-import { WordFilters } from '../../../../../../features/words/models/word-filter.model';
+import { WordFilters } from '../../models/word-filter.model';
 import { BaseFilterSectionComponent } from '../../base/base-filter-section.directive';
 
 @Component({

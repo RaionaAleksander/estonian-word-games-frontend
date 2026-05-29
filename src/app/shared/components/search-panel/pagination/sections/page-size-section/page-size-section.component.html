@@ -1,0 +1,24 @@
+<app-search-section title="Page Size">
+
+  <div class="section-row">
+
+    <div class="section-field">
+
+      <label>Items per page</label>
+
+      <select
+        [value]="size"
+        (change)="onSizeChange($any($event.target).value)"
+      >
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+
+    </div>
+
+  </div>
+
+</app-search-section>

@@ -1,27 +1,38 @@
-.filter-row {
+.section-row {
   display: flex;
   gap: 1rem;
   margin-bottom: 1rem;
 }
 
-.filter-field {
+.section-field {
   display: flex;
   flex-direction: column;
   flex: 1;
+  min-width: 0;
 }
 
-.filter-field.full-width {
+.section-field.full-width {
   width: 100%;
 }
 
-label {
+.section-field label {
   margin-bottom: 0.5rem;
   font-weight: 500;
 }
 
-input {
+.section-field input,
+.section-field select {
+  width: 100%;
+  box-sizing: border-box;
   padding: 0.7rem;
   border: 1px solid #bdbdbd;
   border-radius: 6px;
   background: white;
+  font: inherit;
+}
+
+@media (max-width: 768px) {
+  .section-row {
+    flex-direction: column;
+  }
 }

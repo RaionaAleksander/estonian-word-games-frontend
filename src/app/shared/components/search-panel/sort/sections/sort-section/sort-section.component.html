@@ -1,0 +1,31 @@
+<app-search-section title="Sorting">
+
+  <div class="section-row">
+
+    <div class="section-field">
+      <label>Sort</label>
+      <select
+        [value]="sort ?? ''"
+        (change)="onSortChange($any($event.target).value)"
+      >
+        <option value="">None</option>
+        <option value="LENGTH">Length</option>
+        <option value="ALPHABET">Alphabet</option>
+      </select>
+    </div>
+
+    <div class="section-field">
+      <label>Order</label>
+      <select
+        [value]="order ?? ''"
+        (change)="onOrderChange($any($event.target).value)"
+      >
+        <option value="">None</option>
+        <option value="ASC">ASC</option>
+        <option value="DESC">DESC</option>
+      </select>
+    </div>
+
+  </div>
+
+</app-search-section>

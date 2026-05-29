@@ -6,6 +6,18 @@
     (filtersChange)="updateFilters($event)"
   />
 
+  <!-- SORT CONTAINER -->
+  <app-sort-container
+    [sort]="sort"
+    (sortChange)="updateSort($event)"
+  />
+
+  <!-- PAGE SIZE CONTAINER -->
+  <app-pagination-container
+    [pageSize]="pageSize"
+    (pageSizeChange)="updatePageSize($event)"
+  />
+
   <!-- ACTIONS -->
   <app-panel-actions
     primaryLabel="Apply All"
