@@ -1,19 +1,12 @@
 <section class="filter-container">
 
-  <div class="flex justify-between items-center mb-4">
-    <h2 class="text-lg font-semibold m-0">Filters</h2>
+  <app-collapsible-header
+    title="Filters"
+    [expanded]="isExpanded()"
+    (expandedChange)="toggle()"
+  />
 
-    <button 
-      type="button" 
-      (click)="toggle()"
-      class="w-9 h-9 text-base font-bold p-0 border border-gray-300 bg-white rounded-md cursor-pointer hover:bg-gray-100 transition"
-    >
-      {{ expanded() ? '▼' : '►' }}
-    </button>
-  </div>
-
-  @if (expanded()) {
-
+  @if (isExpanded()) {
     <app-length-section
         [minLength]="filters.minLength"
         [maxLength]="filters.maxLength"
@@ -47,7 +40,6 @@
         [excludedWords]="filters.excludedWords"
         (valueChange)="updateFilters($event)"
     />
-
   }
 
 </section>

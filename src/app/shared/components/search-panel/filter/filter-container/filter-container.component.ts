@@ -6,6 +6,8 @@ import { BoundarySectionComponent } from '../sections/boundary-section/boundary-
 import { LetterSectionComponent } from '../sections/letter-section/letter-section.component';
 import { CategorySectionComponent } from '../sections/category-section/category-section.component';
 import { PatternSectionComponent } from '../sections/pattern-section/pattern-section.component';
+import { CollapsibleHeaderComponent } from '../../foundation/collapsible-header/collapsible-header.component';
+import { ExpandableContainerDirective } from '../../foundation/directives/expandable-container.directive';
 
 @Component({
   selector: 'app-filter-container',
@@ -15,20 +17,15 @@ import { PatternSectionComponent } from '../sections/pattern-section/pattern-sec
     ExcludedWordsSectionComponent, 
     LengthSectionComponent, BoundarySectionComponent,
     LetterSectionComponent, CategorySectionComponent,
-    PatternSectionComponent
+    PatternSectionComponent,
+    CollapsibleHeaderComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FilterContainerComponent {
-
-  protected expanded = signal(true);
+export class FilterContainerComponent extends ExpandableContainerDirective {
 
   @Input() filters!: WordFilters;
   @Output() filtersChange = new EventEmitter<WordFilters>();
-
-  protected toggle(): void {
-    this.expanded.update(v => !v);
-  }
 
   protected updateFilters(partial: Partial<WordFilters>): void {
     this.filtersChange.emit({
