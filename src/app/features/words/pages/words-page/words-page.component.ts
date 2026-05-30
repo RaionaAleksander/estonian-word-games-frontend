@@ -7,6 +7,7 @@ import { WordFilters } from '../../../../shared/components/search-panel/filter/m
 import { WordMainPanelComponent } from '../../components/word-main-panel/word-main-panel.component';
 import { WordQuery } from '../../models/word-query.model';
 import { WordSort } from '../../../../shared/components/search-panel/sort/models/word-sort.model';
+import { WordQueryMeta } from '../../models/word-query-meta.model';
 
 @Component({
   selector: 'app-words-page',
@@ -24,9 +25,14 @@ export class WordsPageComponent implements OnInit {
 
   protected readonly error = signal<string | null>(null);
 
-  protected readonly currentPage = signal(0);
+  protected readonly totalElements = signal(0);
   protected readonly totalPages = signal(1);
+  protected readonly currentPage = signal(0);
   protected readonly pageSize = signal(20);
+  protected readonly pageCount = signal(0);
+
+  protected readonly meta = signal<WordQueryMeta | null>(null);
+  protected readonly generatedAt = signal<string | null>(null);
 
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
@@ -85,7 +91,13 @@ export class WordsPageComponent implements OnInit {
     ).subscribe({
       next: (response) => {
         this.words.set(response.words);
+        this.totalElements.set(response.totalElements);
         this.totalPages.set(response.totalPages);
+        this.pageCount.set(response.count);
+        
+        this.meta.set(response.meta);
+        this.generatedAt.set(response.generatedAt);
+
         this.loading.set(false);
       },
       error: () => {
