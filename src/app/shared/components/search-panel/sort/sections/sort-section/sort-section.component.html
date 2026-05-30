@@ -1,31 +1,27 @@
 <app-search-section title="Sorting">
-
-  <div class="section-row">
-
-    <div class="section-field">
-      <label>Sort</label>
+  <app-section-row>
+    <app-section-field label="Sort">
       <select
         [value]="sort ?? ''"
         (change)="onSortChange($any($event.target).value)"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-gray-300"
       >
         <option value="">None</option>
         <option value="LENGTH">Length</option>
         <option value="ALPHABET">Alphabet</option>
       </select>
-    </div>
+    </app-section-field>
 
-    <div class="section-field">
-      <label>Order</label>
+    <app-section-field label="Order">
       <select
         [value]="order ?? ''"
         (change)="onOrderChange($any($event.target).value)"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-gray-300"
       >
         <option value="">None</option>
         <option value="ASC">ASC</option>
         <option value="DESC">DESC</option>
       </select>
-    </div>
-
-  </div>
-
+    </app-section-field>
+  </app-section-row>
 </app-search-section>

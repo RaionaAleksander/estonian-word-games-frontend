@@ -1,29 +1,25 @@
 <app-search-section title="Length">
-
-  <div class="section-row">
-
-    <div class="section-field">
-      <label>Min Length</label>
+  <app-section-row>
+    <app-section-field label="Min Length">
       <input
         id="minLength"
         placeholder="3"
         type="number"
         [value]="minLength ?? ''"
         (input)="onMinChange($any($event.target).value)"
+        class="w-full box-border px-3 py-2 border border-gray-300 rounded-md bg-white font-inherit"
       />
-    </div>
+    </app-section-field>
 
-    <div class="section-field">
-      <label>Max Length</label>
+    <app-section-field label="Max Length">
       <input
         id="maxLength"
         placeholder="10"
         type="number"
         [value]="maxLength ?? ''"
         (input)="onMaxChange($any($event.target).value)"
+        class="w-full box-border px-3 py-2 border border-gray-300 rounded-md bg-white font-inherit"
       />
-    </div>
-
-  </div>
-
+    </app-section-field>
+  </app-section-row>
 </app-search-section>

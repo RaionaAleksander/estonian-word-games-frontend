@@ -1,17 +1,14 @@
 <app-search-section title="Length">
-
-  <div class="section-row">
-
-    <div class="section-field">
-      <label>Excluded Words</label>
+  <app-section-row>
+    <app-section-field label="Excluded Words">
       <input 
         id="excludedWords"
         placeholder="kass"
         type="text"
         [value]="excludedWords?.join(', ') ?? ''"
         (input)="onExcludedChange($any($event.target).value)"
+        class="w-full box-border px-3 py-2 border border-gray-300 rounded-md bg-white font-inherit"
       />
-    </div>
-
-  </div>
+    </app-section-field>
+  </app-section-row>
 </app-search-section>

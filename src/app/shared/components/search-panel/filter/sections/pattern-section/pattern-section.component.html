@@ -1,21 +1,17 @@
 <app-search-section title="Pattern">
-  <div class="section-row">
-    <div class="section-field">
-
-      <label>Word Pattern</label>
-
+  <app-section-row>
+    <app-section-field label="Word Pattern">
       <input
         id="pattern"
         type="text"
         placeholder="_a_a"
         [value]="pattern ?? ''"
         (input)="onPatternChange($any($event.target).value)"
+        class="w-full box-border px-3 py-2 border border-gray-300 rounded-md bg-white font-inherit"
       />
-
       <small class="mt-2">
         Use "_" for unknown letters
       </small>
-
-    </div>
-  </div>
+    </app-section-field>
+  </app-section-row>
 </app-search-section>

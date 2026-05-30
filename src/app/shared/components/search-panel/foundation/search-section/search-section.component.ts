@@ -7,7 +7,5 @@ import { Component, input } from '@angular/core';
   styleUrl: './search-section.component.css',
 })
 export class SearchSectionComponent {
-
   public readonly title = input.required<string>();
-
 }

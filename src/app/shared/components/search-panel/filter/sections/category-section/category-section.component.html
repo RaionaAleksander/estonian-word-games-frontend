@@ -1,28 +1,25 @@
 <app-search-section title="Length">
-
-  <div class="section-row">
-
-    <div class="section-field">
-      <label>Include</label>
+  <app-section-row>
+    <app-section-field label="Include">
       <input 
         id="includeCategories"
         placeholder="loomad"
         type="text" 
         [value]="includeCategories?.join(', ') ?? ''"
         (input)="onIncludeChange($any($event.target).value)"
+        class="w-full box-border px-3 py-2 border border-gray-300 rounded-md bg-white font-inherit"
       />
-    </div>
+    </app-section-field>
 
-    <div class="section-field">
-      <label>Exclude</label>
+    <app-section-field label="Exclude">
       <input 
         id="excludeCategories"
         placeholder="riigid"
         type="text" 
         [value]="excludeCategories?.join(', ') ?? ''"
         (input)="onExcludeChange($any($event.target).value)"
+        class="w-full box-border px-3 py-2 border border-gray-300 rounded-md bg-white font-inherit"
       />
-    </div>
-
-  </div>
+    </app-section-field>
+  </app-section-row>
 </app-search-section>
