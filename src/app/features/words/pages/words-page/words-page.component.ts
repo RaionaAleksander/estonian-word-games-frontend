@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@ang
 import { Word } from '../../models/word.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { WordsApiService } from '../../../../core/api/words/words-api.service';
-import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
+import { PaginationComponent } from '../../../../shared/components/pagination/pagination-container/pagination-container.component';
 import { WordFilters } from '../../../../shared/components/search-panel/filter/models/word-filter.model';
 import { WordMainPanelComponent } from '../../components/word-main-panel/word-main-panel.component';
 import { WordQuery } from '../../models/word-query.model';

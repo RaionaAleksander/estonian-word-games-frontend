@@ -1,0 +1,69 @@
+<div class="flex flex-wrap items-center justify-center gap-1.5 mt-4">
+
+  <!-- FIRST -->
+  @if (currentPage > 0) {
+    <app-pagination-button (click)="goToFirst()"><<</app-pagination-button>
+    <app-pagination-button (click)="goToPrev()"><</app-pagination-button>
+  }
+
+  <!-- prev-2 -->
+  @if (currentPage - 2 >= 0) {
+    <app-pagination-button (click)="goToPage(currentPage - 2)">
+      {{ currentPage - 1 }}
+    </app-pagination-button>
+  }
+
+  <!-- prev-1 -->
+  @if (currentPage - 1 >= 0) {
+    <app-pagination-button (click)="goToPage(currentPage - 1)">
+      {{ currentPage }}
+    </app-pagination-button>
+  }
+
+  <!-- CURRENT -->
+  <app-pagination-active-button>
+    {{ currentPage + 1 }}
+  </app-pagination-active-button>
+
+  <!-- next+1 -->
+  @if (currentPage + 1 < totalPages) {
+    <app-pagination-button (click)="goToPage(currentPage + 1)">
+      {{ currentPage + 2 }}
+    </app-pagination-button>
+  }
+
+  <!-- next+2 -->
+  @if (currentPage + 2 < totalPages) {
+    <app-pagination-button (click)="goToPage(currentPage + 2)">
+      {{ currentPage + 3 }}
+    </app-pagination-button>
+  }
+
+  <!-- NEXT -->
+  @if (currentPage < totalPages - 1) {
+    <app-pagination-button (click)="goToNext()">></app-pagination-button>
+    <app-pagination-button (click)="goToLast()">>></app-pagination-button>
+  }
+
+  <!-- GO INPUT -->
+  <input
+    type="number"
+    placeholder="Page"
+    [value]="goToPageInput()"
+    (input)="goToPageInput.set($any($event.target).valueAsNumber)"
+    class="w-16 px-2 py-1 text-center border border-gray-300 rounded bg-white"
+  />
+
+  <button
+    (click)="onGo()"
+    [disabled]="isGoDisabled()"
+    class="px-3 py-1.5 border border-gray-300 bg-white rounded
+         hover:bg-gray-100 transition
+         disabled:bg-gray-200
+         disabled:text-gray-500
+         disabled:cursor-not-allowed"
+    >
+    GO
+  </button>
+
+</div>

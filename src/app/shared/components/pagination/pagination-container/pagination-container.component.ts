@@ -1,9 +1,12 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, signal, computed } from '@angular/core';
+import { PaginationButtonComponent } from '../foundation/pagination-button/pagination-button.component';
+import { PaginationActiveButtonComponent } from '../foundation/pagination-active-button/pagination-active-button.component';
 
 @Component({
-  selector: 'app-pagination',
-  templateUrl: './pagination.component.html',
-  styleUrl: './pagination.component.css',
+  selector: 'app-pagination-container',
+  imports: [PaginationButtonComponent, PaginationActiveButtonComponent],
+  templateUrl: './pagination-container.component.html',
+  styleUrl: './pagination-container.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginationComponent {
