@@ -1,0 +1,14 @@
+<app-search-section title="Limit">
+  <app-section-row>
+    <app-section-field label="Items limit">
+      <input
+        id="limit"
+        placeholder="20"
+        type="number"
+        [value]="limit"
+        (input)="onLimitChange($any($event.target).value)"
+        class="w-full box-border px-3 py-2 border border-gray-300 rounded-md bg-white font-inherit"
+      />
+    </app-section-field>
+  </app-section-row>
+</app-search-section>

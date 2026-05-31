@@ -3,7 +3,47 @@
     Random Words
   </h1>
 
-  <div class="p-4 border border-gray-200 rounded-md bg-gray-50 text-gray-600">
-    This page is under development.
+  <app-random-words-main-panel
+    [filters]="query.filters"
+    [sort]="query.sort"
+    [limit]="{ limit: query.limit }"
+    (applyAllEvent)="onQueryChange($event)"
+    (resetAllEvent)="onResetAll()"
+  />
+
+  @if (loading()) {
+    <p>Loading words...</p>
+  }
+
+  @if (error()) {
+    <p>{{ error() }}</p>
+  }
+
+  <!-- TEMP WORDS LIST -->
+  <div class="mt-4 rounded-md border border-gray-200 bg-white">
+    @for (word of words(); track word.id) {
+      <div class="border-b border-gray-100 p-3">
+        <div class="font-semibold">
+          {{ word.lemma }}
+        </div>
+
+        <div class="text-sm text-gray-500">
+          ID: {{ word.id }}
+          · Length: {{ word.length }}
+          · Category: {{ word.category }}
+        </div>
+      </div>
+    }
   </div>
+
+  <app-query-meta-panel
+    [generatedAt]="generatedAt()"
+  >
+    <app-filter-meta
+      [filters]="meta()?.filters ?? {}"
+    />
+    <app-sort-meta
+      [sort]="meta()?.sort ?? {}"
+    />
+  </app-query-meta-panel>
 </section>

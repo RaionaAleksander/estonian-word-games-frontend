@@ -1,0 +1,29 @@
+<app-search-panel class="main-panel">
+
+  <!-- FILTERS -->
+  <app-filter-container
+    [filters]="filters"
+    (filtersChange)="updateFilters($event)"
+  />
+
+  <!-- SORT -->
+  <app-sort-container
+    [sort]="sort"
+    (sortChange)="updateSort($event)"
+  />
+
+  <!-- LIMIT -->
+  <app-limit-container
+    [limit]="limit"
+    (limitChange)="updateLimit($event)"
+  />
+
+  <!-- ACTIONS -->
+  <app-panel-actions
+    primaryLabel="Generate"
+    secondaryLabel="Reset"
+    (primaryClick)="applyAll()"
+    (secondaryClick)="resetAll()"
+  />
+
+</app-search-panel>

@@ -1,0 +1,15 @@
+<section class="limit-container">
+
+  <app-collapsible-header
+    title="Limit"
+    [isExpanded]="isExpanded()"
+    (expandedChange)="toggle()"
+  />
+
+  @if (isExpanded()) {
+    <app-limit-section
+      [limit]="limit.limit"
+      (valueChange)="updateLimit($event)"
+    />
+  }
+</section>
