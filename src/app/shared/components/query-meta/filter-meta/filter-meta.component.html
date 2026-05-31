@@ -1,0 +1,52 @@
+<div class="p-3 bg-white border rounded">
+  <div class="font-semibold mb-2">
+    Filters applied
+  </div>
+  <div class="text-xs space-y-1">
+    <div>
+      Min length: {{ filters().minLength ?? '—' }}
+    </div>
+
+    <div>
+      Max length: {{ filters().maxLength ?? '—' }}
+    </div>
+
+    <div>
+      Starts with: {{ filters().startsWith ?? '—' }}
+    </div>
+
+    <div>
+      Ends with: {{ filters().endsWith ?? '—' }}
+    </div>
+
+    <div>
+      Contains letters:
+      {{ filters().contains?.join(', ') ?? '—' }}
+    </div>
+
+    <div>
+      Does not contain letters:
+      {{ filters().notContains?.join(', ') ?? '—' }}
+    </div>
+
+    <div>
+      Pattern:
+      {{ filters().pattern ?? '—' }}
+    </div>
+
+    <div>
+      Included categories:
+      {{ filters().includeCategories?.join(', ') ?? '—' }}
+    </div>
+
+    <div>
+      Excluded categories:
+      {{ filters().excludeCategories?.join(', ') ?? '—' }}
+    </div>
+
+    <div>
+      Excluded words:
+      {{ filters().excludedWords?.join(', ') ?? '—' }}
+    </div>
+  </div>
+</div>

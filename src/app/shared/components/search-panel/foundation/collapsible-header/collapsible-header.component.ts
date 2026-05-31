@@ -10,7 +10,10 @@ export class CollapsibleHeaderComponent {
   public readonly title = input.required<string>();
 
   @Input()
-  expanded = false;
+  isExpanded = false;
+
+  @Input()
+  noMargin = false;
 
   @Output()
   expandedChange = new EventEmitter<void>();

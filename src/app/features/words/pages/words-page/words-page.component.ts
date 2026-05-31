@@ -1,17 +1,24 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { Word } from '../../models/word.model';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WordsApiService } from '../../../../core/api/words/words-api.service';
 import { PaginationComponent } from '../../../../shared/components/pagination/pagination-container/pagination-container.component';
 import { WordFilters } from '../../../../shared/components/search-panel/filter/models/word-filter.model';
 import { WordMainPanelComponent } from '../../components/word-main-panel/word-main-panel.component';
+import { WordInfoPanelComponent } from '../../components/word-info-panel/word-info-panel.component';
+import { WordTableComponent } from '../../components/word-table/word-table.component';
+import { QueryMetaPanelComponent } from '../../../../shared/components/query-meta/query-meta-panel/query-meta-panel.component';
+import { FilterMetaComponent } from '../../../../shared/components/query-meta/filter-meta/filter-meta.component';
+import { SortMetaComponent } from '../../../../shared/components/query-meta/sort-meta/sort-meta.component';
+
 import { WordQuery } from '../../models/word-query.model';
 import { WordSort } from '../../../../shared/components/search-panel/sort/models/word-sort.model';
 import { WordQueryMeta } from '../../models/word-query-meta.model';
 
 @Component({
   selector: 'app-words-page',
-  imports: [RouterLink, PaginationComponent, WordMainPanelComponent],
+  imports: [PaginationComponent, WordMainPanelComponent, WordInfoPanelComponent, WordTableComponent,
+    QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent],
   templateUrl: './words-page.component.html',
   styleUrl: './words-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -94,7 +101,7 @@ export class WordsPageComponent implements OnInit {
         this.totalElements.set(response.totalElements);
         this.totalPages.set(response.totalPages);
         this.pageCount.set(response.count);
-        
+
         this.meta.set(response.meta);
         this.generatedAt.set(response.generatedAt);
 

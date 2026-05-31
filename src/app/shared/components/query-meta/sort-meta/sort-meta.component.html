@@ -1,0 +1,14 @@
+<div class="p-3 bg-white border rounded">
+  <div class="font-semibold mb-2">
+    Sort applied
+  </div>
+  <div class="text-xs space-y-1">
+    <div>
+      Field: {{ sort().sort ?? '—' }}
+    </div>
+
+    <div>
+      Order: {{ sort().order ?? '—' }}
+    </div>
+  </div>
+</div>

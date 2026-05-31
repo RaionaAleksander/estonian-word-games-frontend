@@ -1,0 +1,24 @@
+<div class="mb-4 p-4 border border-gray-200 rounded-md bg-gray-50 text-sm text-gray-700">
+  <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+    <div class="p-2 bg-white border rounded">
+      <div class="text-xs text-gray-500">Total words</div>
+      <div class="text-lg font-semibold">{{ totalElements() }}</div>
+    </div>
+    <div class="p-2 bg-white border rounded">
+      <div class="text-xs text-gray-500">Pages</div>
+      <div class="text-lg font-semibold">{{ totalPages() }}</div>
+    </div>
+    <div class="p-2 bg-white border rounded">
+      <div class="text-xs text-gray-500">Current page</div>
+      <div class="text-lg font-semibold">{{ currentPage() + 1 }}</div>
+    </div>
+    <div class="p-2 bg-white border rounded">
+      <div class="text-xs text-gray-500">Page size</div>
+      <div class="text-lg font-semibold">{{ pageSize() }}</div>
+    </div>
+    <div class="p-2 bg-white border rounded">
+      <div class="text-xs text-gray-500">On this page</div>
+      <div class="text-lg font-semibold">{{ pageCount() }}</div>
+    </div>
+  </div>
+</div>

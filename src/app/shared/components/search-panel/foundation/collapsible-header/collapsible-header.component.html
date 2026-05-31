@@ -1,4 +1,4 @@
-<div class="flex justify-between items-center mb-4">
+<div [class.mb-4]="!noMargin" class="flex justify-between items-center">
 
   <h2 class="text-lg font-semibold m-0">
     {{ title() }}
@@ -9,7 +9,7 @@
     (click)="expandedChange.emit()"
     class="w-9 h-9 text-base font-bold p-0 border border-gray-300 bg-white rounded-md cursor-pointer hover:bg-gray-100 transition"
   >
-    {{ expanded ? '▼' : '►' }}
+    {{ isExpanded ? '▼' : '►' }}
   </button>
 
 </div>

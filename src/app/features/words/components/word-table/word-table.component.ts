@@ -1,9 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Word } from '../../models/word.model';
 
 @Component({
   selector: 'app-word-table',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './word-table.component.html',
   styleUrl: './word-table.component.css',
 })
-export class WordTableComponent {}
+export class WordTableComponent {
+  @Input({ required: true })
+  words!: Word[];
+}

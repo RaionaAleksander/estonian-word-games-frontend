@@ -5,7 +5,6 @@ import { PageSize } from '../../../../shared/components/search-panel/pagination/
 import { FilterContainerComponent } from '../../../../shared/components/search-panel/filter/filter-container/filter-container.component';
 import { SortContainerComponent } from '../../../../shared/components/search-panel/sort/sort-container/sort-container.component';
 import { PaginationContainerComponent } from '../../../../shared/components/search-panel/pagination/pagination-container/pagination-container.component';
-import { WordQuery } from '../../models/word-query.model';
 import { PanelActionsComponent } from '../../../../shared/components/search-panel/foundation/panel-actions/panel-actions.component';
 import { SearchPanelComponent } from '../../../../shared/components/search-panel/foundation/search-panel/search-panel.component';
 

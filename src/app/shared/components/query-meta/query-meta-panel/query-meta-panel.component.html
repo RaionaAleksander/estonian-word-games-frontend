@@ -1,0 +1,18 @@
+<div class="mt-8 p-4 border border-gray-200 rounded-md bg-gray-50 text-sm text-gray-700">
+  <app-collapsible-header
+    title="Query metadata"
+    [isExpanded]="isExpanded()"
+    (expandedChange)="toggle()"
+    [noMargin]="true"
+  />
+
+  @if (isExpanded()) {
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+        <ng-content />
+    </div>
+
+    <div class="mt-3 text-xs text-gray-500">
+        Generated at: {{ generatedAt() | date:'dd.MM.yyyy, HH:mm:ss' }}
+    </div>
+  }
+</div>
