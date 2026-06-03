@@ -12,11 +12,11 @@
   />
 
   @if (loading()) {
-    <p>Loading words...</p>
+    <p class="text-lg text-gray-600">Loading words...</p>
   }
 
   @if (error()) {
-    <p>{{ error() }}</p>
+    <p class="text-lg text-red-500">{{ error() }}</p>
   }
 
   <app-random-words-summary-panel

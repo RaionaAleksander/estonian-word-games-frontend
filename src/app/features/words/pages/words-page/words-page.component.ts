@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { Word } from '../../models/word.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { WordQuery } from '../../models/word-query.model';
+import { WordSort } from '../../../../shared/components/search-panel/sort/models/word-sort.model';
+import { WordQueryMeta } from '../../models/word-query-meta.model';
 import { WordsApiService } from '../../../../core/api/words/words-api.service';
 import { PaginationComponent } from '../../../../shared/components/pagination/pagination-container/pagination-container.component';
 import { WordFilters } from '../../../../shared/components/search-panel/filter/models/word-filter.model';
@@ -10,10 +13,8 @@ import { WordTableComponent } from '../../components/word-table/word-table.compo
 import { QueryMetaPanelComponent } from '../../../../shared/components/query-meta/query-meta-panel/query-meta-panel.component';
 import { FilterMetaComponent } from '../../../../shared/components/query-meta/filter-meta/filter-meta.component';
 import { SortMetaComponent } from '../../../../shared/components/query-meta/sort-meta/sort-meta.component';
-
-import { WordQuery } from '../../models/word-query.model';
-import { WordSort } from '../../../../shared/components/search-panel/sort/models/word-sort.model';
-import { WordQueryMeta } from '../../models/word-query-meta.model';
+import { buildWordsFiltersParams } from '../../../../shared/utility/words-query/words-query-filters.builder';
+import { parseWordFiltersFromQuery } from '../../../../shared/utility/words-query/words-query.filters.parser';
 
 @Component({
   selector: 'app-words-page',
@@ -65,7 +66,7 @@ export class WordsPageComponent implements OnInit {
         rawParams[key] = params.get(key);
       });
       this.query = {
-        filters: this.parseFiltersFromQuery(rawParams),
+        filters: parseWordFiltersFromQuery(rawParams),
 
         sort: {
           sort: rawParams['sort'] || undefined,
@@ -152,69 +153,15 @@ export class WordsPageComponent implements OnInit {
       size: this.query.size,
     };
 
-    const filters = this.query.filters;
-
-    if (filters.minLength != null) params.minLength = filters.minLength;
-    if (filters.maxLength != null) params.maxLength = filters.maxLength;
-
-    if (filters.startsWith) params.startsWith = filters.startsWith;
-    if (filters.endsWith) params.endsWith = filters.endsWith;
-    if (filters.pattern) params.pattern = filters.pattern;
-
-    if (Array.isArray(filters.contains) && filters.contains.length)
-      params.contains = filters.contains.join(',');
-
-    if (Array.isArray(filters.notContains) && filters.notContains.length)
-      params.notContains = filters.notContains.join(',');
-
-    if (Array.isArray(filters.includeCategories) && filters.includeCategories.length)
-      params.includeCategories = filters.includeCategories.join(',');
-
-    if (Array.isArray(filters.excludeCategories) && filters.excludeCategories.length)
-      params.excludeCategories = filters.excludeCategories.join(',');
-
-    if (Array.isArray(filters.excludedWords) && filters.excludedWords.length)
-      params.excludedWords = filters.excludedWords.join(',');
-
     if (this.query.sort.sort)
       params.sort = this.query.sort.sort;
 
     if (this.query.sort.order)
       params.order = this.query.sort.order;
 
-    params.size = this.query.size;
-
-    return params;
-  }
-
-  private parseFiltersFromQuery(params: any): WordFilters {
     return {
-      minLength: params['minLength'] ? Number(params['minLength']) : undefined,
-      maxLength: params['maxLength'] ? Number(params['maxLength']) : undefined,
-
-      startsWith: params['startsWith'] || undefined,
-      endsWith: params['endsWith'] || undefined,
-      pattern: params['pattern'] || undefined,
-
-      contains: params['contains']
-        ? params['contains'].split(',').filter(Boolean)
-        : undefined,
-
-      notContains: params['notContains']
-        ? params['notContains'].split(',').filter(Boolean)
-        : undefined,
-
-      includeCategories: params['includeCategories']
-        ? params['includeCategories'].split(',').filter(Boolean)
-        : undefined,
-
-      excludeCategories: params['excludeCategories']
-        ? params['excludeCategories'].split(',').filter(Boolean)
-        : undefined,
-
-      excludedWords: params['excludedWords']
-        ? params['excludedWords'].split(',').filter(Boolean)
-        : undefined,
+      ...params,
+      ...buildWordsFiltersParams(this.query.filters),
     };
   }
 

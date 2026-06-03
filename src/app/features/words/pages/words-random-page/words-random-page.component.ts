@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { RandomWordsApiService } from '../../../../core/api/words/random-words-api.service';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WordQueryMeta } from '../../models/word-query-meta.model';
 import { RandomWordQuery } from '../../models/random-word-query.model';
 import { WordFilters } from '../../../../shared/components/search-panel/filter/models/word-filter.model';
@@ -12,11 +12,13 @@ import { RandomWordCloudComponent } from '../../components/random-word-cloud/ran
 import { QueryMetaPanelComponent } from '../../../../shared/components/query-meta/query-meta-panel/query-meta-panel.component';
 import { FilterMetaComponent } from '../../../../shared/components/query-meta/filter-meta/filter-meta.component';
 import { SortMetaComponent } from '../../../../shared/components/query-meta/sort-meta/sort-meta.component';
+import { buildWordsFiltersParams } from '../../../../shared/utility/words-query/words-query-filters.builder';
+import { parseWordFiltersFromQuery } from '../../../../shared/utility/words-query/words-query.filters.parser';
 
 @Component({
   selector: 'app-words-random-page',
   imports: [RandomWordsMainPanelComponent, RandomWordsSummaryPanelComponent, RandomWordCloudComponent,
-    QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent, RouterLink],
+    QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent],
   templateUrl: './words-random-page.component.html',
   styleUrl: './words-random-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -61,7 +63,7 @@ export class WordsRandomPageComponent implements OnInit {
       });
 
       this.query = {
-        filters: this.parseFiltersFromQuery(rawParams),
+        filters: parseWordFiltersFromQuery(rawParams),
         sort: {
           sort: rawParams['sort'] || undefined,
           order: rawParams['order'] || undefined,
@@ -118,6 +120,8 @@ export class WordsRandomPageComponent implements OnInit {
       relativeTo: this.route,
       queryParams: this.buildQueryParams(),
     });
+
+    this.loadWords(this.query);
   }
 
   private buildQueryParams(): any {
@@ -125,69 +129,15 @@ export class WordsRandomPageComponent implements OnInit {
       limit: this.query.limit,
     };
 
-    const filters = this.query.filters;
-
-    if (filters.minLength != null) params.minLength = filters.minLength;
-    if (filters.maxLength != null) params.maxLength = filters.maxLength;
-
-    if (filters.startsWith) params.startsWith = filters.startsWith;
-    if (filters.endsWith) params.endsWith = filters.endsWith;
-    if (filters.pattern) params.pattern = filters.pattern;
-
-    if (Array.isArray(filters.contains) && filters.contains.length)
-      params.contains = filters.contains.join(',');
-
-    if (Array.isArray(filters.notContains) && filters.notContains.length)
-      params.notContains = filters.notContains.join(',');
-
-    if (Array.isArray(filters.includeCategories) && filters.includeCategories.length)
-      params.includeCategories = filters.includeCategories.join(',');
-
-    if (Array.isArray(filters.excludeCategories) && filters.excludeCategories.length)
-      params.excludeCategories = filters.excludeCategories.join(',');
-
-    if (Array.isArray(filters.excludedWords) && filters.excludedWords.length)
-      params.excludedWords = filters.excludedWords.join(',');
-
     if (this.query.sort.sort)
       params.sort = this.query.sort.sort;
 
     if (this.query.sort.order)
       params.order = this.query.sort.order;
 
-    params.limit = this.query.limit;
-
-    return params;
-  }
-
-  private parseFiltersFromQuery(params: any): WordFilters {
     return {
-      minLength: params['minLength'] ? Number(params['minLength']) : undefined,
-      maxLength: params['maxLength'] ? Number(params['maxLength']) : undefined,
-
-      startsWith: params['startsWith'] || undefined,
-      endsWith: params['endsWith'] || undefined,
-      pattern: params['pattern'] || undefined,
-
-      contains: params['contains']
-        ? params['contains'].split(',').filter(Boolean)
-        : undefined,
-
-      notContains: params['notContains']
-        ? params['notContains'].split(',').filter(Boolean)
-        : undefined,
-
-      includeCategories: params['includeCategories']
-        ? params['includeCategories'].split(',').filter(Boolean)
-        : undefined,
-
-      excludeCategories: params['excludeCategories']
-        ? params['excludeCategories'].split(',').filter(Boolean)
-        : undefined,
-
-      excludedWords: params['excludedWords']
-        ? params['excludedWords'].split(',').filter(Boolean)
-        : undefined,
+      ...params,
+      ...buildWordsFiltersParams(this.query.filters),
     };
   }
 
