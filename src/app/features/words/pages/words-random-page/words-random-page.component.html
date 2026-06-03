@@ -19,22 +19,14 @@
     <p>{{ error() }}</p>
   }
 
-  <!-- TEMP WORDS LIST -->
-  <div class="mt-4 rounded-md border border-gray-200 bg-white">
-    @for (word of words(); track word.id) {
-      <div class="border-b border-gray-100 p-3">
-        <div class="font-semibold">
-          {{ word.lemma }}
-        </div>
+  <app-random-words-summary-panel
+    [count]="count()"
+    [limit]="query.limit"
+  />
 
-        <div class="text-sm text-gray-500">
-          ID: {{ word.id }}
-          · Length: {{ word.length }}
-          · Category: {{ word.category }}
-        </div>
-      </div>
-    }
-  </div>
+  <app-random-word-cloud
+    [words]="words()"
+  />
 
   <app-query-meta-panel
     [generatedAt]="generatedAt()"

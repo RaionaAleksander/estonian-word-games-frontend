@@ -1,0 +1,39 @@
+<div class="mt-6 w-4/5 mx-auto p-4 border border-gray-200 rounded-lg bg-white flex flex-wrap gap-3 justify-center">
+  @for (word of words; track word.id) {
+    <div class="relative group">
+      <a
+        [routerLink]="['/words/details', word.lemma]"
+        class="inline-block px-3 py-1 rounded-full border border-gray-300
+         bg-white hover:bg-gray-100 hover:border-gray-400 transition cursor-pointer"
+      >
+        {{ word.lemma }}
+      </a>
+
+      <!-- HOVER PANEL -->
+      <div
+        class="absolute left-1/2 top-full -translate-x-1/2 z-20 mt-2 hidden group-hover:block
+          min-w-56 rounded-lg border border-gray-200 bg-white p-3 shadow-lg"
+      >
+        <div class="font-semibold text-base mb-2">
+          {{ word.lemma }}
+        </div>
+        <div class="space-y-1 text-sm text-gray-600">
+          <div>
+            <span class="font-medium">ID:</span>
+            {{ word.id }}
+          </div>
+
+          <div>
+            <span class="font-medium">Length:</span>
+            {{ word.length }}
+          </div>
+
+          <div>
+            <span class="font-medium">Category:</span>
+            {{ word.category }}
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

@@ -1,19 +1,22 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { RandomWordsApiService } from '../../../../core/api/words/random-words-api.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { WordQueryMeta } from '../../models/word-query-meta.model';
 import { RandomWordQuery } from '../../models/random-word-query.model';
 import { WordFilters } from '../../../../shared/components/search-panel/filter/models/word-filter.model';
 import { WordSort } from '../../../../shared/components/search-panel/sort/models/word-sort.model';
 import { Word } from '../../models/word.model';
 import { RandomWordsMainPanelComponent } from '../../components/random-words-main-panel/random-words-main-panel.component';
+import { RandomWordsSummaryPanelComponent } from '../../components/random-words-summary-panel/random-words-summary-panel.component';
+import { RandomWordCloudComponent } from '../../components/random-word-cloud/random-word-cloud.component';
 import { QueryMetaPanelComponent } from '../../../../shared/components/query-meta/query-meta-panel/query-meta-panel.component';
 import { FilterMetaComponent } from '../../../../shared/components/query-meta/filter-meta/filter-meta.component';
 import { SortMetaComponent } from '../../../../shared/components/query-meta/sort-meta/sort-meta.component';
 
 @Component({
   selector: 'app-words-random-page',
-  imports: [RandomWordsMainPanelComponent, QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent],
+  imports: [RandomWordsMainPanelComponent, RandomWordsSummaryPanelComponent, RandomWordCloudComponent,
+    QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent, RouterLink],
   templateUrl: './words-random-page.component.html',
   styleUrl: './words-random-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,6 +29,7 @@ export class WordsRandomPageComponent implements OnInit {
   private readonly router = inject(Router);
 
   protected readonly words = signal<Word[]>([]);
+  protected readonly count = signal(0);
 
   protected readonly loading = signal(true);
   protected readonly error = signal<string | null>(null);
@@ -83,6 +87,7 @@ export class WordsRandomPageComponent implements OnInit {
     .subscribe({
       next: (response) => {
         this.words.set(response.words);
+        this.count.set(response.count);
         this.meta.set(response.meta);
         this.generatedAt.set(response.generatedAt);
         this.loading.set(false);
