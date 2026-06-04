@@ -27,9 +27,21 @@
     [pageCount]="pageCount()"
   />
 
-  <app-word-table
-    [words]="words()"
-  />
+  @if (totalElements() === 0) {
+    <app-empty-state
+      title="No words found"
+      description="No words match the selected filters."
+    />
+  } @else if (pageCount() === 0) {
+    <app-empty-state
+      title="No words on this page"
+      description="The requested page is outside the available results."
+    />
+  } @else {
+    <app-word-table
+      [words]="words()"
+    />
+  }
 
   <app-pagination-container
     [currentPage]="currentPage()"

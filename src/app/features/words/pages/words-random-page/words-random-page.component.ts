@@ -14,11 +14,13 @@ import { FilterMetaComponent } from '../../../../shared/components/query-meta/fi
 import { SortMetaComponent } from '../../../../shared/components/query-meta/sort-meta/sort-meta.component';
 import { buildWordsFiltersParams } from '../../../../shared/utility/words-query/words-query-filters.builder';
 import { parseWordFiltersFromQuery } from '../../../../shared/utility/words-query/words-query.filters.parser';
+import { EmptyStateComponent } from '../../../../shared/components/empty-state/empty-state.component';
+import { parseNonNegativeNumber } from '../../../../shared/utility/number-param.util';
 
 @Component({
   selector: 'app-words-random-page',
   imports: [RandomWordsMainPanelComponent, RandomWordsSummaryPanelComponent, RandomWordCloudComponent,
-    QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent],
+    QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent, EmptyStateComponent],
   templateUrl: './words-random-page.component.html',
   styleUrl: './words-random-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -51,8 +53,7 @@ export class WordsRandomPageComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(params => {
 
-      const limit =
-        Number(params.get('limit')) || 20;
+      const limit = parseNonNegativeNumber(params.get('limit'), 20);
 
       this.limit.set(limit);
 
@@ -93,6 +94,7 @@ export class WordsRandomPageComponent implements OnInit {
         this.meta.set(response.meta);
         this.generatedAt.set(response.generatedAt);
         this.loading.set(false);
+        this.error.set(null);
       },
 
       error: () => {
@@ -109,11 +111,15 @@ export class WordsRandomPageComponent implements OnInit {
     sort: WordSort;
     limit: number;
   }): void {
+    const limit = parseNonNegativeNumber(
+      String(event.limit),
+      20
+    );
 
     this.query = {
       filters: event.filters,
       sort: event.sort,
-      limit: event.limit,
+      limit,
     };
 
     this.router.navigate([], {
@@ -126,7 +132,7 @@ export class WordsRandomPageComponent implements OnInit {
 
   private buildQueryParams(): any {
     const params: any = {
-      limit: this.query.limit,
+      limit: this.query.limit >= 0 ? this.query.limit : 20,
     };
 
     if (this.query.sort.sort)

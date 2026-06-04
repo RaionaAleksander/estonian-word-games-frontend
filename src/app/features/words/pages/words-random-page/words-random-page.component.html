@@ -24,9 +24,21 @@
     [limit]="query.limit"
   />
 
-  <app-random-word-cloud
-    [words]="words()"
-  />
+  @if (limit() === 0) {
+    <app-empty-state
+      title="Limit is 0"
+      description="Increase the limit to generate random words."
+    />
+  } @else if (count() === 0) {
+    <app-empty-state
+      title="No random words generated"
+      description="Try adjusting filters or click Generate again."
+    />
+  } @else {
+    <app-random-word-cloud
+      [words]="words()"
+    />
+  }
 
   <app-query-meta-panel
     [generatedAt]="generatedAt()"

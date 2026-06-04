@@ -15,11 +15,13 @@ import { FilterMetaComponent } from '../../../../shared/components/query-meta/fi
 import { SortMetaComponent } from '../../../../shared/components/query-meta/sort-meta/sort-meta.component';
 import { buildWordsFiltersParams } from '../../../../shared/utility/words-query/words-query-filters.builder';
 import { parseWordFiltersFromQuery } from '../../../../shared/utility/words-query/words-query.filters.parser';
+import { EmptyStateComponent } from '../../../../shared/components/empty-state/empty-state.component';
+import { parseNonNegativeNumber } from '../../../../shared/utility/number-param.util';
 
 @Component({
   selector: 'app-words-page',
   imports: [PaginationComponent, WordMainPanelComponent, WordInfoPanelComponent, WordTableComponent,
-    QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent],
+    QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent, EmptyStateComponent],
   templateUrl: './words-page.component.html',
   styleUrl: './words-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -54,8 +56,8 @@ export class WordsPageComponent implements OnInit {
 
   public ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
-      const page = Number(params.get('page')) || 0;
-      const size = Number(params.get('size')) || 20;
+      const page = parseNonNegativeNumber(params.get('page'), 0);
+      const size = parseNonNegativeNumber(params.get('size'), 20);
 
       this.currentPage.set(page);
       this.pageSize.set(size);
