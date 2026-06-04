@@ -1,14 +1,15 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { WordExistsResponse } from '../../models/word-exists-response.model';
 import { WordExistsApiService } from '../../../../core/api/words/word-exists-api.service';
 import { WordExistsMainPanelComponent } from '../../components/word-exists-main-panel/word-exists-main-panel.component';
+import { WordExistsResultComponent } from '../../components/word-exists-result/word-exists-result.component';
 import { WordName } from '../../../../shared/components/search-panel/word-name/models/word-name.model';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { EmptyStateComponent } from '../../../../shared/components/empty-state/empty-state.component';
 
 @Component({
   selector: 'app-words-exists-page',
-  imports: [WordExistsMainPanelComponent, DatePipe],
+  imports: [WordExistsMainPanelComponent, WordExistsResultComponent, EmptyStateComponent],
   templateUrl: './words-exists-page.component.html',
   styleUrl: './words-exists-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

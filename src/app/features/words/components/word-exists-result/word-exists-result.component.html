@@ -1,0 +1,30 @@
+<div
+  class="mt-6 mx-auto max-w-xl rounded-lg border p-6 shadow-sm text-center"
+  [class.border-green-300]="result.exists"
+  [class.bg-green-50]="result.exists"
+  [class.border-red-300]="!result.exists"
+  [class.bg-red-50]="!result.exists"
+>
+
+  <div class="text-sm text-gray-500 mb-2">
+    Word checked
+  </div>
+
+  <div class="text-3xl font-bold mb-4">
+    {{ result.word }}
+  </div>
+
+  <div
+    class="text-lg font-semibold"
+    [class.text-green-700]="result.exists"
+    [class.text-red-700]="!result.exists"
+  >
+    {{ result.exists ? 'Exists in database' : 'Not found in database' }}
+  </div>
+
+  <div class="mt-4 text-sm text-gray-500">
+    Checked at:
+    {{ result.checkedAt | date:'dd.MM.yyyy, HH:mm:ss' }}
+  </div>
+
+</div>
