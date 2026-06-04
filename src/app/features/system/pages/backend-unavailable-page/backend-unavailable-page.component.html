@@ -1,0 +1,63 @@
+<section class="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
+  <h1 class="mt-6 text-4xl font-bold text-red-600">
+    Backend Unavailable
+  </h1>
+
+  <img
+    src="/images/status/backend-unavailable.png"
+    alt="Backend unavailable"
+    class="mt-6 w-48 h-48 opacity-90"
+  />
+
+  <p class="mt-4 max-w-xl text-gray-600">
+    The API server is not running or not reachable.
+  </p>
+
+  <div class="mt-6 w-full max-w-md rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm text-gray-700">
+    <div class="mb-2 font-semibold">
+      Expected endpoint:
+    </div>
+
+    <div class="mb-4 font-mono text-xs text-gray-500">
+      http://localhost:8080
+    </div>
+
+    <div class="mb-2 font-semibold">
+      Current status:
+    </div>
+
+    <div class="font-bold text-red-600">
+      OFFLINE
+    </div>
+
+    @if (returnUrl()) {
+      <div class="mt-4 text-xs text-gray-500">
+        You were trying to open:
+        <span class="font-mono">{{ returnUrl() }}</span>
+      </div>
+    }
+  </div>
+
+  <div class="mt-6 flex gap-3">
+    <button
+      (click)="retry()"
+      class="rounded-md bg-red-600 px-4 py-2 text-white hover:bg-red-700 disabled:opacity-50"
+      [disabled]="checking()"
+    >
+      {{ checking() ? 'Checking...' : 'Retry connection' }}
+    </button>
+
+    <button
+      (click)="goHome()"
+      class="rounded-md border border-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-100"
+    >
+      Go home
+    </button>
+  </div>
+
+  @if (isUp() === true) {
+    <p class="mt-4 text-green-600 font-semibold">
+      Backend is back online. Redirecting...
+    </p>
+  }
+</section>
