@@ -8,8 +8,10 @@ import { WordsDefinitionsPageComponent } from './features/words/pages/words-defi
 import { BackendUnavailablePageComponent } from './features/system/pages/backend-unavailable-page/backend-unavailable-page.component';
 import { NotFoundPageComponent } from './features/system/pages/not-found-page.component/not-found-page.component';
 import { BackendHealthGuard } from './core/guards/backend-health.guard';
+import { HomePageComponent } from './features/home/pages/home-page/home-page.component';
 
 export const routes: Routes = [
+  { path: '', component: HomePageComponent },
   { path: 'words', component: WordsPageComponent, canActivate: [BackendHealthGuard] },
   { path: 'words/random', component: WordsRandomPageComponent, canActivate: [BackendHealthGuard] },
   { path: 'words/pattern', component: WordsPatternPageComponent, canActivate: [BackendHealthGuard] },
