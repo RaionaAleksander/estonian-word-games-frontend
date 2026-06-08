@@ -19,44 +19,50 @@
     <p class="text-lg text-red-500">{{ error() }}</p>
   }
 
-  <app-word-info-panel
-    [totalElements]="totalElements()"
-    [totalPages]="totalPages()"
-    [currentPage]="currentPage()"
-    [pageSize]="pageSize()"
-    [pageCount]="pageCount()"
-  />
-
-  @if (totalElements() === 0) {
-    <app-empty-state
-      title="No words found"
-      description="No words match the selected filters."
-    />
-  } @else if (pageCount() === 0) {
-    <app-empty-state
-      title="No words on this page"
-      description="The requested page is outside the available results."
-    />
-  } @else {
-    <app-word-table
-      [words]="words()"
+  @if (response(); as res) {
+    <app-word-info-panel
+      [totalElements]="res.totalElements"
+      [totalPages]="res.totalPages"
+      [currentPage]="res.currentPage"
+      [pageSize]="res.pageSize"
+      [pageCount]="res.count"
     />
   }
 
-  <app-pagination-container
-    [currentPage]="currentPage()"
-    [totalPages]="totalPages()"
-    (pageChange)="onPageChange($event)"
-  ></app-pagination-container>
+  @if (response(); as res) {
+    @if (res.totalElements === 0) {
+      <app-empty-state
+        title="No words found"
+        description="No words match the selected filters."
+      />
+    } @else if (res.count === 0) {
+      <app-empty-state
+        title="No words on this page"
+        description="The requested page is outside the available results."
+      />
+    } @else {
+      <app-word-table [words]="res.words" />
+    }
+  }
 
-  <app-query-meta-panel
-    [generatedAt]="generatedAt()"
-  >
-    <app-filter-meta
-      [filters]="meta()?.filters ?? {}"
-    />
-    <app-sort-meta
-      [sort]="meta()?.sort ?? {}"
-    />
-  </app-query-meta-panel>
+  @if (response(); as res) {
+    <app-pagination-container
+      [currentPage]="res.currentPage"
+      [totalPages]="res.totalPages"
+      (pageChange)="onPageChange($event)"
+    ></app-pagination-container>
+  }
+
+  @if (response(); as res) {
+    <app-query-meta-panel
+      [generatedAt]="res.generatedAt"
+    >
+      <app-filter-meta
+        [filters]="res.meta.filters"
+      />
+      <app-sort-meta
+        [sort]="res.meta.sort"
+      />
+    </app-query-meta-panel>
+  }
 </section>

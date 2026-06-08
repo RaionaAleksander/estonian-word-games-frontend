@@ -2,6 +2,6 @@ import { WordFilters } from '../../../shared/components/search-panel/filter/mode
 import { WordSort } from '../../../shared/components/search-panel/sort/models/word-sort.model';
 
 export interface WordQueryMeta {
-  filters: WordFilters | null;
-  sort: WordSort | null;
+  filters: WordFilters;
+  sort: WordSort;
 }

@@ -2,6 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { WordQueryParams } from '../../../features/words/models/word-query-params.model';
+import { WordPageResponse } from '../../../features/words/models/word-page-response.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +13,7 @@ export class WordsApiService {
 
   private readonly apiUrl = 'http://localhost:8080/api/v1/words';
 
-  public getWordsPage(page: number, size: number, queryParams: WordQueryParams) {
+  public getWordsPage(page: number, size: number, queryParams: WordQueryParams): Observable<WordPageResponse> {
     let params = new HttpParams()
       .set('page', page)
       .set('size', size);
@@ -64,6 +66,6 @@ export class WordsApiService {
       params = params.set('order', queryParams.order);
     }
 
-    return this.http.get<any>(this.apiUrl, { params });
+    return this.http.get<WordPageResponse>(this.apiUrl, { params });
   }
 }

@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
-import { Word } from '../../models/word.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WordQuery } from '../../models/word-query.model';
 import { WordSort } from '../../../../shared/components/search-panel/sort/models/word-sort.model';
-import { WordQueryMeta } from '../../models/word-query-meta.model';
 import { WordsApiService } from '../../../../core/api/words/words-api.service';
 import { PaginationComponent } from '../../../../shared/components/pagination/pagination-container/pagination-container.component';
 import { WordFilters } from '../../../../shared/components/search-panel/filter/models/word-filter.model';
@@ -17,6 +15,7 @@ import { buildWordsFiltersParams } from '../../../../shared/utility/words-query/
 import { parseWordFiltersFromQuery } from '../../../../shared/utility/words-query/words-query.filters.parser';
 import { EmptyStateComponent } from '../../../../shared/components/empty-state/empty-state.component';
 import { parseNonNegativeNumber } from '../../../../shared/utility/number-param.util';
+import { WordPageResponse } from '../../models/word-page-response.model';
 
 @Component({
   selector: 'app-words-page',
@@ -29,20 +28,11 @@ import { parseNonNegativeNumber } from '../../../../shared/utility/number-param.
 export class WordsPageComponent implements OnInit {
   private readonly wordsApiService = inject(WordsApiService);
 
-  protected readonly words = signal<Word[]>([]);
-
   protected readonly loading = signal(true);
 
   protected readonly error = signal<string | null>(null);
 
-  protected readonly totalElements = signal(0);
-  protected readonly totalPages = signal(1);
-  protected readonly currentPage = signal(0);
-  protected readonly pageSize = signal(20);
-  protected readonly pageCount = signal(0);
-
-  protected readonly meta = signal<WordQueryMeta | null>(null);
-  protected readonly generatedAt = signal<string | null>(null);
+  protected readonly response = signal<WordPageResponse | null>(null);
 
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
@@ -59,9 +49,6 @@ export class WordsPageComponent implements OnInit {
       const page = parseNonNegativeNumber(params.get('page'), 0);
       const size = parseNonNegativeNumber(params.get('size'), 20);
 
-      this.currentPage.set(page);
-      this.pageSize.set(size);
-
       const rawParams: any = {};
 
       params.keys.forEach((key) => {
@@ -69,12 +56,10 @@ export class WordsPageComponent implements OnInit {
       });
       this.query = {
         filters: parseWordFiltersFromQuery(rawParams),
-
         sort: {
           sort: rawParams['sort'] || undefined,
           order: rawParams['order'] || undefined,
         },
-
         page,
         size,
       };
@@ -100,14 +85,7 @@ export class WordsPageComponent implements OnInit {
       }
     ).subscribe({
       next: (response) => {
-        this.words.set(response.words);
-        this.totalElements.set(response.totalElements);
-        this.totalPages.set(response.totalPages);
-        this.pageCount.set(response.count);
-
-        this.meta.set(response.meta);
-        this.generatedAt.set(response.generatedAt);
-
+        this.response.set(response);
         this.loading.set(false);
       },
       error: () => {

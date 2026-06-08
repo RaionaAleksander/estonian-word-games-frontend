@@ -1,3 +1,4 @@
+import { WordQueryMeta } from './word-query-meta.model';
 import { Word } from './word.model';
 
 export interface WordPageResponse {
@@ -7,5 +8,6 @@ export interface WordPageResponse {
   pageSize: number;
   count: number;
   words: Word[];
+  meta: WordQueryMeta;
   generatedAt: string;
 }

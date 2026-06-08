@@ -19,35 +19,36 @@
     <p class="text-lg text-red-500">{{ error() }}</p>
   }
 
-  <app-random-words-summary-panel
-    [count]="count()"
-    [limit]="query.limit"
-  />
-
-  @if (limit() === 0) {
-    <app-empty-state
-      title="Limit is 0"
-      description="Increase the limit to generate random words."
-    />
-  } @else if (count() === 0) {
-    <app-empty-state
-      title="No random words generated"
-      description="Try adjusting filters or click Generate again."
-    />
-  } @else {
-    <app-random-word-cloud
-      [words]="words()"
+  @if (response(); as res) {
+    <app-random-words-summary-panel
+      [count]="res.count"
+      [limit]="query.limit"
     />
   }
 
-  <app-query-meta-panel
-    [generatedAt]="generatedAt()"
-  >
-    <app-filter-meta
-      [filters]="meta()?.filters ?? {}"
-    />
-    <app-sort-meta
-      [sort]="meta()?.sort ?? {}"
-    />
-  </app-query-meta-panel>
+  @if (response(); as res) {
+    @if (res.count === 0) {
+      <app-empty-state
+        title="No random words generated"
+        description="Try adjusting filters or click Generate again."
+      />
+    } @else {
+      <app-random-word-cloud
+        [words]="res.words"
+      />
+    }
+  }
+
+  @if (response(); as res) {
+    <app-query-meta-panel
+      [generatedAt]="res.generatedAt"
+    >
+      <app-filter-meta
+        [filters]="res.meta.filters"
+      />
+      <app-sort-meta
+        [sort]="res.meta.sort"
+      />
+    </app-query-meta-panel>
+  }
 </section>

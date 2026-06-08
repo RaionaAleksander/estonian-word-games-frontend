@@ -2,6 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { WordQueryParams } from '../../../features/words/models/word-query-params.model';
+import { RandomWordsResponse } from '../../../features/words/models/random-words-response.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +13,7 @@ export class RandomWordsApiService {
 
   private readonly apiUrl = 'http://localhost:8080/api/v1/words/random';
 
-  public getRandomWords(limit: number, queryParams: WordQueryParams,) {
+  public getRandomWords(limit: number, queryParams: WordQueryParams): Observable<RandomWordsResponse> {
     let params = new HttpParams().set('limit', limit);
 
     if (queryParams.minLength != null) {
@@ -62,6 +64,6 @@ export class RandomWordsApiService {
       params = params.set('order', queryParams.order);
     }
 
-    return this.http.get<any>(this.apiUrl, { params });
+    return this.http.get<RandomWordsResponse>(this.apiUrl, { params });
   }
 }
