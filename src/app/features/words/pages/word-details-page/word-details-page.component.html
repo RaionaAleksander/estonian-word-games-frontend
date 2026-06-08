@@ -16,74 +16,15 @@
       {{ result()!.exists ? formatWord(result()!.lemma!) : formatWord(result()!.word) }}
     </h1>
 
-    @if (!result()!.exists) {
+    @if (result()!.exists) {
+      <app-word-details-result
+        [result]="result()!"
+      />
+    } @else {
       <app-empty-state
         [title]="'Word not found: ' + requestedWord()"
         description="This word does not exist in the dictionary. Check the spelling or try again later."
       />
-    } @else {
-      <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-        <div class="grid gap-4 md:grid-cols-3">
-          <div>
-            <div class="text-sm text-gray-500">
-              Lemma
-            </div>
-
-            <div class="text-lg font-semibold">
-              {{ result()!.lemma }}
-            </div>
-          </div>
-
-          <div>
-            <div class="text-sm text-gray-500">
-              Length
-            </div>
-
-            <div class="text-lg font-semibold">
-              {{ result()!.length }}
-            </div>
-          </div>
-
-          <div>
-            <div class="text-sm text-gray-500">
-              Category
-            </div>
-
-            <div class="text-lg font-semibold">
-              {{ result()!.category }}
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-8">
-          <h2 class="mb-3 text-xl font-semibold">
-            Definitions
-          </h2>
-
-          @if (result()!.definitions.length) {
-            <ul class="space-y-2">
-              @for (
-                definition of result()!.definitions;
-                track definition
-              ) {
-                <li
-                  class="rounded-md border border-gray-200 bg-gray-50 p-3"
-                >
-                  {{ definition }}
-                </li>
-              }
-            </ul>
-          } @else {
-            <div class="text-gray-500">
-              No definitions available.
-            </div>
-          }
-        </div>
-
-        <div class="mt-6 text-sm text-gray-500">
-          Fetched at: {{ result()!.fetchedAt | date:'dd.MM.yyyy, HH:mm:ss' }}
-        </div>
-      </div>
     }
   }
 </section>

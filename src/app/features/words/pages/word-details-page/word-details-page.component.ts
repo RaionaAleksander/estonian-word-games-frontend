@@ -4,11 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { WordDetailsApiService } from '../../../../core/api/words/word-details-api.service';
 import { WordDetailsResponse } from '../../models/word-details-response.model';
 import { EmptyStateComponent } from '../../../../shared/components/empty-state/empty-state.component';
-import { DatePipe } from '@angular/common';
+import { WordDetailsResultComponent } from '../../components/word-details-result/word-details-result.component';
 
 @Component({
   selector: 'app-word-details-page',
-  imports: [EmptyStateComponent, DatePipe],
+  imports: [WordDetailsResultComponent, EmptyStateComponent],
   templateUrl: './word-details-page.component.html',
   styleUrl: './word-details-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
