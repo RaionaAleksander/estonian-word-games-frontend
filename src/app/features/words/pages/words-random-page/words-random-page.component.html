@@ -17,16 +17,12 @@
 
   @if (error()) {
     <p class="text-lg text-red-500">{{ error() }}</p>
-  }
-
-  @if (response(); as res) {
+  } @else if (response(); as res) {
     <app-random-words-summary-panel
       [count]="res.count"
       [limit]="query.limit"
     />
-  }
 
-  @if (response(); as res) {
     @if (res.count === 0) {
       <app-empty-state
         title="No random words generated"
@@ -37,9 +33,7 @@
         [words]="res.words"
       />
     }
-  }
-
-  @if (response(); as res) {
+    
     <app-query-meta-panel
       [generatedAt]="res.generatedAt"
     >

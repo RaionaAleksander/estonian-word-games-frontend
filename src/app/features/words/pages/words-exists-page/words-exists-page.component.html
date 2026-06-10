@@ -18,9 +18,7 @@
     <p class="mt-4 text-lg text-red-500">
       {{ error() }}
     </p>
-  }
-
-  @if (result()) {
+  } @else if (result()) {
     <app-word-exists-result
       [result]="result()!"
     />

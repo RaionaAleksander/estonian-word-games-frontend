@@ -9,9 +9,7 @@
     <p class="text-lg text-red-500">
       {{ error() }}
     </p>
-  }
-
-  @if (!loading() && result()) {
+  } @else if (result(); as res) {
     <h1 class="mb-6 text-3xl font-bold">
       {{ result()!.exists ? formatWord(result()!.lemma!) : formatWord(result()!.word) }}
     </h1>
