@@ -35,17 +35,23 @@
         You were trying to open:
         <span class="font-mono">{{ returnUrl() }}</span>
       </div>
+    } @else {
+      <div class="mt-4 text-xs text-gray-500">
+        You opened this page directly.
+      </div>
     }
   </div>
 
   <div class="mt-6 flex gap-3">
-    <button
-      (click)="retry()"
-      class="rounded-md bg-red-600 px-4 py-2 text-white hover:bg-red-700 disabled:opacity-50"
-      [disabled]="checking()"
-    >
-      {{ checking() ? 'Checking...' : 'Retry connection' }}
-    </button>
+    @if (returnUrl()) {
+      <button
+        (click)="retry()"
+        class="rounded-md bg-red-600 px-4 py-2 text-white hover:bg-red-700 disabled:opacity-50"
+        [disabled]="checking()"
+      >
+        {{ checking() ? 'Checking...' : 'Retry connection' }}
+      </button>
+    }
 
     <button
       (click)="goHome()"

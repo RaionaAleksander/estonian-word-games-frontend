@@ -1,4 +1,6 @@
+import { HealthComponent } from "./health-component.model";
+
 export interface HealthResponse {
   status: string;
-  timestamp: string;
+  components: Record<string, HealthComponent>;
 }

@@ -20,12 +20,12 @@ export class BackendUnavailablePageComponent {
 
   protected readonly isUp = signal<boolean | null>(null);
 
-  protected readonly returnUrl = signal<string>('/');
+  protected readonly returnUrl = signal<string | null>(null);
 
   ngOnInit(): void {
     const url = this.route.snapshot.queryParamMap.get('returnUrl');
 
-    this.returnUrl.set(url ?? '/');
+    this.returnUrl.set(url);
   }
 
   protected retry(): void {
@@ -37,10 +37,10 @@ export class BackendUnavailablePageComponent {
         this.isUp.set(ok);
         this.checking.set(false);
 
+        const url = this.returnUrl() ?? '/';
+
         if (ok) {
-          this.router.navigateByUrl(
-            this.returnUrl()
-          );
+          this.router.navigateByUrl(url);
         }
       },
       error: () => {

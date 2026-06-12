@@ -10,7 +10,7 @@ export class HealthApiService {
 
   private readonly http = inject(HttpClient);
 
-  private readonly apiUrl = 'http://localhost:8080/api/v1/health';
+  private readonly apiUrl = 'http://localhost:8080/actuator/health';
 
   public checkHealth(): Observable<HealthResponse> {
     return this.http.get<HealthResponse>(

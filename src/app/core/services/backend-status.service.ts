@@ -29,7 +29,7 @@ export class BackendStatusService {
       .checkHealth()
       .pipe(
         map(response =>
-          response.status === 'UP'
+          response?.status?.toUpperCase() === 'UP'
         ),
 
         tap(isUp => {
