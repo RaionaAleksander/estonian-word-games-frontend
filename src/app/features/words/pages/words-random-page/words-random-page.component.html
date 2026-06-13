@@ -12,11 +12,11 @@
   />
 
   @if (loading()) {
-    <p class="text-lg text-gray-600">Loading words...</p>
+    <app-loading-state [message]="'Loading words...'" />
   }
 
   @if (error()) {
-    <p class="text-lg text-red-500">{{ error() }}</p>
+    <app-error-state [error]="error()!"/>
   } @else if (response(); as res) {
     <app-random-words-summary-panel
       [count]="res.count"
@@ -33,7 +33,7 @@
         [words]="res.words"
       />
     }
-    
+
     <app-query-meta-panel
       [generatedAt]="res.generatedAt"
     >

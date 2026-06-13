@@ -1,14 +1,10 @@
 <section class="p-8">
   @if (loading()) {
-    <p class="text-lg text-gray-600">
-      Loading word details...
-    </p>
+    <app-loading-state [message]="'Loading word details...'" />
   }
 
   @if (error()) {
-    <p class="text-lg text-red-500">
-      {{ error() }}
-    </p>
+    <app-error-state [error]="error()!"/>
   } @else if (result(); as res) {
     <h1 class="mb-6 text-3xl font-bold">
       {{ result()!.exists ? formatWord(result()!.lemma!) : formatWord(result()!.word) }}

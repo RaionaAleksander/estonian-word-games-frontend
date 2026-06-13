@@ -4,11 +4,15 @@ import { ActivatedRoute } from '@angular/router';
 import { WordDetailsApiService } from '../../../../core/api/words/word-details-api.service';
 import { WordDetailsResponse } from '../../models/word-details-response.model';
 import { EmptyStateComponent } from '../../../../shared/components/empty-state/empty-state.component';
+import { LoadingStateComponent } from '../../../../shared/components/loading-state/loading-state.component';
+import { ErrorStateComponent } from '../../../../shared/components/error-state/error-state.component';
+import { ErrorResponse } from '../../../../shared/api/error-response.model';
+import { mapHttpError } from '../../../../shared/api/map-http-error';
 import { WordDetailsResultComponent } from '../../components/word-details-result/word-details-result.component';
 
 @Component({
   selector: 'app-word-details-page',
-  imports: [WordDetailsResultComponent, EmptyStateComponent],
+  imports: [WordDetailsResultComponent, EmptyStateComponent, LoadingStateComponent, ErrorStateComponent],
   templateUrl: './word-details-page.component.html',
   styleUrl: './word-details-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,7 +25,7 @@ export class WordDetailsPageComponent implements OnInit {
 
   protected readonly loading = signal(true);
 
-  protected readonly error = signal<string | null>(null);
+  protected readonly error = signal<ErrorResponse | null>(null);
 
   protected readonly result = signal<WordDetailsResponse | null>(null);
 
@@ -55,11 +59,9 @@ export class WordDetailsPageComponent implements OnInit {
           this.result.set(response);
           this.loading.set(false);
         },
-
-        error: () => {
-          this.error.set(
-            'Failed to load word details'
-          );
+        error: (err) => {
+          this.error.set(mapHttpError(err));
+          this.result.set(null);
           this.loading.set(false);
         },
       });

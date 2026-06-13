@@ -9,15 +9,11 @@
   />
 
   @if (loading()) {
-    <p class="mt-4 text-lg text-gray-600">
-      Checking word...
-    </p>
+    <app-loading-state [message]="'Checking word...'" />
   }
 
   @if (error()) {
-    <p class="mt-4 text-lg text-red-500">
-      {{ error() }}
-    </p>
+    <app-error-state [error]="error()!"/>
   } @else if (result()) {
     <app-word-exists-result
       [result]="result()!"

@@ -6,10 +6,15 @@ import { WordExistsResultComponent } from '../../components/word-exists-result/w
 import { WordName } from '../../../../shared/components/search-panel/word-name/models/word-name.model';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { EmptyStateComponent } from '../../../../shared/components/empty-state/empty-state.component';
+import { LoadingStateComponent } from '../../../../shared/components/loading-state/loading-state.component';
+import { ErrorStateComponent } from '../../../../shared/components/error-state/error-state.component';
+import { ErrorResponse } from '../../../../shared/api/error-response.model';
+import { mapHttpError } from '../../../../shared/api/map-http-error';
 
 @Component({
   selector: 'app-words-exists-page',
-  imports: [WordExistsMainPanelComponent, WordExistsResultComponent, EmptyStateComponent],
+  imports: [WordExistsMainPanelComponent, WordExistsResultComponent, 
+    EmptyStateComponent, LoadingStateComponent, ErrorStateComponent],
   templateUrl: './words-exists-page.component.html',
   styleUrl: './words-exists-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,7 +22,7 @@ import { EmptyStateComponent } from '../../../../shared/components/empty-state/e
 export class WordsExistsPageComponent {
   protected readonly loading = signal(false);
 
-  protected readonly error = signal<string | null>(null);
+  protected readonly error = signal<ErrorResponse | null>(null);
 
   protected readonly result =
     signal<WordExistsResponse | null>(null);
@@ -51,10 +56,12 @@ export class WordsExistsPageComponent {
       .subscribe({
         next: (response) => {
           this.result.set(response);
+          this.error.set(null);
           this.loading.set(false);
         },
-        error: () => {
-          this.error.set('Failed to check word');
+        error: (err) => {
+          this.error.set(mapHttpError(err));
+          this.result.set(null);
           this.loading.set(false);
         },
       });

@@ -13,13 +13,18 @@ import { SortMetaComponent } from '../../../../shared/components/query-meta/sort
 import { buildWordsFiltersParams } from '../../../../shared/utility/words-query/words-query-filters.builder';
 import { parseWordFiltersFromQuery } from '../../../../shared/utility/words-query/words-query.filters.parser';
 import { EmptyStateComponent } from '../../../../shared/components/empty-state/empty-state.component';
+import { LoadingStateComponent } from '../../../../shared/components/loading-state/loading-state.component';
+import { ErrorStateComponent } from '../../../../shared/components/error-state/error-state.component';
 import { parseNonNegativeNumber } from '../../../../shared/utility/number-param.util';
 import { RandomWordsResponse } from '../../models/random-words-response.model';
+import { ErrorResponse } from '../../../../shared/api/error-response.model';
+import { mapHttpError } from '../../../../shared/api/map-http-error';
 
 @Component({
   selector: 'app-words-random-page',
   imports: [RandomWordsMainPanelComponent, RandomWordsSummaryPanelComponent, RandomWordCloudComponent,
-    QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent, EmptyStateComponent],
+    QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent, 
+    EmptyStateComponent, LoadingStateComponent, ErrorStateComponent],
   templateUrl: './words-random-page.component.html',
   styleUrl: './words-random-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,7 +37,7 @@ export class WordsRandomPageComponent implements OnInit {
   private readonly router = inject(Router);
 
   protected readonly loading = signal(true);
-  protected readonly error = signal<string | null>(null);
+  protected readonly error = signal<ErrorResponse | null>(null);
 
   protected readonly response = signal<RandomWordsResponse | null>(null);
 
@@ -69,10 +74,10 @@ export class WordsRandomPageComponent implements OnInit {
     });
   }
 
-  private loadWords(
-    query: RandomWordQuery
-  ): void {
+  private loadWords(query: RandomWordQuery): void {
+    
     this.loading.set(true);
+    this.error.set(null);
 
     this.randomWordsApiService.getRandomWords(
       query.limit,
@@ -87,11 +92,9 @@ export class WordsRandomPageComponent implements OnInit {
         this.loading.set(false);
         this.error.set(null);
       },
-
-      error: () => {
-        this.error.set(
-          'Failed to load random words'
-        );
+      error: (err) => {
+        this.error.set(mapHttpError(err));
+        this.response.set(null);
         this.loading.set(false);
       }
     });

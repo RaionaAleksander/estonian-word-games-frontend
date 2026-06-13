@@ -1,0 +1,26 @@
+<div
+  class="mt-6 rounded-lg border border-red-200 bg-red-50 p-6"
+>
+  <div class="text-lg font-semibold text-red-700">
+    {{ error.error }}
+  </div>
+
+  <div class="mt-2 text-red-600">
+    {{ error.message }}
+  </div>
+
+  <div class="mt-4 space-y-1 text-sm text-gray-600">
+    <div>
+      Status: {{ error.status }}
+    </div>
+
+    <div>
+      Path: {{ error.path }}
+    </div>
+
+    <div>
+      Time:
+      {{ error.timestamp | date:'dd.MM.yyyy HH:mm:ss' }}
+    </div>
+  </div>
+</div>

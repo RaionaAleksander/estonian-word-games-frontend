@@ -14,13 +14,18 @@ import { SortMetaComponent } from '../../../../shared/components/query-meta/sort
 import { buildWordsFiltersParams } from '../../../../shared/utility/words-query/words-query-filters.builder';
 import { parseWordFiltersFromQuery } from '../../../../shared/utility/words-query/words-query.filters.parser';
 import { EmptyStateComponent } from '../../../../shared/components/empty-state/empty-state.component';
+import { LoadingStateComponent } from '../../../../shared/components/loading-state/loading-state.component';
+import { ErrorStateComponent } from '../../../../shared/components/error-state/error-state.component';
 import { parseNonNegativeNumber } from '../../../../shared/utility/number-param.util';
 import { WordPageResponse } from '../../models/word-page-response.model';
+import { ErrorResponse } from '../../../../shared/api/error-response.model';
+import { mapHttpError } from '../../../../shared/api/map-http-error';
 
 @Component({
   selector: 'app-words-page',
   imports: [PaginationComponent, WordMainPanelComponent, WordInfoPanelComponent, WordTableComponent,
-    QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent, EmptyStateComponent],
+    QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent, 
+    EmptyStateComponent, LoadingStateComponent, ErrorStateComponent],
   templateUrl: './words-page.component.html',
   styleUrl: './words-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,7 +35,7 @@ export class WordsPageComponent implements OnInit {
 
   protected readonly loading = signal(true);
 
-  protected readonly error = signal<string | null>(null);
+  protected readonly error = signal<ErrorResponse | null>(null);
 
   protected readonly response = signal<WordPageResponse | null>(null);
 
@@ -74,6 +79,7 @@ export class WordsPageComponent implements OnInit {
       return;
     }
 
+    this.error.set(null);
     this.loading.set(true);
 
     this.wordsApiService.getWordsPage(
@@ -86,10 +92,12 @@ export class WordsPageComponent implements OnInit {
     ).subscribe({
       next: (response) => {
         this.response.set(response);
+        this.error.set(null);
         this.loading.set(false);
       },
-      error: () => {
-        this.error.set('Failed to load words');
+      error: (err) => {
+        this.error.set(mapHttpError(err));
+        this.response.set(null);
         this.loading.set(false);
       },
     });
