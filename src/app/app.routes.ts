@@ -9,6 +9,7 @@ import { BackendUnavailablePageComponent } from './features/system/pages/backend
 import { NotFoundPageComponent } from './features/system/pages/not-found-page.component/not-found-page.component';
 import { BackendHealthGuard } from './core/guards/backend-health.guard';
 import { HomePageComponent } from './features/home/pages/home-page/home-page.component';
+import { BackendHealthPageComponent } from './features/system/pages/backend-health-page/backend-health-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -19,5 +20,6 @@ export const routes: Routes = [
   { path: 'words/definitions', component: WordsDefinitionsPageComponent, canActivate: [BackendHealthGuard] },
   { path: 'words/details/:lemma', component: WordDetailsPageComponent, canActivate: [BackendHealthGuard] },
   { path: 'backend-unavailable', component: BackendUnavailablePageComponent },
+  { path: 'backend-health', component: BackendHealthPageComponent, canActivate: [BackendHealthGuard] },
   { path: '**', component: NotFoundPageComponent },
 ];
