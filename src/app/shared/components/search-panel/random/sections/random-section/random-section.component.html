@@ -1,0 +1,17 @@
+<app-search-section title="Random order">
+  <app-section-row>
+    <app-section-field label="Enable random order">
+      <label class="flex items-center gap-3">
+        <input
+          type="checkbox"
+          [checked]="random"
+          (change)="onRandomChange($any($event.target).checked)"
+        />
+
+        <span class="text-sm text-gray-600">
+          Shuffle results randomly
+        </span>
+      </label>
+    </app-section-field>
+  </app-section-row>
+</app-search-section>

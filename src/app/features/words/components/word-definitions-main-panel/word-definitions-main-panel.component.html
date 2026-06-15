@@ -1,0 +1,29 @@
+<app-search-panel class="main-panel">
+  <!-- WORD -->
+  <app-word-name-section
+    [word]="word.word"
+    (valueChange)="updateWord($event)"
+  />
+
+  <br/>
+
+  <!-- LIMIT -->
+  <app-limit-container
+    [limit]="limit"
+    (limitChange)="updateLimit($event)"
+  />
+
+  <!-- RANDOM -->
+  <app-random-container
+    [random]="random"
+    (randomChange)="updateRandom($event)"
+  />
+
+  <!-- ACTIONS -->
+  <app-panel-actions
+    primaryLabel="Get definitions"
+    secondaryLabel="Reset"
+    (primaryClick)="applyAll()"
+    (secondaryClick)="resetAll()"
+  />
+</app-search-panel>

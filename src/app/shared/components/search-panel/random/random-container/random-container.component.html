@@ -1,0 +1,14 @@
+<section class="random-container">
+  <app-collapsible-header
+    title="Random"
+    [isExpanded]="isExpanded()"
+    (expandedChange)="toggle()"
+  />
+
+  @if (isExpanded()) {
+    <app-random-section
+      [random]="random.random"
+      (valueChange)="updateRandom($event)"
+    />
+  }
+</section>
