@@ -1,0 +1,66 @@
+<div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+  <div class="grid gap-4 md:grid-cols-3">
+    <div>
+      <div class="text-sm text-gray-500">
+        Word
+      </div>
+
+      <div class="text-lg font-semibold">
+        {{ result.word }}
+      </div>
+    </div>
+
+    <div>
+      <div class="text-sm text-gray-500">
+        Definitions count
+      </div>
+
+      <div class="text-lg font-semibold">
+        {{ result.count }}
+      </div>
+    </div>
+
+    <div>
+      <div class="text-sm text-gray-500">
+        Random order
+      </div>
+
+      <div class="text-lg font-semibold">
+        {{ result.randomApplied ? 'Yes' : 'No' }}
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-8">
+    <h2 class="mb-3 text-xl font-semibold">
+      Definitions
+    </h2>
+
+    @if (result.definitions.length) {
+      <ol class="space-y-3">
+        @for (
+          definition of result.definitions;
+          track definition;
+          let index = $index
+        ) {
+          <li class="rounded-md border border-gray-200 bg-gray-50 p-3">
+            <span class="font-semibold">
+              {{ index + 1 }}.
+            </span>
+
+            {{ definition }}
+          </li>
+        }
+      </ol>
+    } @else {
+      <div class="text-gray-500">
+        No definitions available.
+      </div>
+    }
+  </div>
+
+  <div class="mt-6 text-sm text-gray-500">
+    Fetched at:
+    {{ result.fetchedAt | date:'dd.MM.yyyy, HH:mm:ss' }}
+  </div>
+</div>

@@ -25,39 +25,20 @@
       [error]="error()!"
     />
   } @else if (response(); as res) {
-
-    @if (res.count === 0) {
-      <app-empty-state
-        title="No definitions found"
-        description="No definitions were found for the specified word."
-      />
+      @if (res.count === 0) {
+        <app-empty-state
+          title="No definitions found"
+          description="No definitions were found for the specified word."
+        />
+      } @else {
+        <app-word-definitions-result
+          [result]="res"
+        />
+      }
     } @else {
-
-      <div
-        class="mt-6 rounded-lg border border-gray-200 bg-white p-6"
-      >
-        <h2 class="mb-4 text-xl font-semibold">
-          Definitions for "{{ res.word }}"
-        </h2>
-
-        <ol class="list-decimal space-y-3 pl-6">
-          @for (
-            definition of res.definitions;
-            track $index
-          ) {
-            <li class="text-gray-700">
-              {{ definition }}
-            </li>
-          }
-        </ol>
-      </div>
-
-    }
-
-  } @else {
-    <app-empty-state
-      title="No definitions loaded"
-      description="Enter a word and click Get definitions."
-    />
+      <app-empty-state
+        title="No definitions loaded"
+        description="Enter a word and click Get definitions."
+      />
   }
 </section>

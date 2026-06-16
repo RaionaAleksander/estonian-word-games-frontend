@@ -7,6 +7,7 @@ import { WordLimit } from '../../../../shared/components/search-panel/limit/mode
 import { WordRandom } from '../../../../shared/components/search-panel/random/models/word-random.model';
 import { mapHttpError } from '../../../../shared/api/map-http-error';
 import { WordDefinitionsMainPanelComponent } from '../../components/word-definitions-main-panel/word-definitions-main-panel.component';
+import { WordDefinitionsResultComponent } from '../../components/word-definitions-result/word-definitions-result.component';
 import { LoadingStateComponent } from '../../../../shared/components/loading-state/loading-state.component';
 import { ErrorStateComponent } from '../../../../shared/components/error-state/error-state.component';
 import { EmptyStateComponent } from '../../../../shared/components/empty-state/empty-state.component';
@@ -14,10 +15,8 @@ import { EmptyStateComponent } from '../../../../shared/components/empty-state/e
 @Component({
   selector: 'app-words-definitions-page',
   imports: [
-    WordDefinitionsMainPanelComponent,
-    LoadingStateComponent,
-    ErrorStateComponent,
-    EmptyStateComponent,
+    WordDefinitionsMainPanelComponent, WordDefinitionsResultComponent,
+    LoadingStateComponent, ErrorStateComponent, EmptyStateComponent,
   ],
   templateUrl: './words-definitions-page.component.html',
   styleUrl: './words-definitions-page.component.css',
