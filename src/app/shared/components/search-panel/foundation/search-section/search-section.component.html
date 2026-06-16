@@ -1,9 +1,9 @@
 <div class="mb-8">
-
-  <h3 class="mb-4 font-semibold text-lg">
-    {{ title() }}
-  </h3>
+  @if (title()) {
+    <h3 class="mb-4 text-base font-semibold text-gray-800">
+      {{ title() }}
+    </h3>
+  }
 
   <ng-content />
-
 </div>

@@ -12,4 +12,5 @@ import { Component, input } from '@angular/core';
 })
 export class SectionFieldComponent {
   public readonly label = input.required<string>();
+  public readonly required = input<boolean>(false);
 }
