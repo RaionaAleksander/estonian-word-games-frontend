@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { NavigationCardComponent } from '../../../../shared/components/navigation-card/navigation-card.component';
 
 @Component({
-  selector: 'app-home-page',
+  selector: 'app-games-home-page.component',
   imports: [NavigationCardComponent],
-  templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.css',
+  templateUrl: './games-home-page.component.html',
+  styleUrl: './games-home-page.component.css',
 })
-export class HomePageComponent {}
+export class GamesHomePageComponent {}

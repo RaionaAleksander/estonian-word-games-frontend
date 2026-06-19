@@ -11,9 +11,14 @@ import { BackendHealthGuard } from './core/guards/backend-health.guard';
 import { HomePageComponent } from './features/home/pages/home-page/home-page.component';
 import { BackendHealthPageComponent } from './features/system/pages/backend-health-page/backend-health-page.component';
 import { WordsHomePageComponent } from './features/words/pages/words-home-page/words-home-page.component';
+import { GamesHomePageComponent } from './features/games/home/games-home-page/games-home-page.component';
+import { WordSegadicPageComponent } from './features/games/word-segadic/pages/word-segadic-page/word-segadic-page.component';
+import { CrosswordPageComponent } from './features/games/crossword/pages/crossword-page/crossword-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
+
+  // WORDS
   { path: 'words', component: WordsHomePageComponent },
   { path: 'words/page', component: WordsPageComponent, canActivate: [BackendHealthGuard] },
   { path: 'words/random', component: WordsRandomPageComponent, canActivate: [BackendHealthGuard] },
@@ -21,7 +26,15 @@ export const routes: Routes = [
   { path: 'words/exists', component: WordsExistsPageComponent, canActivate: [BackendHealthGuard] },
   { path: 'words/definitions', component: WordsDefinitionsPageComponent, canActivate: [BackendHealthGuard] },
   { path: 'words/details/:lemma', component: WordDetailsPageComponent, canActivate: [BackendHealthGuard] },
+
+  // GAMES (NEW)
+  { path: 'games', component: GamesHomePageComponent },
+  { path: 'games/crossword', component: CrosswordPageComponent, canActivate: [BackendHealthGuard] },
+  { path: 'games/word-segadic', component: WordSegadicPageComponent, canActivate: [BackendHealthGuard] },
+  
+  // SYSTEM
   { path: 'backend-unavailable', component: BackendUnavailablePageComponent },
   { path: 'backend-health', component: BackendHealthPageComponent, canActivate: [BackendHealthGuard] },
+  
   { path: '**', component: NotFoundPageComponent },
 ];
