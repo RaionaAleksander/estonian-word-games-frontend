@@ -6,7 +6,7 @@ import { WordsPatternPageComponent } from './features/words/pages/words-pattern-
 import { WordsExistsPageComponent } from './features/words/pages/words-exists-page/words-exists-page.component';
 import { WordsDefinitionsPageComponent } from './features/words/pages/words-definitions-page/words-definitions-page.component';
 import { BackendUnavailablePageComponent } from './features/system/pages/backend-unavailable-page/backend-unavailable-page.component';
-import { NotFoundPageComponent } from './features/system/pages/not-found-page.component/not-found-page.component';
+import { NotFoundPageComponent } from './features/system/pages/not-found-page/not-found-page.component';
 import { BackendHealthGuard } from './core/guards/backend-health.guard';
 import { HomePageComponent } from './features/home/pages/home-page/home-page.component';
 import { BackendHealthPageComponent } from './features/system/pages/backend-health-page/backend-health-page.component';

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-crossword-page.component',
+  selector: 'app-crossword-page',
   imports: [],
   templateUrl: './crossword-page.component.html',
   styleUrl: './crossword-page.component.css',
