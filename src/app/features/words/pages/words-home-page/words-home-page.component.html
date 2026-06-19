@@ -1,0 +1,40 @@
+<section class="mx-auto max-w-6xl p-8">
+  <h1 class="mb-3 text-center text-4xl font-bold">
+    Words
+  </h1>
+
+  <p class="mb-10 text-center text-gray-600">
+    Explore dictionary data, definitions and
+    word-related tools.
+  </p>
+
+  <div class="grid gap-8 md:grid-cols-2">
+    <app-navigation-card
+      title="Word List"
+      description="Browse all words in the dictionary with filtering, sorting and pagination."
+      imageUrl="/images/words/words-page.png"
+      route="/words/page"
+    />
+
+    <app-navigation-card
+      title="Random Words"
+      description="Generate random words from the dictionary using filters and sorting options."
+      imageUrl="/images/words/random-words.png"
+      route="/words/random"
+    />
+
+    <app-navigation-card
+      title="Word Exists"
+      description="Check whether a word exists in the dictionary database."
+      imageUrl="/images/words/word-exists.png"
+      route="/words/exists"
+    />
+
+    <app-navigation-card
+      title="Definitions"
+      description="Retrieve dictionary definitions and explore meanings of words."
+      imageUrl="/images/words/word-definitions.png"
+      route="/words/definitions"
+    />
+  </div>
+</section>

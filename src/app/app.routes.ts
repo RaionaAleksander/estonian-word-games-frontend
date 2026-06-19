@@ -10,10 +10,12 @@ import { NotFoundPageComponent } from './features/system/pages/not-found-page.co
 import { BackendHealthGuard } from './core/guards/backend-health.guard';
 import { HomePageComponent } from './features/home/pages/home-page/home-page.component';
 import { BackendHealthPageComponent } from './features/system/pages/backend-health-page/backend-health-page.component';
+import { WordsHomePageComponent } from './features/words/pages/words-home-page/words-home-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
-  { path: 'words', component: WordsPageComponent, canActivate: [BackendHealthGuard] },
+  { path: 'words', component: WordsHomePageComponent },
+  { path: 'words/page', component: WordsPageComponent, canActivate: [BackendHealthGuard] },
   { path: 'words/random', component: WordsRandomPageComponent, canActivate: [BackendHealthGuard] },
   { path: 'words/pattern', component: WordsPatternPageComponent, canActivate: [BackendHealthGuard] },
   { path: 'words/exists', component: WordsExistsPageComponent, canActivate: [BackendHealthGuard] },
