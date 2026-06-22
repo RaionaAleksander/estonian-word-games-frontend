@@ -27,10 +27,10 @@ export const routes: Routes = [
   { path: 'words/definitions', component: WordsDefinitionsPageComponent, canActivate: [BackendHealthGuard] },
   { path: 'words/details/:lemma', component: WordDetailsPageComponent, canActivate: [BackendHealthGuard] },
 
-  // GAMES (NEW)
+  // GAMES
   { path: 'games', component: GamesHomePageComponent },
   { path: 'games/crossword', component: CrosswordPageComponent, canActivate: [BackendHealthGuard] },
-  { path: 'games/word-segadic', component: WordSegadicPageComponent, canActivate: [BackendHealthGuard] },
+  { path: 'games/sonasegadik', component: WordSegadicPageComponent, canActivate: [BackendHealthGuard] },
   
   // SYSTEM
   { path: 'backend-unavailable', component: BackendUnavailablePageComponent },
