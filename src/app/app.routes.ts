@@ -12,7 +12,7 @@ import { HomePageComponent } from './features/home/pages/home-page/home-page.com
 import { BackendHealthPageComponent } from './features/system/pages/backend-health-page/backend-health-page.component';
 import { WordsHomePageComponent } from './features/words/pages/words-home-page/words-home-page.component';
 import { GamesHomePageComponent } from './features/games/home/games-home-page/games-home-page.component';
-import { WordSegadicPageComponent } from './features/games/word-segadic/pages/word-segadic-page/word-segadic-page.component';
+import { WordSearchPageComponent } from './features/games/word-search/pages/word-search-page/word-search-page.component';
 import { CrosswordPageComponent } from './features/games/crossword/pages/crossword-page/crossword-page.component';
 
 export const routes: Routes = [
@@ -30,7 +30,7 @@ export const routes: Routes = [
   // GAMES
   { path: 'games', component: GamesHomePageComponent },
   { path: 'games/crossword', component: CrosswordPageComponent, canActivate: [BackendHealthGuard] },
-  { path: 'games/sonasegadik', component: WordSegadicPageComponent, canActivate: [BackendHealthGuard] },
+  { path: 'games/sonasegadik', component: WordSearchPageComponent, canActivate: [BackendHealthGuard] },
   
   // SYSTEM
   { path: 'backend-unavailable', component: BackendUnavailablePageComponent },
