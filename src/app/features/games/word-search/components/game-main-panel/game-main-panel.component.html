@@ -1,0 +1,23 @@
+<app-search-panel class="main-panel">
+
+  <!-- GAME SETTINGS -->
+  <app-game-settings-container
+    [settings]="settings"
+    (settingsChange)="updateSettings($event)"
+  />
+
+  <!-- FILTERS -->
+  <app-filter-container
+    [filters]="filters"
+    (filtersChange)="updateFilters($event)"
+  />
+
+  <!-- ACTIONS -->
+  <app-panel-actions
+    primaryLabel="Generate"
+    secondaryLabel="Reset"
+    (primaryClick)="applyAll()"
+    (secondaryClick)="resetAll()"
+  />
+
+</app-search-panel>

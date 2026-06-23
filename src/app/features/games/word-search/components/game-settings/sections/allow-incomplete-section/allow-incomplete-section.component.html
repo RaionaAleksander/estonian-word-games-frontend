@@ -1,0 +1,13 @@
+<app-search-section title="Allow Incomplete">
+  <app-section-row>
+    <app-section-field label="Allow incomplete generation">
+      <label class="flex items-center gap-3">
+        <input
+          type="checkbox"
+          [checked]="allowIncomplete"
+          (change)="onChange($any($event.target).checked)"
+        />
+      </label>
+    </app-section-field>
+  </app-section-row>
+</app-search-section>

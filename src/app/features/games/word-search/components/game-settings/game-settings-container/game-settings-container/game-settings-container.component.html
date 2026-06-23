@@ -1,0 +1,28 @@
+<section class="game-settings-container">
+  <app-collapsible-header
+    title="Game Settings"
+    [isExpanded]="isExpanded()"
+    (expandedChange)="toggle()"
+  />
+  
+  @if (isExpanded()) {
+    <!-- GRID -->
+    <app-grid-size-section
+      [rows]="settings.rows"
+      [cols]="settings.cols"
+      (valueChange)="updateSettings($event)"
+    />
+
+    <!-- WORDS COUNT -->
+    <app-words-count-section
+      [wordsCount]="settings.wordsCount"
+      (valueChange)="updateSettings($event)"
+    />
+
+    <!-- ALLOW INCOMPLETE -->
+    <app-allow-incomplete-section
+      [allowIncomplete]="settings.allowIncomplete"
+      (valueChange)="updateSettings($event)"
+    />
+  }
+</section>

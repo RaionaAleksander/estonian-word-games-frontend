@@ -1,0 +1,12 @@
+<app-search-section title="Words Count">
+  <app-section-row>
+    <app-section-field label="Count">
+      <input
+        type="number"
+        [value]="wordsCount"
+        (input)="onChange($any($event.target).value)"
+        class="w-full box-border px-3 py-2 border border-gray-300 rounded-md bg-white font-inherit"
+      />
+    </app-section-field>
+  </app-section-row>
+</app-search-section>
