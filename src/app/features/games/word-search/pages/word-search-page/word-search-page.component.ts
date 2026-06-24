@@ -3,7 +3,7 @@ import { WordSearchApiService } from '../../../../../core/api/games/word-search-
 import { ErrorResponse } from '../../../../../shared/api/error-response.model';
 import { WordSearchResponse } from '../../models/word-search-response.model';
 import { WordSearchQuery } from '../../models/word-search-query.model';
-import { GameMainPanelComponent } from '../../components/game-main-panel/game-main-panel.component';
+import { WordSearchMainPanelComponent } from '../../components/word-search-main-panel/word-search-main-panel.component';
 import { ErrorStateComponent } from '../../../../../shared/components/error-state/error-state.component';
 import { LoadingStateComponent } from '../../../../../shared/components/loading-state/loading-state.component';
 import { EmptyStateComponent } from '../../../../../shared/components/empty-state/empty-state.component';
@@ -12,11 +12,12 @@ import { QueryMetaPanelComponent } from '../../../../../shared/components/query-
 import { FilterMetaComponent } from '../../../../../shared/components/query-meta/filter-meta/filter-meta.component';
 import { WordSearchGridComponent } from '../../components/word-search-grid/word-search-grid.component';
 import { WordSearchWordsComponent } from '../../components/word-search-words/word-search-words.component';
+import { WordSearchInfoPanelComponent } from '../../components/word-search-info-panel/word-search-info-panel.component';
 
 @Component({
   selector: 'app-word-search-page',
-  imports: [GameMainPanelComponent, QueryMetaPanelComponent, FilterMetaComponent, 
-    WordSearchGridComponent, WordSearchWordsComponent,
+  imports: [WordSearchMainPanelComponent, QueryMetaPanelComponent, FilterMetaComponent, 
+    WordSearchGridComponent, WordSearchWordsComponent, WordSearchInfoPanelComponent,
     ErrorStateComponent, LoadingStateComponent, EmptyStateComponent],
   templateUrl: './word-search-page.component.html',
   styleUrl: './word-search-page.component.css',

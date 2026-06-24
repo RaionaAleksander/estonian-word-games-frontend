@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GameSettingsContainerComponent } from './game-settings-container.component';
+import { WordSearchSettingsContainerComponent } from './word-search-settings-container.component';
 
 describe('GameSettingsContainerComponent', () => {
-  let component: GameSettingsContainerComponent;
-  let fixture: ComponentFixture<GameSettingsContainerComponent>;
+  let component: WordSearchSettingsContainerComponent;
+  let fixture: ComponentFixture<WordSearchSettingsContainerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GameSettingsContainerComponent],
+      imports: [WordSearchSettingsContainerComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(GameSettingsContainerComponent);
+    fixture = TestBed.createComponent(WordSearchSettingsContainerComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

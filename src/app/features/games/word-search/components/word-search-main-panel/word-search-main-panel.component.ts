@@ -1,25 +1,25 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { WordSearchSettings } from '../game-settings/models/word-search-game-settings.model';
+import { WordSearchSettings } from '../word-search-settings/models/word-search-game-settings.model';
 import { WordFilters } from '../../../../../shared/components/search-panel/filter/models/word-filter.model';
-import { GameSettingsContainerComponent } from '../game-settings/game-settings-container/game-settings-container/game-settings-container.component';
+import { WordSearchSettingsContainerComponent } from '../word-search-settings/word-search-settings-container/word-search-settings-container.component';
 import { FilterContainerComponent } from '../../../../../shared/components/search-panel/filter/filter-container/filter-container.component';
 import { PanelActionsComponent } from '../../../../../shared/components/search-panel/foundation/panel-actions/panel-actions.component';
 import { SearchPanelComponent } from '../../../../../shared/components/search-panel/foundation/search-panel/search-panel.component';
 import { WordSearchQuery } from '../../models/word-search-query.model';
 
 @Component({
-  selector: 'app-game-main-panel',
-  templateUrl: './game-main-panel.component.html',
-  styleUrl: './game-main-panel.component.css',
+  selector: 'app-word-search-main-panel',
+  templateUrl: './word-search-main-panel.component.html',
+  styleUrl: './word-search-main-panel.component.css',
   imports: [
-    GameSettingsContainerComponent,
+    WordSearchSettingsContainerComponent,
     FilterContainerComponent,
     PanelActionsComponent,
     SearchPanelComponent
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GameMainPanelComponent {
+export class WordSearchMainPanelComponent {
 
   @Input() settings!: WordSearchSettings;
   @Input() filters!: WordFilters;

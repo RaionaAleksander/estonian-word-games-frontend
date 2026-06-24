@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GameMainPanelComponent } from './game-main-panel.component';
+import { WordSearchMainPanelComponent } from './word-search-main-panel.component';
 
 describe('GameMainPanelComponent', () => {
-  let component: GameMainPanelComponent;
-  let fixture: ComponentFixture<GameMainPanelComponent>;
+  let component: WordSearchMainPanelComponent;
+  let fixture: ComponentFixture<WordSearchMainPanelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GameMainPanelComponent],
+      imports: [WordSearchMainPanelComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(GameMainPanelComponent);
+    fixture = TestBed.createComponent(WordSearchMainPanelComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

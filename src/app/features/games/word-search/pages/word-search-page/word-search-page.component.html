@@ -5,7 +5,7 @@
   </h1>
 
   <!-- MAIN PANEL -->
-  <app-game-main-panel
+  <app-word-search-main-panel
     [settings]="query.settings"
     [filters]="query.filters"
     (applyAllEvent)="onQueryChange($event)"
@@ -31,6 +31,13 @@
 
     <app-word-search-words
       [words]="res.words"
+    />
+
+    <app-word-search-info-panel
+      [rows]="res.rows"
+      [cols]="res.cols"
+      [wordsCount]="res.words.length"
+      [gameType]="res.gameType"
     />
 
     <app-query-meta-panel
