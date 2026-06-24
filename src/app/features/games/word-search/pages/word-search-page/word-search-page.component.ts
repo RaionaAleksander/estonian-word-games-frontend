@@ -7,14 +7,17 @@ import { GameMainPanelComponent } from '../../components/game-main-panel/game-ma
 import { ErrorStateComponent } from '../../../../../shared/components/error-state/error-state.component';
 import { LoadingStateComponent } from '../../../../../shared/components/loading-state/loading-state.component';
 import { EmptyStateComponent } from '../../../../../shared/components/empty-state/empty-state.component';
-import { DatePipe } from '@angular/common';
-import { WordFilters } from '../../../../../shared/components/search-panel/filter/models/word-filter.model';
-import { WordSearchSettings } from '../../components/game-settings/models/word-search-game-settings.model';
 import { mapHttpError } from '../../../../../shared/api/map-http-error';
+import { QueryMetaPanelComponent } from '../../../../../shared/components/query-meta/query-meta-panel/query-meta-panel.component';
+import { FilterMetaComponent } from '../../../../../shared/components/query-meta/filter-meta/filter-meta.component';
+import { WordSearchGridComponent } from '../../components/word-search-grid/word-search-grid.component';
+import { WordSearchWordsComponent } from '../../components/word-search-words/word-search-words.component';
 
 @Component({
   selector: 'app-word-search-page',
-  imports: [GameMainPanelComponent, ErrorStateComponent, LoadingStateComponent, EmptyStateComponent, DatePipe],
+  imports: [GameMainPanelComponent, QueryMetaPanelComponent, FilterMetaComponent, 
+    WordSearchGridComponent, WordSearchWordsComponent,
+    ErrorStateComponent, LoadingStateComponent, EmptyStateComponent],
   templateUrl: './word-search-page.component.html',
   styleUrl: './word-search-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

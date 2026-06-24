@@ -24,48 +24,22 @@
 
   <!-- RESULT -->
   @else if (response(); as res) {
+    <app-word-search-grid
+      [rows]="getGridRows()"
+      [cols]="res.cols"
+    />
 
-    <!-- GRID -->
-    <div class="mt-8 overflow-x-auto">
-      <div class="inline-block rounded-lg border border-gray-300 bg-white p-4">
+    <app-word-search-words
+      [words]="res.words"
+    />
 
-        <div class="grid gap-1"
-             [style.gridTemplateColumns]="'repeat(' + res.cols + ', 32px)'">
-
-          @for (row of getGridRows(); track rowIndex; let rowIndex = $index) {
-            @for (cell of row; track cellIndex; let cellIndex = $index) {
-
-              <div class="flex h-8 w-8 items-center justify-center
-                          rounded border border-gray-200
-                          font-mono text-sm">
-                {{ cell }}
-              </div>
-
-            }
-          }
-
-        </div>
-      </div>
-    </div>
-
-    <!-- WORD LIST -->
-    <div class="mt-6 rounded-lg border border-gray-200 bg-white p-4">
-      <h2 class="mb-3 text-xl font-semibold">Words</h2>
-
-      <div class="flex flex-wrap gap-2">
-        @for (word of res.words; track wordIndex; let wordIndex = $index) {
-          <span class="rounded bg-gray-100 px-3 py-1 text-sm">
-            {{ word }}
-          </span>
-        }
-      </div>
-    </div>
-
-    <!-- META -->
-    <div class="mt-6 text-sm text-gray-500">
-      Generated at:
-      {{ res.generatedAt | date:'dd.MM.yyyy, HH:mm:ss' }}
-    </div>
+    <app-query-meta-panel
+      [generatedAt]="res.generatedAt"
+    >
+      <app-filter-meta
+        [filters]="res.filters"
+      />
+    </app-query-meta-panel>
   }
 
   <!-- EMPTY -->
