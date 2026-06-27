@@ -192,12 +192,18 @@ export class WordSearchPageComponent {
     });
   }
 
+  private hoveredWord: string | null = null;
   private hoverTimeout?: number;
 
   protected previewWord(word: string): void {
+    this.hoveredWord = word;
     clearTimeout(this.hoverTimeout);
 
     this.hoverTimeout = window.setTimeout(() => {
+      if (this.hoveredWord !== word) {
+        return;
+      }
+
       const placement = this.placements()
         .find(p => p.word === word);
 
@@ -216,6 +222,8 @@ export class WordSearchPageComponent {
   }
 
   protected clearPreview(): void {
+    this.hoveredWord = null;
+    clearTimeout(this.hoverTimeout);
     this.previewCells.set(new Set());
   }
 }
