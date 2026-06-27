@@ -14,6 +14,9 @@ import { SortMetaComponent } from '../../../../../shared/components/query-meta/s
 import { WordSearchGridComponent } from '../../components/word-search-grid/word-search-grid.component';
 import { WordSearchWordsComponent } from '../../components/word-search-words/word-search-words.component';
 import { WordSearchInfoPanelComponent } from '../../components/word-search-info-panel/word-search-info-panel.component';
+import { CellPosition } from '../../models/cell-position.model';
+import { WordPlacement } from '../../models/word-placement.model'
+import { WordSearchPlacement } from '../../models/word-search-placement.model';
 
 @Component({
   selector: 'app-word-search-page',
@@ -35,6 +38,13 @@ export class WordSearchPageComponent {
   protected readonly gridRows = computed(() =>
     this.response()?.grid.map(row => row.split('')) ?? []
   );
+
+  protected readonly placements = computed(() => {
+    const res = this.response();
+    return res ? this.buildPlacements(res) : [];
+  });
+
+  protected foundWords = signal<Set<string>>(new Set());
 
   protected query: WordSearchQuery = {
     settings: {
@@ -86,5 +96,77 @@ export class WordSearchPageComponent {
 
     this.response.set(null);
     this.error.set(null);
+  }
+
+  protected onSelection(path: CellPosition[]): void {
+    console.log('USER PATH:', path);
+
+    const result = this.tryMatchWord(path);
+
+    if (result) {
+      this.markWordAsFound(result.word, result.cells);
+    }
+  }
+
+  private buildPlacements(response: WordSearchResponse): WordPlacement[] {
+    return response.placements.map(p => ({
+      word: p.word,
+      cells: this.expandPlacement(p)
+    }));
+  }
+
+  private expandPlacement(p: WordSearchPlacement): CellPosition[] {
+    const directionMap: Record<string, { dr: number; dc: number }> = {
+      LEFT: { dr: 0, dc: -1 },
+      RIGHT: { dr: 0, dc: 1 },
+      UP: { dr: -1, dc: 0 },
+      DOWN: { dr: 1, dc: 0 },
+      UP_LEFT: { dr: -1, dc: -1 },
+      UP_RIGHT: { dr: -1, dc: 1 },
+      DOWN_LEFT: { dr: 1, dc: -1 },
+      DOWN_RIGHT: { dr: 1, dc: 1 },
+    };
+
+    const dir = directionMap[p.direction];
+
+    const cells: CellPosition[] = [];
+
+    for (let i = 0; i < p.word.length; i++) {
+      cells.push({
+        row: p.row + dir.dr * i,
+        col: p.col + dir.dc * i,
+      });
+    }
+
+    return cells;
+  }
+
+  private tryMatchWord(path: CellPosition[]): WordPlacement | null {
+    return this.placements().find(p =>
+      this.compareCells(p.cells, path)
+    ) ?? null;
+  }
+
+  private compareCells(a: CellPosition[], b: CellPosition[]): boolean {
+    if (a.length !== b.length) return false;
+
+    const normal = a.every((cell, i) =>
+      cell.row === b[i].row && cell.col === b[i].col
+    );
+
+    const reversed = a.every((cell, i) =>
+      cell.row === b[b.length - 1 - i].row &&
+      cell.col === b[b.length - 1 - i].col
+    );
+
+    return normal || reversed;
+  }
+
+  protected markWordAsFound(word: string, cells: CellPosition[]): void {
+    this.foundWords.update(set => {
+      const newSet = new Set(set);
+      newSet.add(word);
+      return newSet;
+    });
   }
 }

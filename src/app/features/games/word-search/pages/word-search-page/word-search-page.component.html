@@ -27,11 +27,13 @@
   @else if (response(); as res) {
     <app-word-search-grid
       [rows]="gridRows()"
-      [cols]="response()?.cols ?? 0"
+      [cols]="res.cols"
+      (selectionEnd)="onSelection($event)"
     />
 
     <app-word-search-words
       [words]="res.words"
+      [foundWords]="foundWords()"
     />
 
     <app-word-search-info-panel

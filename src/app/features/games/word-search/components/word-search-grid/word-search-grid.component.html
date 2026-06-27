@@ -1,12 +1,19 @@
 <div class="mt-8 flex justify-center overflow-x-auto">
   <div class="inline-block rounded-lg border border-gray-300 bg-white p-4">
     <div
-      class="grid gap-1"
+      class="grid select-none"
+      onselectstart="return false"
       [style.gridTemplateColumns]="'repeat(' + cols + ', 32px)'"
     >
       @for (row of rows; track rowIndex; let rowIndex = $index) {
         @for (cell of row; track cellIndex; let cellIndex = $index) {
-          <div class="flex items-center justify-center font-mono text-sm h-8 w-8">
+          <div class="flex items-center justify-center font-mono text-sm h-8 w-8
+          select-none cursor-pointer hover:bg-gray-100 active:bg-blue-100 transition"
+            style="-webkit-user-drag: none"
+            [class.bg-blue-100]="isActive(rowIndex, cellIndex)"
+            (mousedown)="onMouseDown(rowIndex, cellIndex)"
+            (mouseenter)="onMouseEnter(rowIndex, cellIndex)"
+            (mouseup)="onMouseUp()">
             {{ cell }}
           </div>
         }

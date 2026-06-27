@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { CellPosition } from '../../models/cell-position.model';
 
 @Component({
   selector: 'app-word-search-grid',
@@ -9,9 +10,83 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class WordSearchGridComponent {
 
-  @Input({ required: true }) 
-  rows!: string[][];
+  @Input({ required: true }) rows!: string[][];
 
-  @Input({ required: true }) 
-  cols!: number;
+  @Input({ required: true }) cols!: number;
+
+  @Output() selectionEnd = new EventEmitter<CellPosition[]>();
+
+  private isMouseDown = false;
+
+  private startCell: CellPosition | null = null;
+
+  private currentCell: CellPosition | null = null;
+
+  protected activePath: CellPosition[] = [];
+
+  onMouseDown(row: number, col: number): void {
+    this.isMouseDown = true;
+
+    this.startCell = { row, col };
+    this.currentCell = { row, col };
+  }
+
+  onMouseEnter(row: number, col: number): void {
+    if (!this.isMouseDown || !this.startCell) return;
+
+    this.currentCell = { row, col };
+
+    this.activePath = this.buildPath(this.startCell, this.currentCell);
+  }
+
+  onMouseUp(): void {
+    if (!this.isMouseDown || !this.startCell || !this.currentCell) return;
+
+    this.isMouseDown = false;
+
+    const path = this.buildPath(this.startCell, this.currentCell);
+
+    this.selectionEnd.emit(path);
+
+    this.activePath = [];
+
+    this.startCell = null;
+    this.currentCell = null;
+  }
+
+  private buildPath(start: CellPosition, end: CellPosition): CellPosition[] {
+    const dx = end.col - start.col;
+    const dy = end.row - start.row;
+
+    const stepX = dx === 0 ? 0 : dx / Math.abs(dx);
+    const stepY = dy === 0 ? 0 : dy / Math.abs(dy);
+
+    const isStraight =
+      stepX === 0 ||
+      stepY === 0 ||
+      Math.abs(stepX) === Math.abs(stepY);
+
+    if (!isStraight) {
+      return [start];
+    }
+
+    const length = Math.max(Math.abs(dx), Math.abs(dy));
+
+    const result: CellPosition[] = [];
+
+    for (let i = 0; i <= length; i++) {
+      result.push({
+        row: start.row + stepY * i,
+        col: start.col + stepX * i,
+      });
+    }
+
+    return result;
+  }
+
+  isActive(row: number, col: number): boolean {
+    return this.activePath.some(
+      p => p.row === row && p.col === col
+    );
+  }
 }

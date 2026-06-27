@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class WordSearchWordsComponent {
 
-  @Input({ required: true })
-  words!: string[];
+  @Input({ required: true }) words!: string[];
+
+  @Input() foundWords: Set<string> = new Set();
 }
