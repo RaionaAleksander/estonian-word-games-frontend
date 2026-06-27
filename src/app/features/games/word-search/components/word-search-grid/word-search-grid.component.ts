@@ -14,6 +14,10 @@ export class WordSearchGridComponent {
 
   @Input({ required: true }) cols!: number;
 
+  @Input() foundCells: Set<string> = new Set();
+
+  @Input() previewCells: Set<string> = new Set();
+
   @Output() selectionEnd = new EventEmitter<CellPosition[]>();
 
   private isMouseDown = false;
@@ -23,6 +27,10 @@ export class WordSearchGridComponent {
   private currentCell: CellPosition | null = null;
 
   protected activePath: CellPosition[] = [];
+
+  private cellKey(row: number, col: number): string {
+    return `${row}:${col}`;
+  }
 
   onMouseDown(row: number, col: number): void {
     this.isMouseDown = true;
@@ -87,6 +95,18 @@ export class WordSearchGridComponent {
   isActive(row: number, col: number): boolean {
     return this.activePath.some(
       p => p.row === row && p.col === col
+    );
+  }
+
+  protected isFound(row: number, col: number): boolean {
+    return this.foundCells.has(
+      this.cellKey(row, col)
+    );
+  }
+
+  protected isPreview(row: number, col: number): boolean {
+    return this.previewCells.has(
+      this.cellKey(row, col)
     );
   }
 }

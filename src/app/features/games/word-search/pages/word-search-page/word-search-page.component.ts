@@ -46,6 +46,14 @@ export class WordSearchPageComponent {
 
   protected foundWords = signal<Set<string>>(new Set());
 
+  protected foundCells = signal<Set<string>>(new Set());
+
+  protected previewCells = signal<Set<string>>(new Set());
+
+  private cellKey(row: number, col: number): string {
+      return `${row}:${col}`;
+  }
+
   protected query: WordSearchQuery = {
     settings: {
       rows: 10,
@@ -71,6 +79,8 @@ export class WordSearchPageComponent {
       .subscribe({
         next: (res) => {
           this.response.set(res);
+          this.foundCells.set(new Set());
+          this.foundWords.set(new Set());
           this.loading.set(false);
         },
         error: (err) => {
@@ -99,13 +109,17 @@ export class WordSearchPageComponent {
   }
 
   protected onSelection(path: CellPosition[]): void {
-    console.log('USER PATH:', path);
-
     const result = this.tryMatchWord(path);
 
-    if (result) {
-      this.markWordAsFound(result.word, result.cells);
+    if (!result) {
+      return;
     }
+
+    if (this.foundWords().has(result.word)) {
+      return;
+    }
+
+    this.markWordAsFound(result.word, result.cells);
   }
 
   private buildPlacements(response: WordSearchResponse): WordPlacement[] {
@@ -168,5 +182,40 @@ export class WordSearchPageComponent {
       newSet.add(word);
       return newSet;
     });
+
+    this.foundCells.update(current => {
+      const next = new Set(current);
+      cells.forEach(cell =>
+        next.add(this.cellKey(cell.row, cell.col))
+      );
+      return next;
+    });
+  }
+
+  private hoverTimeout?: number;
+
+  protected previewWord(word: string): void {
+    clearTimeout(this.hoverTimeout);
+
+    this.hoverTimeout = window.setTimeout(() => {
+      const placement = this.placements()
+        .find(p => p.word === word);
+
+      if (!placement) {
+        return;
+      }
+
+      const next = new Set<string>();
+
+      placement.cells.forEach(cell =>
+        next.add(this.cellKey(cell.row, cell.col))
+      );
+
+      this.previewCells.set(next);
+    }, 1500);
+  }
+
+  protected clearPreview(): void {
+    this.previewCells.set(new Set());
   }
 }

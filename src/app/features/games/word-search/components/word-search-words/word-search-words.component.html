@@ -7,7 +7,9 @@
     <div class="flex flex-wrap justify-center gap-2">
       @for (word of words; track wordIndex; let wordIndex = $index) {
         <span class="rounded px-3 py-1 text-sm"
-          [class.line-through]="foundWords.has(word)">
+          [class.line-through]="foundWords.has(word)"
+          (mouseenter)="hoverWord.emit(word)"
+          (mouseleave)="leaveWord.emit()">
           {{ word }}
         </span>
       }

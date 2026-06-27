@@ -29,11 +29,15 @@
       [rows]="gridRows()"
       [cols]="res.cols"
       (selectionEnd)="onSelection($event)"
+      [foundCells]="foundCells()"
+      [previewCells]="previewCells()"
     />
 
     <app-word-search-words
       [words]="res.words"
       [foundWords]="foundWords()"
+      (hoverWord)="previewWord($event)"
+      (leaveWord)="clearPreview()"
     />
 
     <app-word-search-info-panel
