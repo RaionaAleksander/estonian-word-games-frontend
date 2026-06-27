@@ -1,4 +1,4 @@
-import { WordFilters } from '../../../../shared/components/search-panel/filter/models/word-filter.model';
+import { WordSearchMeta } from './word-search-meta.model';
 import { WordSearchPlacement } from './word-search-placement.model';
 
 export interface WordSearchResponse {
@@ -13,7 +13,7 @@ export interface WordSearchResponse {
 
   placements: WordSearchPlacement[];
 
-  filters: WordFilters;
+  meta: WordSearchMeta;
 
   generatedAt: string;
 

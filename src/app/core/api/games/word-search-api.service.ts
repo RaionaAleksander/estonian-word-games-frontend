@@ -62,6 +62,14 @@ export class WordSearchApiService {
       params = params.set('excludedWords', filters.excludedWords.join(','));
     }
 
+    if (query.sort.sort) {
+      params = params.set('sort', query.sort.sort);
+    }
+
+    if (query.sort.order) {
+      params = params.set('order', query.sort.order);
+    }
+
     return this.http.get<WordSearchResponse>(
       `${this.apiUrl}/generate`,
       { params }

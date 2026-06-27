@@ -8,6 +8,7 @@
   <app-word-search-main-panel
     [settings]="query.settings"
     [filters]="query.filters"
+    [sort]="query.sort"
     (applyAllEvent)="onQueryChange($event)"
     (resetAllEvent)="onReset()"
   />
@@ -25,8 +26,8 @@
   <!-- RESULT -->
   @else if (response(); as res) {
     <app-word-search-grid
-      [rows]="getGridRows()"
-      [cols]="res.cols"
+      [rows]="gridRows()"
+      [cols]="response()?.cols ?? 0"
     />
 
     <app-word-search-words
@@ -44,7 +45,10 @@
       [generatedAt]="res.generatedAt"
     >
       <app-filter-meta
-        [filters]="res.filters"
+        [filters]="res.meta.filters"
+      />
+      <app-sort-meta
+        [sort]="res.meta.sort"
       />
     </app-query-meta-panel>
   }

@@ -12,6 +12,12 @@
     (filtersChange)="updateFilters($event)"
   />
 
+  <!-- SORT -->
+  <app-sort-container
+    [sort]="sort"
+    (sortChange)="updateSort($event)"
+  />
+
   <!-- ACTIONS -->
   <app-panel-actions
     primaryLabel="Generate"

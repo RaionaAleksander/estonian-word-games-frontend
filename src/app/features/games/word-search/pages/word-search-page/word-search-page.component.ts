@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { WordSearchApiService } from '../../../../../core/api/games/word-search-api.service';
 import { ErrorResponse } from '../../../../../shared/api/error-response.model';
 import { WordSearchResponse } from '../../models/word-search-response.model';
@@ -10,13 +10,14 @@ import { EmptyStateComponent } from '../../../../../shared/components/empty-stat
 import { mapHttpError } from '../../../../../shared/api/map-http-error';
 import { QueryMetaPanelComponent } from '../../../../../shared/components/query-meta/query-meta-panel/query-meta-panel.component';
 import { FilterMetaComponent } from '../../../../../shared/components/query-meta/filter-meta/filter-meta.component';
+import { SortMetaComponent } from '../../../../../shared/components/query-meta/sort-meta/sort-meta.component';
 import { WordSearchGridComponent } from '../../components/word-search-grid/word-search-grid.component';
 import { WordSearchWordsComponent } from '../../components/word-search-words/word-search-words.component';
 import { WordSearchInfoPanelComponent } from '../../components/word-search-info-panel/word-search-info-panel.component';
 
 @Component({
   selector: 'app-word-search-page',
-  imports: [WordSearchMainPanelComponent, QueryMetaPanelComponent, FilterMetaComponent, 
+  imports: [WordSearchMainPanelComponent, QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent,
     WordSearchGridComponent, WordSearchWordsComponent, WordSearchInfoPanelComponent,
     ErrorStateComponent, LoadingStateComponent, EmptyStateComponent],
   templateUrl: './word-search-page.component.html',
@@ -31,6 +32,10 @@ export class WordSearchPageComponent {
   protected readonly error = signal<ErrorResponse | null>(null);
   protected readonly response = signal<WordSearchResponse | null>(null);
 
+  protected readonly gridRows = computed(() =>
+    this.response()?.grid.map(row => row.split('')) ?? []
+  );
+
   protected query: WordSearchQuery = {
     settings: {
       rows: 10,
@@ -39,11 +44,8 @@ export class WordSearchPageComponent {
       allowIncomplete: false,
     },
     filters: {},
+    sort: {},
   };
-
-  protected getGridRows(): string[][] {
-    return this.response()?.grid.map(row => row.split('')) ?? [];
-  }
 
   protected onQueryChange(query: WordSearchQuery): void {
     this.query = query;
@@ -71,14 +73,16 @@ export class WordSearchPageComponent {
 
   protected onReset(): void {
 
-    this.query.settings = {
-      rows: 10,
-      cols: 10,
-      wordsCount: 5,
-      allowIncomplete: false,
+    this.query = {
+      settings: {
+        rows: 10,
+        cols: 10,
+        wordsCount: 5,
+        allowIncomplete: false,
+      },
+      filters: {},
+      sort: {},
     };
-
-    this.query.filters = {};
 
     this.response.set(null);
     this.error.set(null);
