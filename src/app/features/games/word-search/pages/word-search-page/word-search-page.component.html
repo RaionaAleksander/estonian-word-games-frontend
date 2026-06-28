@@ -28,17 +28,32 @@
     <app-word-search-grid
       [rows]="gridRows()"
       [cols]="res.cols"
+      [zoom]="zoom()"
       (selectionEnd)="onSelection($event)"
       [foundCells]="foundCells()"
       [previewCells]="previewCells()"
     />
 
-    <app-word-search-words
-      [words]="res.words"
-      [foundWords]="foundWords()"
-      (hoverWord)="previewWord($event)"
-      (leaveWord)="clearPreview()"
-    />
+    <app-word-search-side-panel>
+      <app-word-search-words
+        [words]="res.words"
+        [foundWords]="foundWords()"
+        (hoverWord)="previewWord($event)"
+        (leaveWord)="clearPreview()"
+      />
+
+      <app-word-search-victory
+        [isVisible]="isCompleted()"
+      />
+
+      <app-word-search-controls
+        (clean)="clearGameProgress()"
+        (zoomIn)="onZoomIn()"
+        (zoomOut)="onZoomOut()"
+        [canZoomIn]="canZoomIn()"
+        [canZoomOut]="canZoomOut()"
+      />
+    </app-word-search-side-panel>
 
     <app-word-search-info-panel
       [rows]="res.rows"

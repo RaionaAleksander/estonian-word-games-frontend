@@ -1,18 +1,20 @@
 <div class="mt-8 flex justify-center overflow-x-auto">
-  <div class="inline-block rounded-lg border border-gray-300 bg-white p-4">
+  <div class="inline-block rounded-lg border border-gray-300 bg-white p-4 transition-all duration-500 origin-top">
     <div
       class="grid select-none"
       onselectstart="return false"
-      [style.gridTemplateColumns]="'repeat(' + cols + ', 32px)'"
+      [style.gridTemplateColumns]="'repeat(' + cols + ', ' + cellSize + 'px)'"
     >
       @for (row of rows; track rowIndex; let rowIndex = $index) {
         @for (cell of row; track cellIndex; let cellIndex = $index) {
-          <div class="flex items-center justify-center font-mono text-sm h-8 w-8
-          select-none cursor-pointer transition-all duration-500"
+          <div class="flex items-center justify-center font-mono select-none cursor-pointer transition-all duration-500"
             style="-webkit-user-drag: none"
             [class.bg-blue-100]="isActive(rowIndex, cellIndex)"
             [class.bg-green-200]="isFound(rowIndex, cellIndex)"
             [class.bg-gray-300]="isPreview(rowIndex, cellIndex)"
+            [style.width.px]="cellSize"
+            [style.height.px]="cellSize"
+            [style.fontSize.px]="cellSize * 0.45"
             (mousedown)="onMouseDown(rowIndex, cellIndex)"
             (mouseenter)="onMouseEnter(rowIndex, cellIndex)"
             (mouseup)="onMouseUp()">

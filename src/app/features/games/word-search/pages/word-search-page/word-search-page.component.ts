@@ -17,12 +17,15 @@ import { WordSearchInfoPanelComponent } from '../../components/word-search-info-
 import { CellPosition } from '../../models/cell-position.model';
 import { WordPlacement } from '../../models/word-placement.model'
 import { WordSearchPlacement } from '../../models/word-search-placement.model';
+import { WordSearchVictoryComponent } from "../../components/word-search-victory/word-search-victory.component";
+import { WordSearchControlsComponent } from '../../components/word-search-controls/word-search-controls.component';
+import { WordSearchSidePanelComponent } from "../../components/word-search-side-panel/word-search-side-panel.component";
 
 @Component({
   selector: 'app-word-search-page',
   imports: [WordSearchMainPanelComponent, QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent,
     WordSearchGridComponent, WordSearchWordsComponent, WordSearchInfoPanelComponent,
-    ErrorStateComponent, LoadingStateComponent, EmptyStateComponent],
+    ErrorStateComponent, LoadingStateComponent, EmptyStateComponent, WordSearchVictoryComponent, WordSearchControlsComponent, WordSearchSidePanelComponent],
   templateUrl: './word-search-page.component.html',
   styleUrl: './word-search-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -108,6 +111,7 @@ export class WordSearchPageComponent {
     this.error.set(null);
   }
 
+  // Game
   protected onSelection(path: CellPosition[]): void {
     const result = this.tryMatchWord(path);
 
@@ -226,4 +230,41 @@ export class WordSearchPageComponent {
     clearTimeout(this.hoverTimeout);
     this.previewCells.set(new Set());
   }
+
+  protected readonly isCompleted = computed(() => {
+    const response = this.response();
+    if (!response) {
+      return false;
+    }
+    return this.foundWords().size === response.words.length;
+  });
+
+  protected clearGameProgress(): void {
+    this.foundWords.set(new Set());
+    this.foundCells.set(new Set());
+    this.previewCells.set(new Set());
+  }
+
+  private readonly zoomLevels = [0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0];
+  protected zoomIndex = signal(2);
+
+  protected readonly zoom = computed(() =>
+    this.zoomLevels[this.zoomIndex()]
+  );
+
+  protected onZoomIn(): void {
+    this.zoomIndex.update(i => Math.min(i + 1, this.zoomLevels.length - 1));
+  }
+
+  protected onZoomOut(): void {
+    this.zoomIndex.update(i => Math.max(i - 1, 0));
+  }
+
+  canZoomIn = computed(() =>
+    this.zoomIndex() < this.zoomLevels.length - 1
+  );
+
+  canZoomOut = computed(() =>
+    this.zoomIndex() > 0
+  );
 }

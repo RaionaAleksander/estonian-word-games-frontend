@@ -1,0 +1,34 @@
+<div class="mt-8 flex items-center justify-around">
+  <!-- LEFT: zoom controls -->
+  <div class="flex gap-2">
+    <button
+      class="px-3 py-1 border rounded bg-white hover:bg-gray-100"
+      [disabled]="!canZoomIn"
+      [class.opacity-40]="!canZoomIn"
+      [class.cursor-not-allowed]="!canZoomIn"
+      (click)="zoomIn.emit()"
+    >
+      +
+    </button>
+
+    <button
+      class="px-3 py-1 border rounded bg-white hover:bg-gray-100"
+      [disabled]="!canZoomOut"
+      [class.opacity-40]="!canZoomOut"
+      [class.cursor-not-allowed]="!canZoomOut"
+      (click)="zoomOut.emit()"
+    >
+      -
+    </button>
+  </div>
+
+  <!-- RIGHT: clean -->
+  <div>
+    <button
+      class="px-4 py-1 border rounded bg-white hover:bg-gray-100"
+      (click)="clean.emit()"
+    >
+      Clean
+    </button>
+  </div>
+</div>

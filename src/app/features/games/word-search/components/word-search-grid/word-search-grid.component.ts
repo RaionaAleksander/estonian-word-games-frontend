@@ -18,6 +18,8 @@ export class WordSearchGridComponent {
 
   @Input() previewCells: Set<string> = new Set();
 
+  @Input({ required: true }) zoom: number = 1;
+
   @Output() selectionEnd = new EventEmitter<CellPosition[]>();
 
   private isMouseDown = false;
@@ -30,6 +32,12 @@ export class WordSearchGridComponent {
 
   private cellKey(row: number, col: number): string {
     return `${row}:${col}`;
+  }
+
+  protected readonly baseCellSize = 32;
+
+  protected get cellSize(): number {
+    return this.baseCellSize * this.zoom;
   }
 
   onMouseDown(row: number, col: number): void {

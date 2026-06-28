@@ -1,0 +1,9 @@
+@if (isVisible) {
+  <div class="text-center text-xl font-bold text-green-600 mt-4 transition-all duration-700"
+    [class.opacity-0]="!isVisible"
+    [class.opacity-100]="isVisible"
+    [class.translate-y-2]="!isVisible"
+    [class.translate-y-0]="isVisible">
+    ⭐ Congratulations! You found all words!
+  </div>
+}
