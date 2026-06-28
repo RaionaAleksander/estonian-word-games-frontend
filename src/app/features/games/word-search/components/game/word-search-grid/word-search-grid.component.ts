@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { CellPosition } from '../../models/cell-position.model';
+import { CellPosition } from '../../../models/cell-position.model';
 
 @Component({
   selector: 'app-word-search-grid',
