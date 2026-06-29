@@ -37,6 +37,7 @@ export class WordSearchPageComponent {
       cols: 10,
       wordsCount: 5,
       allowIncomplete: false,
+      letterCase: undefined,
     },
     filters: {},
     sort: {},

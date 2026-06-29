@@ -7,6 +7,8 @@ export interface WordSearchResponse {
   rows: number;
   cols: number;
 
+  letterCase: string;
+
   grid: string[];
 
   words: string[];

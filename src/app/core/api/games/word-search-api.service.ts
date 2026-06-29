@@ -20,6 +20,10 @@ export class WordSearchApiService {
       .set('wordsCount', query.settings.wordsCount)
       .set('allowIncomplete', query.settings.allowIncomplete);
 
+    if (query.settings.letterCase) {
+      params = params.set('letterCase', query.settings.letterCase);
+    }
+
     const filters = query.filters;
 
     if (filters.minLength != null) {

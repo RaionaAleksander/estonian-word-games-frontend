@@ -24,5 +24,11 @@
       [allowIncomplete]="settings.allowIncomplete"
       (valueChange)="updateSettings($event)"
     />
+
+    <!-- LETTER CASE -->
+    <app-letter-case-section
+      [letterCase]="settings.letterCase"
+      (valueChange)="updateSettings($event)"
+    />
   }
 </section>
