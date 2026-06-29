@@ -13,11 +13,12 @@ import { FilterMetaComponent } from '../../../../../shared/components/query-meta
 import { SortMetaComponent } from '../../../../../shared/components/query-meta/sort-meta/sort-meta.component';
 import { WordSearchInfoPanelComponent } from '../../components/word-search-info-panel/word-search-info-panel.component';
 import { WordSearchGameComponent } from '../../components/word-search-game/word-search-game.component';
+import { WordSearchExportComponent } from '../../components/word-search-export/word-search-export.component';
 
 @Component({
   selector: 'app-word-search-page',
   imports: [WordSearchMainPanelComponent, QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent,
-    WordSearchInfoPanelComponent, WordSearchGameComponent,
+    WordSearchInfoPanelComponent, WordSearchGameComponent, WordSearchExportComponent,
     ErrorStateComponent, LoadingStateComponent, EmptyStateComponent],
   templateUrl: './word-search-page.component.html',
   styleUrl: './word-search-page.component.css',
