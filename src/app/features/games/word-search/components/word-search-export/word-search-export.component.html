@@ -3,5 +3,44 @@
     Export Game
   </h2>
 
-  <!-- future buttons will go here -->
+
+  <div
+    class="flex items-center justify-between cursor-pointer select-none my-2 group"
+    (click)="toggle()"
+  >
+    <h3 class="text-base font-medium text-gray-600 group-hover:text-gray-700 transition-colors">
+      JSON / TXT Export
+    </h3>
+
+    <span
+      class="text-gray-600 transition-transform duration-500"
+      [class.rotate-90]="isExpanded()"
+    >
+      ►
+    </span>
+  </div>
+
+  @if (isExpanded()) {
+    <div class="bg-gray-900 text-green-200 p-3 rounded-md text-xs overflow-auto max-h-64 border font-mono leading-relaxed whitespace-pre">
+      {{ jsonPreview() }}
+    </div>
+
+    <div class="mt-4 flex gap-2">
+      <button
+          class="flex-1 px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition"
+          (click)="downloadJson()"
+      >
+          Download JSON
+      </button>
+
+      <button
+          class="flex-1 px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600 transition"
+          (click)="downloadTxt()"
+      >
+          Download TXT
+      </button>
+    </div>
+  }
+
+  <!-- future actions will go here -->
 </div>
