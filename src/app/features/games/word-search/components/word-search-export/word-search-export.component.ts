@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, effect, input, signal } from '@angular/core';
 import { WordSearchResponse } from '../../models/word-search-response.model';
-import { ExportSectionComponent } from '../../../../../shared/components/export/foundation/export-section/export-section.component';
-import { JsonExportComponent } from '../../../../../shared/components/export/json-export/json-export.component';
+import { ExportSectionComponent } from '../../../../../shared/export/components/export-section/export-section.component';
+import { JsonExportComponent } from '../../../../../shared/export/components/json-export/json-export.component';
 
 @Component({
   selector: 'app-word-search-export',
