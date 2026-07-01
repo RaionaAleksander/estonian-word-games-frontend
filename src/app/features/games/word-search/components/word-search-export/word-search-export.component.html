@@ -3,44 +3,22 @@
     Export Game
   </h2>
 
+  <app-export-section title="JSON / TXT Export">
+    <app-json-export
+      [data]="response()"
+      fileName="word-search"
+    />
+  </app-export-section>
 
-  <div
-    class="flex items-center justify-between cursor-pointer select-none my-2 group"
-    (click)="toggle()"
-  >
-    <h3 class="text-base font-medium text-gray-600 group-hover:text-gray-700 transition-colors">
-      JSON / TXT Export
-    </h3>
+  <app-export-section title="PDF Export">
+    ...
+  </app-export-section>
 
-    <span
-      class="text-gray-600 transition-transform duration-500"
-      [class.rotate-90]="isExpanded()"
-    >
-      ►
-    </span>
-  </div>
+  <app-export-section title="Print">
+    ...
+  </app-export-section>
 
-  @if (isExpanded()) {
-    <div class="bg-gray-900 text-green-200 p-3 rounded-md text-xs overflow-auto max-h-64 border font-mono leading-relaxed whitespace-pre">
-      {{ jsonPreview() }}
-    </div>
-
-    <div class="mt-4 flex gap-2">
-      <button
-          class="flex-1 px-4 py-2 bg-gray-900 text-white rounded-md hover:bg-gray-800 transition"
-          (click)="downloadJson()"
-      >
-          Download JSON
-      </button>
-
-      <button
-          class="flex-1 px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600 transition"
-          (click)="downloadTxt()"
-      >
-          Download TXT
-      </button>
-    </div>
-  }
-
-  <!-- future actions will go here -->
+  <app-export-section title="Image Export">
+    ...
+  </app-export-section>
 </div>
