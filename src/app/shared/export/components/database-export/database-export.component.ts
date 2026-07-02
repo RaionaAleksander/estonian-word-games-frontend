@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, input, signal } from '@angular/core';
 import { ExportSaveService } from '../../services/export-save.service';
 import { WordSearchResponse } from '../../../../features/games/word-search/models/word-search-response.model';
 import { finalize } from 'rxjs';
@@ -20,6 +20,21 @@ export class DatabaseExportComponent {
   protected readonly isSaving = signal(false);
   protected readonly isSaved = signal(false);
   protected readonly error = signal<string | null>(null);
+
+  constructor() {
+    effect(() => {
+      const game = this.data();
+      if (!game) return;
+
+      this.resetState();
+    });
+  }
+
+  private resetState(): void {
+    this.isSaving.set(false);
+    this.isSaved.set(false);
+    this.error.set(null);
+  }
 
   protected save(): void {
 

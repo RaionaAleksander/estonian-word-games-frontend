@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, computed, effect, input, signal } from '@angular/core';
 import { WordSearchResponse } from '../../models/word-search-response.model';
+import { ExportPanelComponent } from '../../../../../shared/export/components/export-panel/export-panel.component';
 import { ExportSectionComponent } from '../../../../../shared/export/components/export-section/export-section.component';
 import { JsonExportComponent } from '../../../../../shared/export/components/json-export/json-export.component';
 import { DatabaseExportComponent } from '../../../../../shared/export/components/database-export/database-export.component';
 
 @Component({
   selector: 'app-word-search-export',
-  imports: [ExportSectionComponent, JsonExportComponent, DatabaseExportComponent],
+  imports: [ExportPanelComponent, ExportSectionComponent, JsonExportComponent, DatabaseExportComponent],
   templateUrl: './word-search-export.component.html',
   styleUrl: './word-search-export.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

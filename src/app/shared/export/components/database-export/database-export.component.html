@@ -13,6 +13,12 @@
   page.
 </p>
 
+@if (error()) {
+  <p class="mt-2 text-sm text-red-500">
+    {{ error() }}
+  </p>
+}
+
 <button
   class="w-full rounded-md px-4 py-2 text-white transition"
   [class.bg-gray-900]="!isSaved()"
@@ -29,9 +35,3 @@
     Save game
   }
 </button>
-
-@if (error()) {
-  <p class="mt-2 text-sm text-red-500">
-    {{ error() }}
-  </p>
-}
