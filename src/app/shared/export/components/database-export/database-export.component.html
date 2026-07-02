@@ -1,0 +1,37 @@
+<p class="my-4 text-sm text-gray-600">
+  Save this generated game to the database. You will be able to access it later without regenerating it.
+</p>
+
+<p class="mb-4 text-sm text-gray-600">
+  Saved games can be viewed on the
+  <a
+    routerLink="/saved-games"
+    class="text-blue-600 hover:underline"
+  >
+    Saved Games
+  </a>
+  page.
+</p>
+
+<button
+  class="w-full rounded-md px-4 py-2 text-white transition"
+  [class.bg-gray-900]="!isSaved()"
+  [class.bg-green-600]="isSaved()"
+  [class.bg-gray-400]="isSaving()"
+  [disabled]="isSaving() || isSaved()"
+  (click)="save()"
+>
+  @if (isSaving()) {
+    Saving...
+  } @else if (isSaved()) {
+    ✓ Saved
+  } @else {
+    Save game
+  }
+</button>
+
+@if (error()) {
+  <p class="mt-2 text-sm text-red-500">
+    {{ error() }}
+  </p>
+}

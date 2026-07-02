@@ -3,6 +3,12 @@
     Export Game
   </h2>
 
+  <app-export-section title="Database Save">
+    <app-database-export
+      [data]="response()"
+    />
+  </app-export-section>
+
   <app-export-section title="JSON / TXT Export">
     <app-json-export
       [data]="response()"
