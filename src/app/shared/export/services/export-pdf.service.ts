@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 
 @Injectable({ providedIn: 'root' })
 export class ExportPdfService {
   private async render(element: HTMLElement) {
+    const html2canvas = (await import('html2canvas')).default;
+
     const clone = element.cloneNode(true) as HTMLElement;
 
     clone.style.width = '210mm';
@@ -28,6 +28,8 @@ export class ExportPdfService {
   }
 
   async exportFromElement(element: HTMLElement): Promise<void> {
+    const jsPDF = (await import('jspdf')).default;
+
     this.fixOklchColors(element);
 
     const canvas = await this.render(element);
