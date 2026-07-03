@@ -1,0 +1,26 @@
+<p class="my-4 text-sm text-gray-600">
+  Export this game as a printable document or download it as a PDF.
+</p>
+
+<app-document-preview>
+  <app-word-search-document
+    #document
+    [response]="data()"
+  />
+</app-document-preview>
+
+<div class="mt-4 flex gap-2">
+  <button
+    class="flex-1 rounded-md bg-gray-900 px-4 py-2 text-white transition hover:bg-gray-800"
+    (click)="downloadPdf()"
+  >
+    Download PDF
+  </button>
+
+  <button
+    class="flex-1 rounded-md bg-gray-700 px-4 py-2 text-white transition hover:bg-gray-600"
+    (click)="print()"
+  >
+    Print
+  </button>
+</div>

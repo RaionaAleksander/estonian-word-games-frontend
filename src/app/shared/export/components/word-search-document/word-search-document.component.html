@@ -1,0 +1,61 @@
+<app-document-page>
+  <!-- HEADER -->
+  <div class="mb-8 flex items-end gap-8 text-sm">
+    <div class="flex-7">
+      <div class="flex gap-2">
+        <span class="font-medium">Name:</span>
+        <div class="flex-1 border-b border-gray-500 line"></div>
+      </div>
+    </div>
+
+    <div class="flex-3">
+      <div class="flex gap-2">
+        <span class="font-medium">Date:</span>
+        <div class="flex-1 border-b border-gray-500 line"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TITLE -->
+  <h1 class="text-center text-3xl font-bold mb-8">
+    Sõnasegadik
+  </h1>
+
+  <!-- GRID -->
+  <div class="flex justify-center mb-10">
+    <div
+      class="inline-grid gap-1"
+      [style.gridTemplateColumns]="'repeat(' + cols() + ', 1fr)'"
+    >
+      @for (row of rows(); track $index) {
+        @for (letter of row; track $index) {
+          <div
+            class="flex items-center justify-center font-semibold"
+            [style.width.px]="cellSize()"
+            [style.height.px]="cellSize()"
+            [style.fontSize.px]="fontSize()"
+          >
+            {{ letter }}
+          </div>
+        }
+      }
+    </div>
+  </div>
+
+  <!-- WORDS -->
+  <h2 class="text-center text-xl font-semibold mb-5">
+    Sõnad
+  </h2>
+
+  <div class="grid grid-cols-3 gap-x-10 gap-y-2 text-center">
+    @for (column of wordColumns(); track $index) {
+      <div>
+        @for (word of column; track word) {
+          <div class="py-1">
+            {{ word }}
+          </div>
+        }
+      </div>
+    }
+  </div>
+</app-document-page>

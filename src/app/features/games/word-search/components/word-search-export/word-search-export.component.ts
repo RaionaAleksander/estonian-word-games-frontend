@@ -4,10 +4,11 @@ import { ExportPanelComponent } from '../../../../../shared/export/components/ex
 import { ExportSectionComponent } from '../../../../../shared/export/components/export-section/export-section.component';
 import { JsonExportComponent } from '../../../../../shared/export/components/json-export/json-export.component';
 import { DatabaseExportComponent } from '../../../../../shared/export/components/database-export/database-export.component';
+import { PdfExportComponent } from '../../../../../shared/export/components/pdf-export/pdf-export.component';
 
 @Component({
   selector: 'app-word-search-export',
-  imports: [ExportPanelComponent, ExportSectionComponent, JsonExportComponent, DatabaseExportComponent],
+  imports: [ExportPanelComponent, ExportSectionComponent, JsonExportComponent, DatabaseExportComponent, PdfExportComponent],
   templateUrl: './word-search-export.component.html',
   styleUrl: './word-search-export.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

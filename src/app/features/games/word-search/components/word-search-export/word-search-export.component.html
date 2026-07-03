@@ -12,12 +12,10 @@
     />
   </app-export-section>
 
-  <app-export-section title="PDF Export">
-    ...
-  </app-export-section>
-
-  <app-export-section title="Print">
-    ...
+  <app-export-section title="PDF Export / Print">
+    <app-pdf-export
+      [data]="response()"
+    />
   </app-export-section>
 
   <app-export-section title="Image Export">
