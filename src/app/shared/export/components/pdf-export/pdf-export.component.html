@@ -3,10 +3,11 @@
 </p>
 
 <app-document-preview>
-  <app-word-search-document
-    #document
-    [response]="data()"
-  />
+  <div #document>
+    <app-word-search-document
+      [response]="data()"
+    />
+  </div>
 </app-document-preview>
 
 <div class="mt-4 flex gap-2">
@@ -15,12 +16,5 @@
     (click)="downloadPdf()"
   >
     Download PDF
-  </button>
-
-  <button
-    class="flex-1 rounded-md bg-gray-700 px-4 py-2 text-white transition hover:bg-gray-600"
-    (click)="print()"
-  >
-    Print
   </button>
 </div>

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, input, ViewChild } from
 import { WordSearchResponse } from '../../../../features/games/word-search/models/word-search-response.model';
 import { DocumentPreviewComponent } from '../document-preview/document-preview.component';
 import { WordSearchDocumentComponent } from '../word-search-document/word-search-document.component';
+import { ExportPdfService } from '../../services/export-pdf.service';
 
 @Component({
   selector: 'app-pdf-export',
@@ -13,11 +14,15 @@ import { WordSearchDocumentComponent } from '../word-search-document/word-search
 export class PdfExportComponent {
   readonly data = input.required<WordSearchResponse>();
 
-  protected downloadPdf(): void {
-    console.log('Download PDF');
-  }
+  @ViewChild('document', { read: ElementRef })
+  documentRef!: ElementRef<HTMLElement>;
 
-  protected print(): void {
-    console.log('Print');
+  constructor(private pdf: ExportPdfService) {}
+
+  downloadPdf(): void {
+    const el = this.documentRef?.nativeElement;
+    if (!el) return;
+
+    this.pdf.exportFromElement(el);
   }
 }
