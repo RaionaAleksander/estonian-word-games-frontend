@@ -14,6 +14,8 @@ import { WordsHomePageComponent } from './features/words/pages/words-home-page/w
 import { GamesHomePageComponent } from './features/games/home/games-home-page/games-home-page.component';
 import { WordSearchPageComponent } from './features/games/word-search/pages/word-search-page/word-search-page.component';
 import { CrosswordPageComponent } from './features/games/crossword/pages/crossword-page/crossword-page.component';
+import { SavedGamesPageComponent } from './features/saved-games/pages/saved-games-page/saved-games-page.component';
+import { WordSearchCustomPageComponent } from './features/games/word-search/pages/word-search-custom-page/word-search-custom-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -31,10 +33,14 @@ export const routes: Routes = [
   { path: 'games', component: GamesHomePageComponent },
   { path: 'games/crossword', component: CrosswordPageComponent, canActivate: [BackendHealthGuard] },
   { path: 'games/sonasegadik', component: WordSearchPageComponent, canActivate: [BackendHealthGuard] },
+  { path: 'games/sonasegadik-custom', component: WordSearchCustomPageComponent, canActivate: [BackendHealthGuard] },
   
   // SYSTEM
   { path: 'backend-unavailable', component: BackendUnavailablePageComponent },
   { path: 'backend-health', component: BackendHealthPageComponent, canActivate: [BackendHealthGuard] },
+
+  // SAVED GAMES
+  { path: 'saved-games', component: SavedGamesPageComponent, canActivate: [BackendHealthGuard] },
   
   { path: '**', component: NotFoundPageComponent },
 ];
