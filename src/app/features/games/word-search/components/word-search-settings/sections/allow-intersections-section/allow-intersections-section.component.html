@@ -1,10 +1,10 @@
-<app-search-section>
+<app-search-section title="Word Placement">
   <app-section-row>
-    <app-section-field label="Allow incomplete generation">
+    <app-section-field label="Allow word intersections">
       <label class="flex items-center gap-3">
         <input
           type="checkbox"
-          [checked]="allowIncomplete"
+          [checked]="allowIntersections"
           (change)="onChange($any($event.target).checked)"
         />
       </label>

@@ -1,0 +1,18 @@
+<app-search-section>
+  <app-section-row>
+    <app-section-field label="Allowed directions">
+      <input
+        id="directions"
+        type="text"
+        placeholder="RIGHT, DOWN, LEFT"
+        [value]="directions.join(', ')"
+        (input)="onChange($any($event.target).value)"
+        class="w-full box-border rounded-md border border-gray-300 bg-white px-3 py-2 font-inherit"
+      />
+
+      <small class="mt-2 block text-gray-500">
+        Available values: {{ availableDirections.join(', ') }}
+      </small>
+    </app-section-field>
+  </app-section-row>
+</app-search-section>

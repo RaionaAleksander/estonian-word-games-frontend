@@ -1,3 +1,4 @@
+import { WordSearchDirection } from './word-search-direction.model';
 import { WordSearchMeta } from './word-search-meta.model';
 import { WordSearchPlacement } from './word-search-placement.model';
 
@@ -8,6 +9,10 @@ export interface WordSearchResponse {
   cols: number;
 
   letterCase: string;
+
+  allowIntersections: boolean;
+
+  usedDirections: WordSearchDirection[];
 
   grid: string[];
 

@@ -76,6 +76,9 @@ export class WordSearchMainPanelComponent {
       cols: 10,
       wordsCount: 5,
       allowIncomplete: false,
+      allowIntersections: true,
+      directions: [],
+      letterCase: undefined,
     };
 
     this.filters = {};

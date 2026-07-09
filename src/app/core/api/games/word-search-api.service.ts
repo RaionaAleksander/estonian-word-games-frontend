@@ -18,10 +18,15 @@ export class WordSearchApiService {
       .set('rows', query.settings.rows)
       .set('cols', query.settings.cols)
       .set('wordsCount', query.settings.wordsCount)
-      .set('allowIncomplete', query.settings.allowIncomplete);
+      .set('allowIncomplete', query.settings.allowIncomplete)
+      .set('allowIntersections', query.settings.allowIntersections);
 
     if (query.settings.letterCase) {
       params = params.set('letterCase', query.settings.letterCase);
+    }
+
+    for (const direction of query.settings.directions) {
+      params = params.append('directions', direction);
     }
 
     const filters = query.filters;

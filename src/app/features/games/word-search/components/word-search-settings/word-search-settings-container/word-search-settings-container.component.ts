@@ -6,11 +6,13 @@ import { CollapsibleHeaderComponent } from '../../../../../../shared/components/
 import { GridSizeSectionComponent } from '../sections/grid-size-section/grid-size-section.component';
 import { ExpandableContainerDirective } from '../../../../../../shared/components/search-panel/foundation/directives/expandable-container.directive';
 import { WordSearchSettings } from '../models/word-search-game-settings.model';
+import { AllowIntersectionsSectionComponent } from '../sections/allow-intersections-section/allow-intersections-section.component';
+import { DirectionsSectionComponent } from '../sections/directions-section/directions-section.component';
 
 @Component({
   selector: 'app-word-search-settings-container',
   imports: [CollapsibleHeaderComponent, AllowIncompleteSectionComponent, WordsCountSectionComponent, 
-    GridSizeSectionComponent, LetterCaseSectionComponent],
+    GridSizeSectionComponent, LetterCaseSectionComponent, AllowIntersectionsSectionComponent, DirectionsSectionComponent],
   templateUrl: './word-search-settings-container.component.html',
   styleUrl: './word-search-settings-container.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

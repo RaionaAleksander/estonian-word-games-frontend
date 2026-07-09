@@ -13,6 +13,12 @@
       (valueChange)="updateSettings($event)"
     />
 
+    <!-- LETTER CASE -->
+    <app-letter-case-section
+      [letterCase]="settings.letterCase"
+      (valueChange)="updateSettings($event)"
+    />
+
     <!-- WORDS COUNT -->
     <app-words-count-section
       [wordsCount]="settings.wordsCount"
@@ -25,9 +31,15 @@
       (valueChange)="updateSettings($event)"
     />
 
-    <!-- LETTER CASE -->
-    <app-letter-case-section
-      [letterCase]="settings.letterCase"
+    <!-- ALLOW INTERSECTIONS -->
+    <app-allow-intersections-section
+      [allowIntersections]="settings.allowIntersections"
+      (valueChange)="updateSettings($event)"
+    />
+
+    <!-- WORD DIRECTIONS -->
+    <app-directions-section
+      [directions]="settings.directions"
       (valueChange)="updateSettings($event)"
     />
   }
