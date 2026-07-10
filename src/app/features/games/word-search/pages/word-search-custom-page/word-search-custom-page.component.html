@@ -1,9 +1,62 @@
 <section class="mx-auto max-w-6xl p-8">
-  <h1 class="mb-4 text-3xl font-bold">
-    Sõnasegadik Custom
+
+  <h1 class="mb-6 text-3xl font-bold">
+    Custom Sõnasegadik
   </h1>
 
-  <div class="p-4 border border-gray-200 rounded-md bg-gray-50 text-gray-600">
-    This game is under development.
-  </div>
+  <!-- MAIN PANEL -->
+  <app-custom-word-search-main-panel
+    [settings]="query.settings"
+    [sort]="query.sort"
+    (applyAllEvent)="onQueryChange($event)"
+    (resetAllEvent)="onReset()"
+  />
+
+  <!-- LOADING -->
+  @if (loading()) {
+    <app-loading-state
+      [message]="'Generating custom word search...'"
+    />
+  }
+
+  <!-- ERROR -->
+  @if (error()) {
+    <app-error-state
+      [error]="error()!"
+    />
+  }
+
+  <!-- RESULT -->
+  @else if (response(); as res) {
+    <app-word-search-game
+      [response]="res"
+    />
+
+    <app-word-search-info-panel
+      [rows]="res.rows"
+      [cols]="res.cols"
+      [wordsCount]="res.words.length"
+      [gameType]="res.gameType"
+    />
+
+    <app-word-search-export
+      [response]="res"
+    />
+
+    <app-query-meta-panel
+      [generatedAt]="res.generatedAt"
+    >
+      <app-sort-meta
+        [sort]="res.meta.sort"
+      />
+    </app-query-meta-panel>
+  }
+
+  <!-- EMPTY -->
+  @else {
+    <app-empty-state
+      title="No game generated"
+      description="Enter your words and click Generate to create a custom word search."
+    />
+  }
 </section>

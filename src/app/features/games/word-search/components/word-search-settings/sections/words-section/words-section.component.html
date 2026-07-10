@@ -1,0 +1,14 @@
+<app-search-section title="Words">
+  <app-section-row>
+    <app-section-field label="Words">
+      <input
+        id="words"
+        type="text"
+        placeholder="apple, banana, orange"
+        [value]="words.join(', ')"
+        (input)="onChange($any($event.target).value)"
+        class="w-full box-border rounded-md border border-gray-300 bg-white px-3 py-2 font-inherit"
+      />
+    </app-section-field>
+  </app-section-row>
+</app-search-section>
