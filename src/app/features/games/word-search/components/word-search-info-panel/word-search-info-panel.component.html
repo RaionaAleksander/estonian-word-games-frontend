@@ -6,7 +6,7 @@
       </div>
 
       <div class="text-lg font-semibold">
-        {{ rows }} × {{ cols }}
+        {{ response.rows }} x {{ response.cols }}
       </div>
     </div>
 
@@ -16,7 +16,7 @@
       </div>
 
       <div class="text-lg font-semibold">
-        {{ wordsCount }}
+        {{ response.words.length }}
       </div>
     </div>
 
@@ -26,7 +26,43 @@
       </div>
 
       <div class="text-lg font-semibold">
-        {{ gameType }}
+        {{ response.gameType }}
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4 grid gap-4 text-center md:grid-cols-3">
+    <div>
+      <div class="text-sm text-gray-500">
+        Directions
+      </div>
+
+      <div class="text-lg font-semibold">
+        {{ formattedDirections }}
+      </div>
+    </div>
+
+    <div>
+      <div class="text-sm text-gray-500">
+        Fill
+      </div>
+
+      <div class="text-lg font-semibold">
+        {{ stats.occupiedCells }} / {{ stats.totalCells }}
+        ({{ stats.fillPercentage }}%)
+      </div>
+    </div>
+
+    <div>
+      <div class="text-sm text-gray-500">
+        Intersections
+      </div>
+
+      <div class="text-lg font-semibold">
+        {{ stats.intersections > 0 ? 'Yes' : 'No' }}
+        @if (stats.intersections > 0) {
+          ({{ stats.intersections }})
+        }
       </div>
     </div>
   </div>
