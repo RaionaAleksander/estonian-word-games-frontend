@@ -1,0 +1,5 @@
+export enum SavedGameType {
+  FIND_WORD = 'FIND_WORD',
+  WORD_SEARCH = 'WORD_SEARCH',
+  CUSTOM_WORD_SEARCH = 'CUSTOM_WORD_SEARCH',
+}

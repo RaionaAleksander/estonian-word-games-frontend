@@ -9,7 +9,7 @@ export class ExportSaveService {
 
   private readonly api = inject(SavedGameApiService);
 
-  public save(data: unknown): Observable<void> {
+  public save<T>(data: T): Observable<void> {
     return this.api.saveGame(data);
   }
 }
