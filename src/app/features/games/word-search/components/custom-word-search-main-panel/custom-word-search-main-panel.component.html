@@ -1,4 +1,10 @@
 <app-search-panel class="main-panel">
+  <!-- WORDS -->
+  <app-words-section
+    [words]="settings.words"
+    (valueChange)="updateSettings($event)"
+  />
+
   <!-- GAME SETTINGS -->
   <app-custom-word-search-settings-container
     [settings]="settings"

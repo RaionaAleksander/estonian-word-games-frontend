@@ -6,7 +6,6 @@ import { GridSizeSectionComponent } from '../sections/grid-size-section/grid-siz
 import { CollapsibleHeaderComponent } from '../../../../../../shared/components/search-panel/foundation/collapsible-header/collapsible-header.component';
 import { CustomWordSearchSettings } from '../models/custom-word-search-setting.model';
 import { ExpandableContainerDirective } from '../../../../../../shared/components/search-panel/foundation/directives/expandable-container.directive';
-import { WordsSectionComponent } from '../sections/words-section/words-section.component';
 
 @Component({
   selector: 'app-custom-word-search-settings-container',
@@ -14,7 +13,6 @@ import { WordsSectionComponent } from '../sections/words-section/words-section.c
     CollapsibleHeaderComponent,
     GridSizeSectionComponent,
     LetterCaseSectionComponent,
-    WordsSectionComponent,
     AllowIntersectionsSectionComponent,
     DirectionsSectionComponent,
   ],

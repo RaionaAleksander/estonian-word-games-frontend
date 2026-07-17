@@ -6,11 +6,13 @@ import { CustomWordSearchSettingsContainerComponent } from '../word-search-setti
 import { CustomWordSearchSettings } from '../word-search-settings/models/custom-word-search-setting.model';
 import { WordSort } from '../../../../../shared/components/search-panel/sort/models/word-sort.model';
 import { CustomWordSearchQuery } from '../../models/custom-word-search-query.model';
+import { WordsSectionComponent } from '../word-search-settings/sections/words-section/words-section.component';
 
 @Component({
   selector: 'app-custom-word-search-main-panel',
   imports: [
     CustomWordSearchSettingsContainerComponent,
+    WordsSectionComponent,
     SortContainerComponent,
     PanelActionsComponent,
     SearchPanelComponent,
