@@ -3,6 +3,13 @@
     Saved Games
   </h1>
 
+  <app-saved-games-main-panel
+    [settings]="searchSettings"
+    [pageSize]="pageSizeConfig"
+    (applyAllEvent)="onQueryChange($event)"
+    (resetAllEvent)="onResetAll()"
+  />
+
   @if (loading()) {
     <app-loading-state
       [message]="'Loading saved games...'"

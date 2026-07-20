@@ -1,1 +1,18 @@
-<p>saved-games-main-panel.component works!</p>
+<app-search-panel>
+  <app-saved-games-settings-container
+    [settings]="draftSettings"
+    (settingsChange)="updateSettings($event)"
+  />
+
+  <app-pagination-container
+    [pageSize]="pageSize"
+    (pageSizeChange)="updatePageSize($event)"
+  />
+
+  <app-panel-actions
+    primaryLabel="Apply All"
+    secondaryLabel="Reset All"
+    (primaryClick)="applyAll()"
+    (secondaryClick)="resetAll()"
+  />
+</app-search-panel>

@@ -10,6 +10,11 @@ import { SavedGameApiService } from '../../../../core/api/saved-game/saved-game-
 import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorResponse } from '../../../../shared/api/error-response.model';
 import { SavedGamesResponse } from '../../models/saved-games-response';
+import { SavedGamesMainPanelComponent } from '../../components/saved-games-main-panel/saved-games-main-panel.component';
+import { SavedGamesQuery } from '../../models/saved-games-query';
+import { SavedGamesSearchSettings } from '../../components/saved-games-search-settings/models/saved-games-search-settings';
+import { SavedGameSort } from '../../models/enums/saved-game-sort.enum';
+import { SavedGameType } from '../../models/enums/saved-game-type.enum';
 
 @Component({
   selector: 'app-saved-games-page',
@@ -20,6 +25,7 @@ import { SavedGamesResponse } from '../../models/saved-games-response';
     LoadingStateComponent,
     ErrorStateComponent,
     EmptyStateComponent,
+    SavedGamesMainPanelComponent,
   ],
   templateUrl: './saved-games-page.component.html',
   styleUrl: './saved-games-page.component.css',
@@ -37,46 +43,112 @@ export class SavedGamesPageComponent implements OnInit {
 
   protected readonly response = signal<SavedGamesResponse | null>(null);
 
-  protected page = 0;
-  protected size = 10;
+  protected query: SavedGamesQuery = {
+    page: 0,
+    size: 10,
+  };
 
   public ngOnInit(): void {
-    this.route.queryParamMap.subscribe(params => {
-      this.page = Number(params.get('page') ?? 0);
-      this.size = Number(params.get('size') ?? 10);
-      this.loadSavedGames();
+    this.route.queryParamMap.subscribe((params) => {
+      this.query = {
+        gameType: params.get('gameType') as SavedGameType || undefined,
+        sort: params.get('sort') as SavedGameSort || undefined,
+        page: Number(params.get('page') ?? 0),
+        size: Number(params.get('size') ?? 10),
+      };
+      this.loadSavedGames(this.query);
     });
   }
 
-  private loadSavedGames(): void {
+  private loadSavedGames(query: SavedGamesQuery): void {
     this.loading.set(true);
     this.error.set(null);
 
-    this.savedGameApiService.getSavedGames({
-      page: this.page,
-      size: this.size,
-    })
-    .subscribe({
-      next: (response) => {
-        this.response.set(response);
-        this.loading.set(false);
-      },
+    this.savedGameApiService
+      .getSavedGames(query)
+      .subscribe({
+        next: (response) => {
+          this.response.set(response);
+          this.loading.set(false);
+        },
+        error: (err) => {
+          this.error.set(mapHttpError(err));
+          this.response.set(null);
+          this.loading.set(false);
+        }
+      });
+  }
 
-      error: (err) => {
-        this.error.set(mapHttpError(err));
-        this.response.set(null);
-        this.loading.set(false);
-      }
+  protected get searchSettings(): SavedGamesSearchSettings {
+    return {
+      gameType: this.query.gameType,
+      sort: this.query.sort,
+    };
+  }
+
+  protected get pageSizeConfig() {
+    return {
+      size: this.query.size ?? 10
+    };
+  }
+
+  protected onQueryChange(event: {
+    settings: SavedGamesSearchSettings;
+    size: number;
+  }): void {
+    this.query = {
+      ...this.query,
+      ...event.settings,
+      size: event.size,
+      page: 0,
+    };
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: this.buildQueryParams(),
+    });
+  }
+
+  private buildQueryParams(): any {
+    const params: any = {
+      page: this.query.page,
+      size: this.query.size,
+    };
+
+    if (this.query.gameType) {
+      params.gameType = this.query.gameType;
+    }
+
+    if (this.query.sort) {
+      params.sort = this.query.sort;
+    }
+
+    return params;
+  }
+
+  protected onResetAll(): void {
+    this.query = {
+      page: 0,
+      size: 10,
+    };
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        page: 0,
+      },
     });
   }
 
   protected onPageChange(page: number): void {
+    this.query = {
+      ...this.query,
+      page,
+    };
+
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: {
-        page,
-        size: this.size,
-      },
+      queryParams: this.buildQueryParams(),
     });
   }
 }

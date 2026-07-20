@@ -1,0 +1,19 @@
+<section class="game-settings-container">
+  <app-collapsible-header
+    title="Search Settings"
+    [isExpanded]="isExpanded()"
+    (expandedChange)="toggle()"
+  />
+
+  @if (isExpanded()) {
+    <app-game-type-section
+      [gameType]="settings.gameType"
+      (valueChange)="updateSettings($event)"
+    />
+
+    <app-sort-section
+      [sort]="settings.sort"
+      (valueChange)="updateSettings($event)"
+    />
+  }
+</section>

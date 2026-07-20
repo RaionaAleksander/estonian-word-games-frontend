@@ -1,0 +1,15 @@
+<app-search-section>
+  <app-section-row>
+    <app-section-field label="Sort">
+      <select
+        [value]="sort ?? ''"
+        (change)="onSortChange($any($event.target).value)"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-gray-300"
+      >
+        <option value="">Default</option>
+        <option value="NEWEST">Newest first</option>
+        <option value="OLDEST">Oldest first</option>
+      </select>
+    </app-section-field>
+  </app-section-row>
+</app-search-section>
