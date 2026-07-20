@@ -3,10 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { WordQuery } from '../../models/word-query.model';
 import { WordSort } from '../../../../shared/components/search-panel/sort/models/word-sort.model';
 import { WordsApiService } from '../../../../core/api/words/words-api.service';
-import { PaginationComponent } from '../../../../shared/components/pagination/pagination-container/pagination-container.component';
+import { PaginationNavigatorComponent } from '../../../../shared/components/pagination/pagination-navigator/pagination-navigator.component';
 import { WordFilters } from '../../../../shared/components/search-panel/filter/models/word-filter.model';
 import { WordMainPanelComponent } from '../../components/word-main-panel/word-main-panel.component';
-import { WordInfoPanelComponent } from '../../components/word-info-panel/word-info-panel.component';
 import { WordTableComponent } from '../../components/word-table/word-table.component';
 import { QueryMetaPanelComponent } from '../../../../shared/components/query-meta/query-meta-panel/query-meta-panel.component';
 import { FilterMetaComponent } from '../../../../shared/components/query-meta/filter-meta/filter-meta.component';
@@ -20,10 +19,11 @@ import { parseNonNegativeNumber } from '../../../../shared/utility/number-param.
 import { WordPageResponse } from '../../models/word-page-response.model';
 import { ErrorResponse } from '../../../../shared/api/error-response.model';
 import { mapHttpError } from '../../../../shared/api/map-http-error';
+import { PaginationInfoPanelComponent } from '../../../../shared/components/pagination/pagination-info-panel/pagination-info-panel.component';
 
 @Component({
   selector: 'app-words-page',
-  imports: [PaginationComponent, WordMainPanelComponent, WordInfoPanelComponent, WordTableComponent,
+  imports: [PaginationNavigatorComponent, WordMainPanelComponent, PaginationInfoPanelComponent, WordTableComponent,
     QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent, 
     EmptyStateComponent, LoadingStateComponent, ErrorStateComponent],
   templateUrl: './words-page.component.html',

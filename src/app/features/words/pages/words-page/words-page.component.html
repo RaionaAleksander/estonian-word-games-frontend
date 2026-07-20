@@ -18,7 +18,8 @@
   @if (error()) {
     <app-error-state [error]="error()!"/>
   } @else if (response(); as res) {
-    <app-word-info-panel
+    <app-pagination-info-panel
+      [entityName]="'words'"
       [totalElements]="res.totalElements"
       [totalPages]="res.totalPages"
       [currentPage]="res.currentPage"
@@ -40,11 +41,11 @@
       <app-word-table [words]="res.words" />
     }
 
-    <app-pagination-container
+    <app-pagination-navigator
       [currentPage]="res.currentPage"
       [totalPages]="res.totalPages"
       (pageChange)="onPageChange($event)"
-    ></app-pagination-container>
+    ></app-pagination-navigator>
 
     <app-query-meta-panel
       [generatedAt]="res.generatedAt"

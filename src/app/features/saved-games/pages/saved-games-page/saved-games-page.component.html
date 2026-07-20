@@ -3,7 +3,46 @@
     Saved Games
   </h1>
 
-  <div class="p-4 border border-gray-200 rounded-md bg-gray-50 text-gray-600">
-    This game is under development.
-  </div>
+  @if (loading()) {
+    <app-loading-state
+      [message]="'Loading saved games...'"
+    />
+  }
+
+  @if (error()) {
+    <app-error-state
+      [error]="error()!"
+    />
+  } @else if (response(); as res) {
+    <app-pagination-info-panel
+      entityName="saved games"
+      [totalElements]="res.totalElements"
+      [totalPages]="res.totalPages"
+      [currentPage]="res.currentPage"
+      [pageSize]="res.pageSize"
+      [pageCount]="res.count"
+    />
+
+    @if (res.totalElements === 0) {
+      <app-empty-state
+        title="No saved games found"
+        description="You don't have any saved games yet."
+      />
+    } @else if (res.count === 0) {
+      <app-empty-state
+        title="No saved games on this page"
+        description="The requested page is outside the available results."
+      />
+    } @else {
+      <app-saved-games-table
+        [games]="res.games"
+      />
+    }
+
+    <app-pagination-navigator
+      [currentPage]="res.currentPage"
+      [totalPages]="res.totalPages"
+      (pageChange)="onPageChange($event)"
+    />
+  }
 </section>

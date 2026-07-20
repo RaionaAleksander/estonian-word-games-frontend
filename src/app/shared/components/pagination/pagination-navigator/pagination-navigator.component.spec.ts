@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WordInfoPanelComponent } from './word-info-panel.component';
+import { PaginationComponent } from './pagination-navigator.component';
 
-describe('WordInfoPanelComponent', () => {
-  let component: WordInfoPanelComponent;
-  let fixture: ComponentFixture<WordInfoPanelComponent>;
+describe('PaginationComponent', () => {
+  let component: PaginationComponent;
+  let fixture: ComponentFixture<PaginationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WordInfoPanelComponent],
+      imports: [PaginationComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(WordInfoPanelComponent);
+    fixture = TestBed.createComponent(PaginationComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

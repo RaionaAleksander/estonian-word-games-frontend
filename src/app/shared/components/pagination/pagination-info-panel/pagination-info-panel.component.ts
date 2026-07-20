@@ -1,12 +1,14 @@
 import { Component, input } from '@angular/core';
 
 @Component({
-  selector: 'app-word-info-panel',
+  selector: 'app-pagination-info-panel',
   imports: [],
-  templateUrl: './word-info-panel.component.html',
-  styleUrl: './word-info-panel.component.css',
+  templateUrl: './pagination-info-panel.component.html',
+  styleUrl: './pagination-info-panel.component.css',
 })
-export class WordInfoPanelComponent {
+export class PaginationInfoPanelComponent {
+  public readonly entityName = input.required<string>();
+
   public readonly totalElements = input.required<number>();
 
   public readonly totalPages = input.required<number>();

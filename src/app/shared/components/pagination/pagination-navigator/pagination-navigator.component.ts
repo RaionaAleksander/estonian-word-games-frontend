@@ -3,13 +3,13 @@ import { PaginationButtonComponent } from '../foundation/pagination-button/pagin
 import { PaginationActiveButtonComponent } from '../foundation/pagination-active-button/pagination-active-button.component';
 
 @Component({
-  selector: 'app-pagination-container',
+  selector: 'app-pagination-navigator',
   imports: [PaginationButtonComponent, PaginationActiveButtonComponent],
-  templateUrl: './pagination-container.component.html',
-  styleUrl: './pagination-container.component.css',
+  templateUrl: './pagination-navigator.component.html',
+  styleUrl: './pagination-navigator.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PaginationComponent {
+export class PaginationNavigatorComponent {
   @Input() currentPage = 0; // 0-based
   @Input() totalPages = 0;
 
