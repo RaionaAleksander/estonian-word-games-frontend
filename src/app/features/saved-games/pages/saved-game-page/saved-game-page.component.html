@@ -1,0 +1,23 @@
+<section class="mx-auto max-w-6xl p-8">
+  <h1 class="mb-4 text-3xl font-bold">
+    Saved game #{{ gameId }}
+  </h1>
+
+  @if (loading()) {
+    <app-loading-state
+      message="Loading saved game..."
+    />
+  }
+
+  @if (error()) {
+    <app-error-state
+      [error]="error()!"
+    />
+  }
+
+  @else if (response(); as res) {
+    <app-saved-game-view
+      [response]="res"
+    />
+  }
+</section>

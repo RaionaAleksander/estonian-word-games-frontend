@@ -1,0 +1,18 @@
+<app-export-panel>
+  <app-export-section title="JSON / TXT Export">
+    <app-json-export
+      [data]="response()"
+      fileName="word-search"
+    />
+  </app-export-section>
+
+  <app-export-section title="PDF Export / Print">
+    <app-pdf-export
+      [data]="response()"
+    />
+  </app-export-section>
+
+  <app-export-section title="Image Export">
+    ...
+  </app-export-section>
+</app-export-panel>

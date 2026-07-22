@@ -1,0 +1,25 @@
+<app-word-search-game
+  [response]="response"
+/>
+
+<app-word-search-info-panel
+  [response]="response"
+/>
+
+<app-saved-word-search-export
+  [response]="response"
+/>
+
+<app-query-meta-panel
+  [generatedAt]="response.generatedAt"
+>
+  @if (response.meta.filters) {
+    <app-filter-meta
+      [filters]="response.meta.filters"
+    />
+  }
+
+  <app-sort-meta
+    [sort]="response.meta.sort"
+  />
+</app-query-meta-panel>

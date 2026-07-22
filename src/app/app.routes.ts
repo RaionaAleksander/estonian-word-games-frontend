@@ -16,6 +16,7 @@ import { WordSearchPageComponent } from './features/games/word-search/pages/word
 import { CrosswordPageComponent } from './features/games/crossword/pages/crossword-page/crossword-page.component';
 import { SavedGamesPageComponent } from './features/saved-games/pages/saved-games-page/saved-games-page.component';
 import { WordSearchCustomPageComponent } from './features/games/word-search/pages/word-search-custom-page/word-search-custom-page.component';
+import { SavedGamePageComponent } from './features/saved-games/pages/saved-game-page/saved-game-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -41,6 +42,7 @@ export const routes: Routes = [
 
   // SAVED GAMES
   { path: 'saved-games', component: SavedGamesPageComponent, canActivate: [BackendHealthGuard] },
+  { path: 'saved-games/:id', component: SavedGamePageComponent, canActivate: [BackendHealthGuard] },
   
   { path: '**', component: NotFoundPageComponent },
 ];
