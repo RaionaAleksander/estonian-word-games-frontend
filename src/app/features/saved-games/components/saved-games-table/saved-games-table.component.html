@@ -16,10 +16,21 @@
         <td>{{ game.id }}</td>
         <td>{{ gameTypeLabels[game.gameType] }}</td>
         <td>{{ game.createdAt | date:'dd.MM.yyyy, HH:mm:ss' }}</td>
-        <td>
-          <a [routerLink]="['/saved-games', game.id]">
+        <td class="actions">
+          <a
+            [routerLink]="['/saved-games', game.id]"
+            class="view-button"
+          >
             View
           </a>
+
+          <button
+            type="button"
+            class="delete-button"
+            (click)="deleteGame.emit(game.id)"
+          >
+            Delete
+          </button>
         </td>
       </tr>
     }

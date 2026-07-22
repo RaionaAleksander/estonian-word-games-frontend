@@ -151,4 +151,16 @@ export class SavedGamesPageComponent implements OnInit {
       queryParams: this.buildQueryParams(),
     });
   }
+
+  protected onDeleteGame(id: number): void {
+    this.savedGameApiService.deleteSavedGame(id)
+      .subscribe({
+        next: () => {
+          this.loadSavedGames(this.query);
+        },
+        error: (err) => {
+          this.error.set(mapHttpError(err));
+        }
+      });
+  }
 }

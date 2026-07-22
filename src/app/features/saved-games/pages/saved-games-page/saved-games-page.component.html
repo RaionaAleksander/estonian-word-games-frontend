@@ -43,6 +43,7 @@
     } @else {
       <app-saved-games-table
         [games]="res.games"
+        (deleteGame)="onDeleteGame($event)"
       />
     }
 
