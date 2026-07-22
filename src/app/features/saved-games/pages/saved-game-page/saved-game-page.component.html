@@ -1,7 +1,22 @@
 <section class="mx-auto max-w-6xl p-8">
-  <h1 class="mb-4 text-3xl font-bold">
-    Saved game #{{ gameId }}
+  <h1 class="mb-4 flex items-center gap-2 text-3xl font-bold">
+    <a
+      routerLink="/saved-games"
+      class="text-gray-600 transition-colors duration-200 hover:text-blue-800"
+    >
+      Saved Games
+    </a>
+
+    <span class="text-gray-400">
+      /
+    </span>
+
+    <span>
+      Game #{{ gameId }}
+    </span>
   </h1>
+
+  <hr class="border-0 border-t border-gray-200">
 
   @if (loading()) {
     <app-loading-state
