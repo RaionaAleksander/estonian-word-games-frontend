@@ -15,6 +15,7 @@ import { SavedGamesQuery } from '../../models/saved-games-query';
 import { SavedGamesSearchSettings } from '../../components/saved-games-search-settings/models/saved-games-search-settings';
 import { SavedGameSort } from '../../models/enums/saved-game-sort.enum';
 import { SavedGameType } from '../../models/enums/saved-game-type.enum';
+import { SavedGamesActionsPanelComponent } from '../../components/saved-games-actions-panel/saved-games-actions-panel.component';
 
 @Component({
   selector: 'app-saved-games-page',
@@ -26,6 +27,7 @@ import { SavedGameType } from '../../models/enums/saved-game-type.enum';
     ErrorStateComponent,
     EmptyStateComponent,
     SavedGamesMainPanelComponent,
+    SavedGamesActionsPanelComponent
   ],
   templateUrl: './saved-games-page.component.html',
   styleUrl: './saved-games-page.component.css',
@@ -154,6 +156,19 @@ export class SavedGamesPageComponent implements OnInit {
 
   protected onDeleteGame(id: number): void {
     this.savedGameApiService.deleteSavedGame(id)
+      .subscribe({
+        next: () => {
+          this.loadSavedGames(this.query);
+        },
+        error: (err) => {
+          this.error.set(mapHttpError(err));
+        }
+      });
+  }
+
+  protected onDeleteAllGames(): void {
+    this.savedGameApiService
+      .deleteAllSavedGames()
       .subscribe({
         next: () => {
           this.loadSavedGames(this.query);

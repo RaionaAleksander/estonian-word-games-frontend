@@ -45,12 +45,16 @@
         [games]="res.games"
         (deleteGame)="onDeleteGame($event)"
       />
-    }
 
-    <app-pagination-navigator
-      [currentPage]="res.currentPage"
-      [totalPages]="res.totalPages"
-      (pageChange)="onPageChange($event)"
-    />
+      <app-pagination-navigator
+        [currentPage]="res.currentPage"
+        [totalPages]="res.totalPages"
+        (pageChange)="onPageChange($event)"
+      />
+
+      <app-saved-games-actions-panel
+        (deleteAllGames)="onDeleteAllGames()"
+      />
+    }
   }
 </section>

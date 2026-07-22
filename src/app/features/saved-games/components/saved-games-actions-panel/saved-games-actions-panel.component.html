@@ -1,0 +1,20 @@
+<div class="p-6 mt-6 rounded-md border border-red-200 bg-red-50 text-center">
+
+  <h2 class="text-xl font-semibold text-red-700">
+    Danger Zone
+  </h2>
+
+  <p class="mt-4 text-sm text-red-600">
+    Delete all saved games from the database.
+    This action is permanent and cannot be undone.
+  </p>
+
+  <button
+    type="button"
+    (click)="deleteAll()"
+    class="mt-4 rounded-md bg-red-600 px-4 py-2 text-white transition hover:bg-red-700"
+  >
+    Delete All Games
+  </button>
+
+</div>
