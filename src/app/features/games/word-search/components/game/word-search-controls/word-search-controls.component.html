@@ -23,11 +23,16 @@
   </div>
 
   <!-- RIGHT: clean -->
-  <div>
+  <div class="flex gap-2">
     <button
       class="px-4 py-1 border rounded bg-white hover:bg-gray-100"
-      (click)="clean.emit()"
-    >
+      (click)="solveAll.emit()">
+      Solve all
+    </button>
+
+    <button
+      class="px-4 py-1 border rounded bg-white hover:bg-gray-100"
+      (click)="clean.emit()">
       Clean
     </button>
   </div>

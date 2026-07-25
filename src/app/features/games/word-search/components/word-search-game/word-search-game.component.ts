@@ -124,6 +124,16 @@ export class WordSearchGameComponent {
     this.zoomIndex.update(i => Math.max(i - 1, 0));
   }
 
+  protected solveAll(): void {
+    this.clearPreview();
+
+    this.placements().forEach(p => {
+        if (!this.foundWords().has(p.word)) {
+            this.markWordAsFound(p.word, p.cells);
+        }
+    });
+  }
+
   private resetGameState(): void {
     this.foundWords.set(new Set());
     this.foundCells.set(new Set());

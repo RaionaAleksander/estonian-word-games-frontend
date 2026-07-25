@@ -13,4 +13,5 @@ export class WordSearchControlsComponent {
   @Output() zoomIn = new EventEmitter<void>();
   @Output() zoomOut = new EventEmitter<void>();
   @Output() clean = new EventEmitter<void>();
+  @Output() solveAll = new EventEmitter<void>();  
 }
