@@ -1,5 +1,5 @@
 <p class="my-4 text-sm text-gray-600">
-  Export this game as a printable document or download it as a PDF.
+  Preview your printable document and export it as PDF or PNG.
 </p>
 
 <app-document-preview>
@@ -16,5 +16,12 @@
     (click)="downloadPdf()"
   >
     Download PDF
+  </button>
+
+  <button
+    class="flex-1 rounded-md border border-gray-900 px-4 py-2 transition hover:bg-gray-100"
+    (click)="downloadPng()"
+  >
+    Download PNG
   </button>
 </div>

@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({ providedIn: 'root' })
-export class ExportPdfService {
-  private async render(element: HTMLElement) {
+@Injectable({
+  providedIn: 'root',
+})
+export class DocumentExportService {
+
+  private async render(element: HTMLElement): Promise<HTMLCanvasElement> {
     const html2canvas = (await import('html2canvas')).default;
+
+    this.fixOklchColors(element);
 
     const clone = element.cloneNode(true) as HTMLElement;
 
@@ -19,7 +24,7 @@ export class ExportPdfService {
       scale: 2,
       backgroundColor: '#ffffff',
       windowWidth: clone.scrollWidth,
-      windowHeight: clone.scrollHeight
+      windowHeight: clone.scrollHeight,
     });
 
     document.body.removeChild(clone);
@@ -27,10 +32,8 @@ export class ExportPdfService {
     return canvas;
   }
 
-  async exportFromElement(element: HTMLElement): Promise<void> {
+  async exportPdf(element: HTMLElement): Promise<void> {
     const jsPDF = (await import('jspdf')).default;
-
-    this.fixOklchColors(element);
 
     const canvas = await this.render(element);
 
@@ -43,6 +46,17 @@ export class ExportPdfService {
     pdf.save(`word-search-${Date.now()}.pdf`);
   }
 
+  async exportPng(element: HTMLElement): Promise<void> {
+    const canvas = await this.render(element);
+
+    const link = document.createElement('a');
+
+    link.download = `word-search-${Date.now()}.png`;
+    link.href = canvas.toDataURL('image/png');
+
+    link.click();
+  }
+
   private fixOklchColors(root: HTMLElement): void {
     const all = root.querySelectorAll<HTMLElement>('*');
 
@@ -50,15 +64,15 @@ export class ExportPdfService {
       const style = getComputedStyle(el);
 
       if (style.color?.includes('oklch')) {
-        (el.style as any).color = '#000000';
+        el.style.color = '#000000';
       }
 
       if (style.backgroundColor?.includes('oklch')) {
-        (el.style as any).backgroundColor = '#ffffff';
+        el.style.backgroundColor = '#ffffff';
       }
 
       if (style.borderColor?.includes('oklch')) {
-        (el.style as any).borderColor = '#cccccc';
+        el.style.borderColor = '#cccccc';
       }
     });
   }

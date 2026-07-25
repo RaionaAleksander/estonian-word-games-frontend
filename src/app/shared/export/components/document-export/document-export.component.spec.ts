@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PdfExportComponent } from './pdf-export.component';
+import { DocumentExportComponent } from './document-export.component';
 
-describe('PdfExportComponent', () => {
-  let component: PdfExportComponent;
-  let fixture: ComponentFixture<PdfExportComponent>;
+describe('DocumentExportComponent', () => {
+  let component: DocumentExportComponent;
+  let fixture: ComponentFixture<DocumentExportComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PdfExportComponent],
+      imports: [DocumentExportComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(PdfExportComponent);
+    fixture = TestBed.createComponent(DocumentExportComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
