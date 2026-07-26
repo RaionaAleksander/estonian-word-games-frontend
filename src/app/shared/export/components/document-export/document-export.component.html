@@ -1,11 +1,34 @@
 <p class="my-4 text-sm text-gray-600">
-  Preview your printable document and export it as PDF or PNG.
+  Preview your printable document before exporting it.
 </p>
+
+<p class="my-4 text-sm text-gray-600">
+  Customize the title, then download the document as PDF or PNG.
+</p>
+
+<div class="mb-4">
+  <label
+    for="document-title"
+    class="mb-1 block text-sm font-medium text-gray-700"
+  >
+    Document title
+  </label>
+
+  <input
+    id="document-title"
+    type="text"
+    class="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-gray-900 focus:outline-none"
+    [value]="documentTitle()"
+    (input)="onDocumentTitleInput($event)"
+    placeholder="Sõnasegadik"
+  />
+</div>
 
 <app-document-preview>
   <div #document>
     <app-word-search-document
       [response]="data()"
+      [documentTitle]="documentTitle().trim() || 'Sõnasegadik'"
     />
   </div>
 </app-document-preview>

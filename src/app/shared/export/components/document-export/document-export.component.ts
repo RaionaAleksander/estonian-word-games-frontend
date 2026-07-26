@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, input, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, input, signal, ViewChild } from '@angular/core';
 import { WordSearchResponse } from '../../../../features/games/word-search/models/word-search-response.model';
 import { DocumentPreviewComponent } from '../document-preview/document-preview.component';
 import { WordSearchDocumentComponent } from '../word-search-document/word-search-document.component';
@@ -14,12 +14,20 @@ import { DocumentExportService } from '../../services/document-export.service';
 export class DocumentExportComponent {
   readonly data = input.required<WordSearchResponse>();
 
+  readonly documentTitle = signal('');
+
   @ViewChild('document', { read: ElementRef })
   documentRef!: ElementRef<HTMLElement>;
 
   constructor(
     private documentExport: DocumentExportService
   ) {}
+
+  protected onDocumentTitleInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    this.documentTitle.set(input.value);
+  }
 
   downloadPdf(): void {
     const el = this.documentRef?.nativeElement;

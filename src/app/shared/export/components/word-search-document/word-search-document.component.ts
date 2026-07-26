@@ -11,6 +11,7 @@ import { DocumentPageComponent } from '../document-page/document-page.component'
 })
 export class WordSearchDocumentComponent {
   readonly response = input.required<WordSearchResponse>();
+  readonly documentTitle = input('Sõnasegadik');
 
   private static readonly MAX_GRID_SIZE = 520;
 
