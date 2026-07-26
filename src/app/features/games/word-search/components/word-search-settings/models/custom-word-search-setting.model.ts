@@ -1,4 +1,5 @@
 import { LCase } from "../../../../../../shared/components/search-panel/letter-case/models/letter-case.model";
+import { FillAlphabet } from "../../../models/fill-alphabet.model";
 import { WordSearchDirection } from "../../../models/word-search-direction.model";
 
 export interface CustomWordSearchSettings {
@@ -8,6 +9,8 @@ export interface CustomWordSearchSettings {
   words: string[];
 
   letterCase?: LCase;
+
+  fillAlphabet: FillAlphabet;
 
   allowIntersections: boolean;
 

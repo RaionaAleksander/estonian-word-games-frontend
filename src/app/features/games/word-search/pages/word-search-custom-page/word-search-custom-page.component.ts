@@ -47,6 +47,7 @@ export class WordSearchCustomPageComponent {
       allowIntersections: true,
       directions: [],
       letterCase: undefined,
+      fillAlphabet: 'ESTONIAN',
     },
     sort: {},
   };
@@ -83,6 +84,7 @@ export class WordSearchCustomPageComponent {
         allowIntersections: true,
         directions: [],
         letterCase: undefined,
+        fillAlphabet: 'ESTONIAN',
       },
       sort: {},
     };

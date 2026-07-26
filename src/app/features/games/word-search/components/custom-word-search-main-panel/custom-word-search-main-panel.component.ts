@@ -66,6 +66,7 @@ export class CustomWordSearchMainPanelComponent {
       allowIntersections: true,
       directions: [],
       letterCase: undefined,
+      fillAlphabet: 'ESTONIAN',
     };
 
     this.sort = {};

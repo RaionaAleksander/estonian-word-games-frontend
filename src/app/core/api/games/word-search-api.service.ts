@@ -85,7 +85,8 @@ export class WordSearchApiService {
     let params = new HttpParams()
       .set('rows', query.settings.rows)
       .set('cols', query.settings.cols)
-      .set('allowIntersections', query.settings.allowIntersections);
+      .set('allowIntersections', query.settings.allowIntersections)
+      .set('alphabet', query.settings.fillAlphabet);;
 
     if (query.settings.letterCase) {
       params = params.set('letterCase', query.settings.letterCase);

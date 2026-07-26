@@ -19,6 +19,12 @@
       (valueChange)="updateSettings($event)"
     />
 
+    <!-- FILL ALPHABET -->
+    <app-fill-alphabet-section
+      [fillAlphabet]="settings.fillAlphabet"
+      (valueChange)="updateSettings($event)"
+    />
+
     <!-- ALLOW INTERSECTIONS -->
     <app-allow-intersections-section
       [allowIntersections]="settings.allowIntersections"
