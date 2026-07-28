@@ -17,6 +17,7 @@ import { CrosswordPageComponent } from './features/games/crossword/pages/crosswo
 import { SavedGamesPageComponent } from './features/saved-games/pages/saved-games-page/saved-games-page.component';
 import { WordSearchCustomPageComponent } from './features/games/word-search/pages/word-search-custom-page/word-search-custom-page.component';
 import { SavedGamePageComponent } from './features/saved-games/pages/saved-game-page/saved-game-page.component';
+import { WordCategoriesPageComponent } from './features/words/pages/word-categories-page/word-categories-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -29,6 +30,7 @@ export const routes: Routes = [
   { path: 'words/exists', component: WordsExistsPageComponent, canActivate: [BackendHealthGuard] },
   { path: 'words/definitions', component: WordsDefinitionsPageComponent, canActivate: [BackendHealthGuard] },
   { path: 'words/details/:lemma', component: WordDetailsPageComponent, canActivate: [BackendHealthGuard] },
+  { path: 'words/categories', component: WordCategoriesPageComponent, canActivate: [BackendHealthGuard]},
 
   // GAMES
   { path: 'games', component: GamesHomePageComponent },
