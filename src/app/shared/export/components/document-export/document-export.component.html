@@ -24,11 +24,32 @@
   />
 </div>
 
+<div class="mb-4">
+  <label
+    for="document-language"
+    class="mb-2 block text-sm font-medium"
+  >
+    Document Language
+  </label>
+
+  <select
+    id="document-language"
+    class="w-full rounded-md border border-gray-300 px-3 py-2"
+    [value]="documentLanguage()"
+    (change)="onDocumentLanguageChange($event)"
+  >
+    <option value="EN">English</option>
+    <option value="ET">Estonian</option>
+    <option value="RU">Russian</option>
+  </select>
+</div>
+
 <app-document-preview>
   <div #document>
     <app-word-search-document
       [response]="data()"
-      [documentTitle]="documentTitle().trim() || 'Sõnasegadik'"
+      [documentTitle]="documentTitle().trim() || 'Word Search'"
+      [language]="documentLanguage()"
     />
   </div>
 </app-document-preview>

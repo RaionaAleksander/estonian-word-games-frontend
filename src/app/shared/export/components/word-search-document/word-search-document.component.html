@@ -3,14 +3,14 @@
   <div class="mb-8 flex items-end gap-8 text-sm">
     <div class="flex-7">
       <div class="flex gap-2">
-        <span class="font-medium">Name:</span>
+        <span class="font-medium">{{ labels().name }}:</span>
         <div class="flex-1 border-b border-gray-500 line"></div>
       </div>
     </div>
 
     <div class="flex-3">
       <div class="flex gap-2">
-        <span class="font-medium">Date:</span>
+        <span class="font-medium">{{ labels().date }}:</span>
         <div class="flex-1 border-b border-gray-500 line"></div>
       </div>
     </div>
@@ -44,7 +44,7 @@
 
   <!-- WORDS -->
   <h2 class="text-center text-xl font-semibold mb-5">
-    Sõnad
+    {{ labels().words }}
   </h2>
 
   <div class="grid grid-cols-3 gap-x-10 gap-y-2 text-center">

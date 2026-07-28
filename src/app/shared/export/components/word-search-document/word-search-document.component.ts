@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { WordSearchResponse } from '../../../../features/games/word-search/models/word-search-response.model';
 import { DocumentPageComponent } from '../document-page/document-page.component';
+import { DocumentLanguage } from '../../models/document-language.model';
 
 @Component({
   selector: 'app-word-search-document',
@@ -12,12 +13,36 @@ import { DocumentPageComponent } from '../document-page/document-page.component'
 export class WordSearchDocumentComponent {
   readonly response = input.required<WordSearchResponse>();
   readonly documentTitle = input('Sõnasegadik');
+  readonly language = input<DocumentLanguage>('EN');
 
   private static readonly MAX_GRID_SIZE = 520;
 
   private static readonly MIN_CELL_SIZE = 16;
 
   private static readonly MAX_CELL_SIZE = 30;
+
+  protected readonly labels = computed(() => {
+    switch (this.language()) {
+      case 'ET':
+        return {
+          name: 'Nimi',
+          date: 'Kuupäev',
+          words: 'Sõnad',
+        };
+      case 'RU':
+        return {
+          name: 'Имя',
+          date: 'Дата',
+          words: 'Слова',
+        };
+      default:
+        return {
+          name: 'Name',
+          date: 'Date',
+          words: 'Words',
+        };
+    }
+  });
 
   protected readonly rows = computed(() =>
     this.response().grid.map(row => row.split(''))
