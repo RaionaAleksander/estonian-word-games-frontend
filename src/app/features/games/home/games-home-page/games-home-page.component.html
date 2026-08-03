@@ -1,23 +1,79 @@
 <section class="mx-auto max-w-6xl p-8">
+  <!-- Breadcrumb -->
+  <nav class="mb-4 text-sm text-gray-500">
+    <a routerLink="/" class="hover:underline">Home</a>
+    <span class="mx-2">/</span>
+    <span class="font-medium text-gray-700">Games</span>
+  </nav>
+
   <h1 class="mb-6 text-center text-4xl font-bold">
     Games
   </h1>
 
-  <div class="mb-8 grid gap-8 md:grid-cols-2">
+  <!-- ========================= -->
+  <!-- WORD SEARCH GAMES -->
+  <!-- ========================= -->
+
+  <h2 class="mb-6 text-2xl font-semibold">
+    Word Search Games
+  </h2>
+
+  <div class="mb-12 grid gap-8 md:grid-cols-2 items-stretch">
     <app-navigation-card
-      title="Sõnasegadik"
-      description="Word puzzle game based on mixed letters."
-      imageUrl="/images/games/sonasegadik-game.png"
-      route="/games/sonasegadik"
+      title="Word Search"
+      description="Generate a classic word search puzzle using words from the dictionary."
+      imageUrl="/images/games/word-search-game.png"
+      route="/games/word-search"
     />
 
     <app-navigation-card
-      title="Custom Sõnasegadik"
+      title="Custom Word Search"
       description="Create your own word search puzzle using custom words."
-      imageUrl="/images/games/sonasegadik-custom-game.png"
-      route="/games/sonasegadik-custom"
+      imageUrl="/images/games/custom-word-search-game.png"
+      route="/games/word-search-custom"
     />
 
+    <app-navigation-card
+      title="Shaped Word Search"
+      description="Generate themed word search puzzles using custom shaped grids."
+      imageUrl="/images/games/shaped-word-search-game.png"
+      route="/games/shaped-word-search"
+    />
+
+    <app-navigation-card
+      title="Custom Shaped Word Search"
+      description="Create your own shaped word search puzzle with custom words."
+      imageUrl="/images/games/custom-shaped-word-search-game.png"
+      route="/games/shaped-word-search-custom"
+    />
+  </div>
+
+  <!-- ========================= -->
+  <!-- SAVED GAMES -->
+  <!-- ========================= -->
+
+  <h2 class="mb-6 text-2xl font-semibold">
+    Saved Games
+  </h2>
+
+  <div class="mb-12">
+    <app-navigation-card
+      title="Saved Games"
+      description="Browse, reopen and manage your previously saved games."
+      imageUrl="/images/saved-games/saved-games.png"
+      route="/saved-games"
+    />
+  </div>
+
+  <!-- ========================= -->
+  <!-- COMING SOON -->
+  <!-- ========================= -->
+
+  <h2 class="mb-6 text-2xl font-semibold text-gray-600">
+    Coming Soon
+  </h2>
+
+  <div class="mb-12 grid gap-8 md:grid-cols-2 items-stretch">
     <app-navigation-card
       title="Crossword"
       description="Guess the hidden main word using clues and related words."
@@ -25,11 +81,4 @@
       route="/games/crossword"
     />
   </div>
-
-  <app-navigation-card
-      title="Saved Games"
-      description="Browse, reopen and manage your previously saved games."
-      imageUrl="/images/saved-games/saved-games.png"
-      route="/saved-games"
-  />
 </section>
