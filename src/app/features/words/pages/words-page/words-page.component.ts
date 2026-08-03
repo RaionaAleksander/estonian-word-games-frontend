@@ -20,12 +20,13 @@ import { WordPageResponse } from '../../models/word-page-response.model';
 import { ErrorResponse } from '../../../../shared/api/error-response.model';
 import { mapHttpError } from '../../../../shared/api/map-http-error';
 import { PaginationInfoPanelComponent } from '../../../../shared/components/pagination/pagination-info-panel/pagination-info-panel.component';
+import { BreadcrumbsComponent } from '../../../../shared/components/navigation/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-words-page',
   imports: [PaginationNavigatorComponent, WordMainPanelComponent, PaginationInfoPanelComponent, WordTableComponent,
     QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent, 
-    EmptyStateComponent, LoadingStateComponent, ErrorStateComponent],
+    EmptyStateComponent, LoadingStateComponent, ErrorStateComponent, BreadcrumbsComponent],
   templateUrl: './words-page.component.html',
   styleUrl: './words-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

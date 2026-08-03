@@ -1,10 +1,11 @@
 <section class="mx-auto max-w-6xl p-8">
   <!-- Breadcrumb -->
-  <nav class="mb-4 text-sm text-gray-500">
-    <a routerLink="/" class="hover:underline">Home</a>
-    <span class="mx-2">/</span>
-    <span class="font-medium text-gray-700">Games</span>
-  </nav>
+  <app-breadcrumbs
+    [items]="[
+      { label: 'Home', route: '/' },
+      { label: 'Games' }
+    ]"
+  />
 
   <h1 class="mb-6 text-center text-4xl font-bold">
     Games
@@ -18,7 +19,7 @@
     Word Search Games
   </h2>
 
-  <div class="mb-12 grid gap-8 md:grid-cols-2 items-stretch">
+  <app-card-grid>
     <app-navigation-card
       title="Word Search"
       description="Generate a classic word search puzzle using words from the dictionary."
@@ -46,7 +47,7 @@
       imageUrl="/images/games/custom-shaped-word-search-game.png"
       route="/games/shaped-word-search-custom"
     />
-  </div>
+  </app-card-grid>
 
   <!-- ========================= -->
   <!-- SAVED GAMES -->
@@ -73,12 +74,12 @@
     Coming Soon
   </h2>
 
-  <div class="mb-12 grid gap-8 md:grid-cols-2 items-stretch">
+  <app-card-grid>
     <app-navigation-card
       title="Crossword"
       description="Guess the hidden main word using clues and related words."
       imageUrl="/images/games/crossword-game.png"
       route="/games/crossword"
     />
-  </div>
+  </app-card-grid>
 </section>

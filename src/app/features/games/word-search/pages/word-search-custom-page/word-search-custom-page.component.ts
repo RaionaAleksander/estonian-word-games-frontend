@@ -13,19 +13,14 @@ import { WordSearchResponse } from '../../models/word-search-response.model';
 import { CustomWordSearchQuery } from '../../models/custom-word-search-query.model';
 import { mapHttpError } from '../../../../../shared/api/map-http-error';
 import { WordSearchApiService } from '../../../../../core/api/games/word-search-api.service';
+import { BreadcrumbsComponent } from '../../../../../shared/components/navigation/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-word-search-custom-page',
   imports: [
-    CustomWordSearchMainPanelComponent,
-    QueryMetaPanelComponent,
-    SortMetaComponent,
-    WordSearchInfoPanelComponent,
-    WordSearchGameComponent,
-    WordSearchExportComponent,
-    ErrorStateComponent,
-    LoadingStateComponent,
-    EmptyStateComponent,
+    CustomWordSearchMainPanelComponent, QueryMetaPanelComponent, SortMetaComponent,
+    WordSearchInfoPanelComponent, WordSearchGameComponent, WordSearchExportComponent,
+    ErrorStateComponent, LoadingStateComponent, EmptyStateComponent, BreadcrumbsComponent
   ],
   templateUrl: './word-search-custom-page.component.html',
   styleUrl: './word-search-custom-page.component.css',

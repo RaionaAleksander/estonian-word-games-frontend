@@ -1,4 +1,13 @@
 <section class="mx-auto max-w-6xl p-8">
+  <!-- Breadcrumb -->
+  <app-breadcrumbs
+    [items]="[
+      { label: 'Home', route: '/' },
+      { label: 'Games', route: '/games' },
+      { label: 'Saved Games' }
+    ]"
+  />
+
   <h1 class="mb-4 text-3xl font-bold">
     Saved Games
   </h1>

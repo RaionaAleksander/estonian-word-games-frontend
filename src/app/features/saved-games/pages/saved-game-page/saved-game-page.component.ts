@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { SavedGameApiService } from '../../../../core/api/saved-game/saved-game-api.service';
 import { ErrorResponse } from '../../../../shared/api/error-response.model';
 import { ErrorStateComponent } from '../../../../shared/components/error-state/error-state.component';
@@ -8,10 +8,11 @@ import { SavedGameViewComponent } from '../../components/saved-game-view/saved-g
 import { SavedGameParserService } from '../../services/saved-game-parser.service';
 import { SavedGameResponse } from '../../models/responses/saved-game-response';
 import { mapHttpError } from '../../../../shared/api/map-http-error';
+import { BreadcrumbsComponent } from '../../../../shared/components/navigation/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-saved-game-page',
-  imports: [ErrorStateComponent, LoadingStateComponent, SavedGameViewComponent, RouterLink],
+  imports: [ErrorStateComponent, LoadingStateComponent, SavedGameViewComponent, BreadcrumbsComponent],
   templateUrl: './saved-game-page.component.html',
   styleUrl: './saved-game-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

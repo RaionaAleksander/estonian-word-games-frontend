@@ -10,11 +10,12 @@ import { LoadingStateComponent } from '../../../../shared/components/loading-sta
 import { ErrorStateComponent } from '../../../../shared/components/error-state/error-state.component';
 import { ErrorResponse } from '../../../../shared/api/error-response.model';
 import { mapHttpError } from '../../../../shared/api/map-http-error';
+import { BreadcrumbsComponent } from '../../../../shared/components/navigation/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-words-exists-page',
   imports: [WordExistsMainPanelComponent, WordExistsResultComponent, 
-    EmptyStateComponent, LoadingStateComponent, ErrorStateComponent],
+    EmptyStateComponent, LoadingStateComponent, ErrorStateComponent, BreadcrumbsComponent],
   templateUrl: './words-exists-page.component.html',
   styleUrl: './words-exists-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

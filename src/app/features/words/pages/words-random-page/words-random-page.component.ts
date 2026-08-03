@@ -19,12 +19,13 @@ import { parseNonNegativeNumber } from '../../../../shared/utility/number-param.
 import { RandomWordsResponse } from '../../models/random-words-response.model';
 import { ErrorResponse } from '../../../../shared/api/error-response.model';
 import { mapHttpError } from '../../../../shared/api/map-http-error';
+import { BreadcrumbsComponent } from '../../../../shared/components/navigation/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-words-random-page',
   imports: [RandomWordsMainPanelComponent, RandomWordsSummaryPanelComponent, RandomWordCloudComponent,
     QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent, 
-    EmptyStateComponent, LoadingStateComponent, ErrorStateComponent],
+    EmptyStateComponent, LoadingStateComponent, ErrorStateComponent, BreadcrumbsComponent],
   templateUrl: './words-random-page.component.html',
   styleUrl: './words-random-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

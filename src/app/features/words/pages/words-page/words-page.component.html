@@ -1,6 +1,15 @@
 <section class="mx-auto max-w-6xl p-8">
+  <!-- Breadcrumb -->
+  <app-breadcrumbs
+    [items]="[
+      { label: 'Home', route: '/' },
+      { label: 'Words', route: '/words' },
+      { label: 'Word List' }
+    ]"
+  />
+
   <h1 class="mb-4 text-3xl font-bold">
-    Eesti sõnad
+    Word List
   </h1>
 
   <app-word-main-panel

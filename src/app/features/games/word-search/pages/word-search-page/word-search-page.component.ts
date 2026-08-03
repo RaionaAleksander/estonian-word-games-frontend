@@ -14,12 +14,13 @@ import { SortMetaComponent } from '../../../../../shared/components/query-meta/s
 import { WordSearchInfoPanelComponent } from '../../components/word-search-info-panel/word-search-info-panel.component';
 import { WordSearchGameComponent } from '../../components/word-search-game/word-search-game.component';
 import { WordSearchExportComponent } from '../../components/word-search-export/word-search-export.component';
+import { BreadcrumbsComponent } from '../../../../../shared/components/navigation/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-word-search-page',
   imports: [WordSearchMainPanelComponent, QueryMetaPanelComponent, FilterMetaComponent, SortMetaComponent,
     WordSearchInfoPanelComponent, WordSearchGameComponent, WordSearchExportComponent,
-    ErrorStateComponent, LoadingStateComponent, EmptyStateComponent],
+    ErrorStateComponent, LoadingStateComponent, EmptyStateComponent, BreadcrumbsComponent],
   templateUrl: './word-search-page.component.html',
   styleUrl: './word-search-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

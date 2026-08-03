@@ -9,10 +9,11 @@ import { ErrorStateComponent } from '../../../../shared/components/error-state/e
 import { ErrorResponse } from '../../../../shared/api/error-response.model';
 import { mapHttpError } from '../../../../shared/api/map-http-error';
 import { WordDetailsResultComponent } from '../../components/word-details-result/word-details-result.component';
+import { BreadcrumbsComponent } from '../../../../shared/components/navigation/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-word-details-page',
-  imports: [WordDetailsResultComponent, EmptyStateComponent, LoadingStateComponent, ErrorStateComponent],
+  imports: [WordDetailsResultComponent, EmptyStateComponent, LoadingStateComponent, ErrorStateComponent, BreadcrumbsComponent],
   templateUrl: './word-details-page.component.html',
   styleUrl: './word-details-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -73,4 +74,18 @@ export class WordDetailsPageComponent implements OnInit {
     const lower = word.toLowerCase();
     return lower.charAt(0).toUpperCase() + lower.slice(1);
   }
+
+  protected readonly breadcrumbItems = computed(() => {
+    const res = this.result();
+
+    const label = res?.exists
+      ? this.formatWord(res.lemma!)
+      : this.formatWord(this.requestedWord());
+
+    return [
+      { label: 'Home', route: '/' },
+      { label: 'Words', route: '/words' },
+      { label }
+    ];
+  });
 }

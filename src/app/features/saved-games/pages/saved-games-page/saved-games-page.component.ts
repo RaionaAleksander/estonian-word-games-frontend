@@ -16,18 +16,14 @@ import { SavedGamesSearchSettings } from '../../components/saved-games-search-se
 import { SavedGameSort } from '../../models/enums/saved-game-sort.enum';
 import { SavedGameType } from '../../models/enums/saved-game-type.enum';
 import { SavedGamesActionsPanelComponent } from '../../components/saved-games-actions-panel/saved-games-actions-panel.component';
+import { BreadcrumbsComponent } from '../../../../shared/components/navigation/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-saved-games-page',
   imports: [
-    PaginationInfoPanelComponent,
-    PaginationNavigatorComponent,
-    SavedGamesTableComponent,
-    LoadingStateComponent,
-    ErrorStateComponent,
-    EmptyStateComponent,
-    SavedGamesMainPanelComponent,
-    SavedGamesActionsPanelComponent
+    PaginationInfoPanelComponent, PaginationNavigatorComponent, SavedGamesTableComponent,
+    LoadingStateComponent, ErrorStateComponent, EmptyStateComponent,
+    SavedGamesMainPanelComponent, SavedGamesActionsPanelComponent, BreadcrumbsComponent
   ],
   templateUrl: './saved-games-page.component.html',
   styleUrl: './saved-games-page.component.css',

@@ -11,13 +11,13 @@ import { WordDefinitionsResultComponent } from '../../components/word-definition
 import { LoadingStateComponent } from '../../../../shared/components/loading-state/loading-state.component';
 import { ErrorStateComponent } from '../../../../shared/components/error-state/error-state.component';
 import { EmptyStateComponent } from '../../../../shared/components/empty-state/empty-state.component';
+import { BreadcrumbsComponent } from '../../../../shared/components/navigation/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-words-definitions-page',
   imports: [
     WordDefinitionsMainPanelComponent, WordDefinitionsResultComponent,
-    LoadingStateComponent, ErrorStateComponent, EmptyStateComponent,
-  ],
+    LoadingStateComponent, ErrorStateComponent, EmptyStateComponent, BreadcrumbsComponent],
   templateUrl: './words-definitions-page.component.html',
   styleUrl: './words-definitions-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

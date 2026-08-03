@@ -1,4 +1,8 @@
 <section class="mx-auto max-w-6xl p-8">
+  <app-breadcrumbs
+    [items]="breadcrumbItems()"
+  />
+  
   @if (loading()) {
     <app-loading-state [message]="'Loading word details...'" />
   }
