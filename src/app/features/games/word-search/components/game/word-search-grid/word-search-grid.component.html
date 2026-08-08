@@ -18,7 +18,7 @@
             (mousedown)="onMouseDown(rowIndex, cellIndex)"
             (mouseenter)="onMouseEnter(rowIndex, cellIndex)"
             (mouseup)="onMouseUp()">
-            {{ cell }}
+            {{ displayCell(cell) }}
           </div>
         }
       }

@@ -1,6 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { SearchSectionComponent } from '../../../../../../../shared/components/search-panel/foundation/search-section/search-section.component';
-import { SectionRowComponent } from '../../../../../../../shared/components/search-panel/foundation/section-row/section-row.component';
 import { CellCoordinate } from '../../../../models/cell-coordinate.model';
 import { BaseGameSettingsSection } from '../../base/base-search-game-settings-section.directive';
 

@@ -45,7 +45,9 @@ export class WordSearchDocumentComponent {
   });
 
   protected readonly rows = computed(() =>
-    this.response().grid.map(row => row.split(''))
+    this.response().grid.map(row =>
+      row.split('').map(cell => cell === '.' ? '' : cell)
+    )
   );
 
   protected readonly cols = computed(() =>

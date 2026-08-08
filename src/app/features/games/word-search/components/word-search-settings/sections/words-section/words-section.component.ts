@@ -19,9 +19,15 @@ export class WordsSectionComponent extends BaseGameSettingsSection<CustomWordSea
 
   @Input() words: string[] = [];
 
-  protected onChange(value: string): void {
+  protected onChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    const sanitizedValue = input.value.replace(/[^\p{L},\s]/gu, '');
+
+    input.value = sanitizedValue;
+
     this.emit({
-      words: this.parseWords(value),
+      words: this.parseWords(sanitizedValue),
     });
   }
 

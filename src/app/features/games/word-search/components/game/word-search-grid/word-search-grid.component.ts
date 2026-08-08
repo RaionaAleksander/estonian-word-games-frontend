@@ -117,4 +117,8 @@ export class WordSearchGridComponent {
       this.cellKey(row, col)
     );
   }
+
+  protected displayCell(cell: string): string {
+    return cell === '.' ? '' : cell;
+  }
 }

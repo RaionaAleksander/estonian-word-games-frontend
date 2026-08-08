@@ -6,7 +6,7 @@
         type="text"
         placeholder="apple, banana, orange"
         [value]="words.join(', ')"
-        (input)="onChange($any($event.target).value)"
+        (input)="onChange($event)"
         class="w-full box-border rounded-md border border-gray-300 bg-white px-3 py-2 font-inherit"
       />
     </app-section-field>
