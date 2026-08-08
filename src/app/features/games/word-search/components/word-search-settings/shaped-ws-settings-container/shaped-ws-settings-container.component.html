@@ -1,0 +1,39 @@
+<section class="game-settings-container">
+  <app-collapsible-header
+    title="Game Settings"
+    [isExpanded]="isExpanded()"
+    (expandedChange)="toggle()"
+  />
+
+  @if (isExpanded()) {
+    <!-- WORDS COUNT -->
+    <app-words-count-section
+      [wordsCount]="settings.wordsCount"
+      (valueChange)="updateSettings($event)"
+    />
+
+    <!-- ALLOW INCOMPLETE -->
+    <app-allow-incomplete-section
+      [allowIncomplete]="settings.allowIncomplete"
+      (valueChange)="updateSettings($event)"
+    />
+
+    <!-- LETTER CASE -->
+    <app-letter-case-section
+      [letterCase]="settings.letterCase"
+      (valueChange)="updateSettings($event)"
+    />
+
+    <!-- ALLOW INTERSECTIONS -->
+    <app-allow-intersections-section
+      [allowIntersections]="settings.allowIntersections"
+      (valueChange)="updateSettings($event)"
+    />
+
+    <!-- WORD DIRECTIONS -->
+    <app-directions-section
+      [directions]="settings.directions"
+      (valueChange)="updateSettings($event)"
+    />
+  }
+</section>

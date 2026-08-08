@@ -1,0 +1,19 @@
+<app-search-section title="Blocked Cells">
+  <div
+    class="grid justify-center gap-1"
+    [style.gridTemplateColumns]="'repeat(' + cols + ', 24px)'"
+  >
+    @for (row of rowsArray; track row) {
+      @for (col of colsArray; track col) {
+        <button
+          type="button"
+          class="h-6 w-6 rounded-sm border border-gray-300 transition-colors"
+          [class.bg-black]="isBlocked(row, col)"
+          [class.bg-white]="!isBlocked(row, col)"
+          [attr.aria-label]="'Row ' + row + ', column ' + col"
+          (click)="toggleCell(row, col)"
+        ></button>
+      }
+    }
+  </div>
+</app-search-section>

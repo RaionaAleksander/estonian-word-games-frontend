@@ -1,0 +1,33 @@
+<app-search-panel class="main-panel">
+  <!-- GRID SETTINGS -->
+  <app-shaped-grid-settings-container
+    [settings]="settings"
+    (settingsChange)="updateSettings($event)"
+  />
+
+  <!-- GAME SETTINGS -->
+  <app-shaped-ws-settings-container
+    [settings]="settings"
+    (settingsChange)="updateSettings($event)"
+  />
+
+  <!-- FILTERS -->
+  <app-filter-container
+    [filters]="filters"
+    (filtersChange)="updateFilters($event)"
+  />
+
+  <!-- SORT -->
+  <app-sort-container
+    [sort]="sort"
+    (sortChange)="updateSort($event)"
+  />
+
+  <!-- ACTIONS -->
+  <app-panel-actions
+    primaryLabel="Generate"
+    secondaryLabel="Reset"
+    (primaryClick)="applyAll()"
+    (secondaryClick)="resetAll()"
+  />
+</app-search-panel>

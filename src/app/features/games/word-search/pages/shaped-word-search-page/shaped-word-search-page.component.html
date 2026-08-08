@@ -8,11 +8,64 @@
     ]"
   />
 
-  <h1 class="mb-4 text-3xl font-bold">
+  <h1 class="mb-6 text-3xl font-bold">
     Shaped Word Search
   </h1>
 
-  <div class="p-4 border border-gray-200 rounded-md bg-gray-50 text-gray-600">
-    This game is under development.
-  </div>
+  <!-- MAIN PANEL -->
+  <app-shaped-word-search-main-panel
+    [settings]="query.settings"
+    [filters]="query.filters"
+    [sort]="query.sort"
+    (applyAllEvent)="onQueryChange($event)"
+    (resetAllEvent)="onReset()"
+  />
+
+  <!-- LOADING -->
+  @if (loading()) {
+    <app-loading-state
+      [message]="'Generating shaped word search...'"
+    />
+  }
+
+  <!-- ERROR -->
+  @if (error()) {
+    <app-error-state
+      [error]="error()!"
+    />
+  }
+
+  <!-- RESULT -->
+  @else if (response(); as res) {
+    <app-word-search-game
+      [response]="res"
+    />
+
+    <app-word-search-info-panel
+      [response]="res"
+    />
+
+    <app-word-search-export
+      [response]="res"
+    />
+
+    <app-query-meta-panel
+      [generatedAt]="res.generatedAt"
+    >
+      <app-filter-meta
+        [filters]="res.meta.filters"
+      />
+      <app-sort-meta
+        [sort]="res.meta.sort"
+      />
+    </app-query-meta-panel>
+  }
+
+  <!-- EMPTY -->
+  @else {
+    <app-empty-state
+      title="No game generated"
+      description="Configure the game settings and click Generate to create a shaped word search."
+    />
+  }
 </section>
