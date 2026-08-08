@@ -7,15 +7,15 @@
 
   @if (isExpanded()) {
     <app-grid-size-section
-      [rows]="settings.rows"
-      [cols]="settings.cols"
+      [rows]="rows"
+      [cols]="cols"
       (valueChange)="updateSettings($event)"
     />
 
     <app-blocked-cells-section
-      [blockedCells]="settings.blockedCells"
-      [rows]="settings.rows"
-      [cols]="settings.cols"
+      [blockedCells]="blockedCells"
+      [rows]="rows"
+      [cols]="cols"
       (valueChange)="updateSettings($event)"
     />
   }

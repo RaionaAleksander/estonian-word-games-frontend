@@ -1,4 +1,10 @@
 <app-search-panel class="main-panel">
+  <!-- WORDS -->
+  <app-words-section
+    [words]="settings.words"
+    (valueChange)="updateSettings($event)"
+  />
+
   <!-- GRID SETTINGS -->
   <app-shaped-grid-settings-container
     [rows]="settings.rows"
@@ -8,15 +14,9 @@
   />
 
   <!-- GAME SETTINGS -->
-  <app-shaped-ws-settings-container
+  <app-custom-shaped-word-search-settings-container
     [settings]="settings"
     (settingsChange)="updateSettings($event)"
-  />
-
-  <!-- FILTERS -->
-  <app-filter-container
-    [filters]="filters"
-    (filtersChange)="updateFilters($event)"
   />
 
   <!-- SORT -->
@@ -32,4 +32,5 @@
     (primaryClick)="applyAll()"
     (secondaryClick)="resetAll()"
   />
+
 </app-search-panel>
